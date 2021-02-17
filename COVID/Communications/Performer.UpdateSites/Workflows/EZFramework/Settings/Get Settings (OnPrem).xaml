@@ -1,0 +1,781 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Get_Settings" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:ed="clr-namespace:EZFramework.Directories;assembly=EZFramework" xmlns:el="clr-namespace:EZFramework.Logging;assembly=EZFramework" xmlns:eo="clr-namespace:EZFramework.Orchestrator;assembly=EZFramework" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="dicCredentials" Type="OutArgument(scg:Dictionary(x:String, s:Tuple(x:String, x:String, ss:SecureString)))" />
+    <x:Property Name="listExceptions" Type="OutArgument(scg:List(scg:KeyValuePair(x:String, x:String)))" />
+    <x:Property sap2010:Annotation.AnnotationText="Dictionary of the settings stored in the Configuration file (.xlsx)." Name="dicConfig" Type="OutArgument(scg:Dictionary(x:String, s:Tuple(x:String, x:String)))">
+      <x:Property.Attributes>
+        <RequiredArgumentAttribute />
+      </x:Property.Attributes>
+    </x:Property>
+    <x:Property Name="listAssetFolders" Type="InArgument(scg:List(x:String))" />
+    <x:Property Name="strPathOrchAPI" Type="InArgument(x:String)" />
+    <x:Property Name="strRobotImpersonation" Type="InArgument(x:String)" />
+  </x:Members>
+  <this:Get_Settings.strPathOrchAPI>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Get_Settings.strPathOrchAPI>
+  <this:Get_Settings.strRobotImpersonation>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Get_Settings.strRobotImpersonation>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1121,6401</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Get_Config_Settings_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="28">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>Newtonsoft.Json.Linq</x:String>
+      <x:String>Newtonsoft.Json</x:String>
+      <x:String>UiPath.Core.Activities.Storage</x:String>
+      <x:String>System.Net</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="31">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Azure</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Security.SecureString</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.CV</AssemblyReference>
+      <AssemblyReference>UiPath.Word</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.Data.Entity</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>OfficeDevPnP.Core</AssemblyReference>
+      <AssemblyReference>UiPathTeam.SharePoint</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <sap:WorkflowViewStateService.ViewState>
+    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+      <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
+    </scg:Dictionary>
+  </sap:WorkflowViewStateService.ViewState>
+  <Sequence sap2010:Annotation.AnnotationText="" DisplayName="Get Settings" sap:VirtualizedContainerService.HintSize="851,6296" sap2010:WorkflowViewState.IdRef="Sequence_4">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="809,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_19" LogLevel="Info" LogMessage="Initializing Project Settings..." />
+    <ui:MultipleAssign DisplayName="Multiple Assign: Declarations" sap:VirtualizedContainerService.HintSize="809,160" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+      <ui:MultipleAssign.AssignOperations>
+        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String))">[dicConfig]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String))">[New Dictionary(of String, Tuple(of String, String))]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String, ss:SecureString))">[dicCredentials]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String, ss:SecureString))">[New Dictionary(of String, Tuple(of String, String, SecureString))]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="scg:List(scg:KeyValuePair(x:String, x:String))">[listExceptions]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="scg:List(scg:KeyValuePair(x:String, x:String))">[New List(of KeyValuePair(of String, String))]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+        </scg:List>
+      </ui:MultipleAssign.AssignOperations>
+    </ui:MultipleAssign>
+    <Sequence DisplayName="Add Project Settings" sap:VirtualizedContainerService.HintSize="809,620" sap2010:WorkflowViewState.IdRef="Sequence_14">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:String" Name="strProjectName" />
+        <Variable x:TypeArguments="x:String" Name="strRuntimeDirectory" />
+        <Variable x:TypeArguments="x:String" Name="strRobotName" />
+        <Variable x:TypeArguments="x:String" Name="strRobotType" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ed:Get_Project_Name Directory="[Environment.CurrentDirectory]" DisplayName="Get Project Name" sap:VirtualizedContainerService.HintSize="338,22" sap2010:WorkflowViewState.IdRef="Get_Project_Name_1" ProjectName="[strProjectName]" />
+      <ed:Get_Runtime_Directory DisplayName="Get Runtime Directory" sap:VirtualizedContainerService.HintSize="338,22" sap2010:WorkflowViewState.IdRef="Get_Runtime_Directory_1" ProjectDirectory="[strRuntimeDirectory]" />
+      <TryCatch DisplayName="Try Catch: Determine if in Dev" sap:VirtualizedContainerService.HintSize="338,51" sap2010:WorkflowViewState.IdRef="TryCatch_19">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <TryCatch.Try>
+          <eo:Get_Robot_Type DisplayName="Get Robot Type" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Get_Robot_Type_2" RobotType="[strRobotType]" />
+        </TryCatch.Try>
+        <TryCatch.Catches>
+          <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="553,283" sap2010:WorkflowViewState.IdRef="Catch`1_19">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ActivityAction x:TypeArguments="s:Exception">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+              </ActivityAction.Argument>
+              <Sequence DisplayName="Couldn't Get Type" sap:VirtualizedContainerService.HintSize="304,214" sap2010:WorkflowViewState.IdRef="Sequence_74">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_62">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:String">[strRobotType]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:String">Error</InArgument>
+                  </Assign.Value>
+                </Assign>
+                <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_62" LogLevel="Trace" LogMessage="[&quot;Couldn't get Robot Type: [&quot; + strRobotType + &quot;]&quot;]" />
+              </Sequence>
+            </ActivityAction>
+          </Catch>
+        </TryCatch.Catches>
+        <TryCatch.Finally>
+          <If Condition="[strRobotType.ToLower.Contains(&quot;dev&quot;)]" DisplayName="If: In Dev" sap:VirtualizedContainerService.HintSize="549,362" sap2010:WorkflowViewState.IdRef="If_15">
+            <If.Then>
+              <Sequence DisplayName="In Dev" sap:VirtualizedContainerService.HintSize="304,214" sap2010:WorkflowViewState.IdRef="Sequence_75">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_63" LogLevel="Warn" LogMessage="Loading Development Environment..." />
+                <Assign DisplayName="Assign: Impersonation Name" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_63">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:String">[strRobotName]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:String">[strRobotImpersonation]</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </Sequence>
+            </If.Then>
+            <If.Else>
+              <eo:Get_Robot_Name DisplayName="Get Robot Name" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Get_Robot_Name_2" RobotName="[strRobotName]" />
+            </If.Else>
+          </If>
+        </TryCatch.Finally>
+      </TryCatch>
+      <AddToCollection x:TypeArguments="x:String" Collection="[listAssetFolders]" DisplayName="Add: Robot Specific" sap:VirtualizedContainerService.HintSize="338,22" sap2010:WorkflowViewState.IdRef="AddToCollection`1_3" Item="[strRobotName]" />
+      <TryCatch DisplayName="Try Catch: Check for Testing" sap:VirtualizedContainerService.HintSize="338,51" sap2010:WorkflowViewState.IdRef="TryCatch_20">
+        <TryCatch.Variables>
+          <Variable x:TypeArguments="x:String" Name="strTestingFolder" />
+        </TryCatch.Variables>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <TryCatch.Try>
+          <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="TestingFolder" DisplayName="Get Asset: TestingFolder" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="GetRobotAsset_4">
+            <ui:GetRobotAsset.Value>
+              <OutArgument x:TypeArguments="x:String">[strTestingFolder]</OutArgument>
+            </ui:GetRobotAsset.Value>
+          </ui:GetRobotAsset>
+        </TryCatch.Try>
+        <TryCatch.Catches>
+          <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="488,104" sap2010:WorkflowViewState.IdRef="Catch`1_20">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ActivityAction x:TypeArguments="s:Exception">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+              </ActivityAction.Argument>
+            </ActivityAction>
+          </Catch>
+        </TryCatch.Catches>
+        <TryCatch.Finally>
+          <If Condition="[Not String.IsNullOrEmpty(strTestingFolder)]" DisplayName="If: In Testing" sap:VirtualizedContainerService.HintSize="484,424" sap2010:WorkflowViewState.IdRef="If_16">
+            <If.Then>
+              <Sequence DisplayName="In Test" sap:VirtualizedContainerService.HintSize="304,276" sap2010:WorkflowViewState.IdRef="Sequence_76">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_64" LogLevel="Warn" LogMessage="Loading Testing Environment..." />
+                <AddToCollection x:TypeArguments="x:String" Collection="[listAssetFolders]" DisplayName="Add: Testing Folder" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="AddToCollection`1_4" Item="[strTestingFolder]" />
+                <Assign DisplayName="Assign: _Testing ProjectName" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_64">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:String">[strProjectName]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:String">[strProjectName + " _Testing"]</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </Sequence>
+            </If.Then>
+          </If>
+        </TryCatch.Finally>
+      </TryCatch>
+      <ui:MultipleAssign DisplayName="Multiple Assign: Add Project Settings" sap:VirtualizedContainerService.HintSize="338,160" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+        <ui:MultipleAssign.AssignOperations>
+          <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="s:Tuple(x:String, x:String)">[dicConfig("ProjectName")]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="s:Tuple(x:String, x:String)">[Tuple.Create("ProjectSettings", strProjectName)]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="s:Tuple(x:String, x:String)">[dicConfig("RuntimeDirectory")]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="s:Tuple(x:String, x:String)">[Tuple.Create("ProjectSettings", strRuntimeDirectory)]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_9">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="s:Tuple(x:String, x:String)">[dicConfig("RobotName")]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="s:Tuple(x:String, x:String)">[Tuple.Create(Environment.MachineName, strRobotName)]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+          </scg:List>
+        </ui:MultipleAssign.AssignOperations>
+      </ui:MultipleAssign>
+    </Sequence>
+    <Sequence DisplayName="Get All Assets" sap:VirtualizedContainerService.HintSize="809,4575" sap2010:WorkflowViewState.IdRef="Sequence_56">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:String" Name="strBearerToken" />
+        <Variable x:TypeArguments="x:String" Name="strJSON" />
+        <Variable x:TypeArguments="njl:JObject" Name="jobjResult" />
+        <Variable x:TypeArguments="x:String" Name="strServerURL" />
+        <Variable x:TypeArguments="x:String" Name="strTenantName" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Sequence DisplayName="Initialize Orchestrator API" sap:VirtualizedContainerService.HintSize="767,1376" sap2010:WorkflowViewState.IdRef="Sequence_67">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="x:String" Name="strAuthBody" />
+          <Variable x:TypeArguments="scg:List(x:String)" Name="listFileJSON" />
+          <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Name="dicOrchAssetNames" />
+          <Variable x:TypeArguments="ss:SecureString" Name="secstrPassword" />
+          <Variable x:TypeArguments="x:String" Name="strUsername" />
+          <Variable x:TypeArguments="x:String" Name="strFolderOrchAPI" />
+        </Sequence.Variables>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:MultipleAssign DisplayName="Multiple Assign: Declare" sap:VirtualizedContainerService.HintSize="462,129" sap2010:WorkflowViewState.IdRef="MultipleAssign_11">
+          <ui:MultipleAssign.AssignOperations>
+            <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_33">
+                <ui:AssignOperation.To>
+                  <OutArgument x:TypeArguments="scg:List(x:String)">[listFileJSON]</OutArgument>
+                </ui:AssignOperation.To>
+                <ui:AssignOperation.Value>
+                  <InArgument x:TypeArguments="scg:List(x:String)">[New List(of String)]</InArgument>
+                </ui:AssignOperation.Value>
+              </ui:AssignOperation>
+              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_34">
+                <ui:AssignOperation.To>
+                  <OutArgument x:TypeArguments="x:String">[strFolderOrchAPI]</OutArgument>
+                </ui:AssignOperation.To>
+                <ui:AssignOperation.Value>
+                  <InArgument x:TypeArguments="x:String">[listAssetFolders.Where(Function(name) name.ToLower.Contains("orchestrator") And name.ToLower.Contains("api")).First()]</InArgument>
+                </ui:AssignOperation.Value>
+              </ui:AssignOperation>
+            </scg:List>
+          </ui:MultipleAssign.AssignOperations>
+        </ui:MultipleAssign>
+        <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each: OnPrem File Path in Settings" sap:VirtualizedContainerService.HintSize="462,367" sap2010:WorkflowViewState.IdRef="ForEach`1_18" Values="[Directory.GetFiles(strPathOrchAPI).Where(Function(file) file.Contains(&quot;OnPrem&quot;) And file.Contains(&quot;.json&quot;))]">
+          <ui:ForEach.Body>
+            <ActivityAction x:TypeArguments="x:String">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="x:String" Name="file" />
+              </ActivityAction.Argument>
+              <Sequence DisplayName="Read File Settings" sap:VirtualizedContainerService.HintSize="426,233" sap2010:WorkflowViewState.IdRef="Sequence_69">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:ReadTextFile Content="[strJSON]" DisplayName="Read Text File" FileName="[file]" sap:VirtualizedContainerService.HintSize="384,79" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
+                <AddToCollection x:TypeArguments="x:String" Collection="[listFileJSON]" DisplayName="Add To Collection: listFileJSON" sap:VirtualizedContainerService.HintSize="384,22" sap2010:WorkflowViewState.IdRef="AddToCollection`1_2" Item="[strJSON]" />
+              </Sequence>
+            </ActivityAction>
+          </ui:ForEach.Body>
+        </ui:ForEach>
+        <ui:MultipleAssign DisplayName="Multiple Assign: Parse Settings" sap:VirtualizedContainerService.HintSize="462,129" sap2010:WorkflowViewState.IdRef="MultipleAssign_7">
+          <ui:MultipleAssign.AssignOperations>
+            <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_22">
+                <ui:AssignOperation.To>
+                  <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[dicOrchAssetNames]</OutArgument>
+                </ui:AssignOperation.To>
+                <ui:AssignOperation.Value>
+                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[JsonConvert.DeserializeObject(of Dictionary(of String, String))(listFileJSON.Where(Function(item) item.Contains("TenantName")).First())]</InArgument>
+                </ui:AssignOperation.Value>
+              </ui:AssignOperation>
+              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_23">
+                <ui:AssignOperation.To>
+                  <OutArgument x:TypeArguments="x:String">[strAuthBody]</OutArgument>
+                </ui:AssignOperation.To>
+                <ui:AssignOperation.Value>
+                  <InArgument x:TypeArguments="x:String">[listFileJSON.Where(Function(item) item.Contains("tenancyName")).First()]</InArgument>
+                </ui:AssignOperation.Value>
+              </ui:AssignOperation>
+            </scg:List>
+          </ui:MultipleAssign.AssignOperations>
+        </ui:MultipleAssign>
+        <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="[dicOrchAssetNames(&quot;ServerURL&quot;)]" DisplayName="Get Asset: ServerURL" FolderPath="[strFolderOrchAPI]" sap:VirtualizedContainerService.HintSize="462,22" sap2010:WorkflowViewState.IdRef="GetRobotAsset_3">
+          <ui:GetRobotAsset.Value>
+            <OutArgument x:TypeArguments="x:String">[strServerURL]</OutArgument>
+          </ui:GetRobotAsset.Value>
+        </ui:GetRobotAsset>
+        <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="[dicOrchAssetNames(&quot;TenantName&quot;)]" DisplayName="Get Asset: TenantName" FolderPath="[strFolderOrchAPI]" sap:VirtualizedContainerService.HintSize="462,22" sap2010:WorkflowViewState.IdRef="GetRobotAsset_1">
+          <ui:GetRobotAsset.Value>
+            <OutArgument x:TypeArguments="x:String">[strTenantName]</OutArgument>
+          </ui:GetRobotAsset.Value>
+        </ui:GetRobotAsset>
+        <ui:GetRobotCredential TimeoutMS="{x:Null}" AssetName="[dicOrchAssetNames(&quot;User&quot;)]" DisplayName="Get Credential: Authenticator" FolderPath="[strFolderOrchAPI]" sap:VirtualizedContainerService.HintSize="462,22" sap2010:WorkflowViewState.IdRef="GetRobotCredential_6" Password="[secstrPassword]" Username="[strUsername]" />
+        <Assign DisplayName="Assign: Format AuthBody" sap:VirtualizedContainerService.HintSize="462,60" sap2010:WorkflowViewState.IdRef="Assign_58">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[strAuthBody]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String">[strAuthBody.Replace("[TenantName]", strTenantName).Replace("[Username]", strUsername).Replace("[Password]", New NetworkCredential("", secstrPassword).Password)]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <ui:HttpClient ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseHeaders="{x:Null}" StatusCode="{x:Null}" Username="{x:Null}" AcceptFormat="JSON" Body="[strAuthBody]" BodyFormat="application/json" ClientCertificate="[Nothing]" ClientCertificatePassword="[Nothing]" DisplayName="HTTP Request: Generate Bearer Token" EndPoint="[strServerURL + &quot;api/Account/Authenticate&quot;]" sap:VirtualizedContainerService.HintSize="462,22" sap2010:WorkflowViewState.IdRef="HttpClient_7" Method="POST" Result="[strJSON]" TimeoutMS="60000">
+          <ui:HttpClient.Attachments>
+            <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+          </ui:HttpClient.Attachments>
+          <ui:HttpClient.Cookies>
+            <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+          </ui:HttpClient.Cookies>
+          <ui:HttpClient.Headers>
+            <InArgument x:TypeArguments="x:String" x:Key="Content-Type">application/json</InArgument>
+          </ui:HttpClient.Headers>
+          <ui:HttpClient.Parameters>
+            <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+          </ui:HttpClient.Parameters>
+          <ui:HttpClient.UrlSegments>
+            <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+          </ui:HttpClient.UrlSegments>
+        </ui:HttpClient>
+        <ui:MultipleAssign DisplayName="Multiple Assign: JSON Results" sap:VirtualizedContainerService.HintSize="462,129" sap2010:WorkflowViewState.IdRef="MultipleAssign_5">
+          <ui:MultipleAssign.AssignOperations>
+            <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_18">
+                <ui:AssignOperation.To>
+                  <OutArgument x:TypeArguments="njl:JObject">[jobjResult]</OutArgument>
+                </ui:AssignOperation.To>
+                <ui:AssignOperation.Value>
+                  <InArgument x:TypeArguments="njl:JObject">[JsonConvert.DeserializeObject(of JObject)(strJSON)]</InArgument>
+                </ui:AssignOperation.Value>
+              </ui:AssignOperation>
+              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_19">
+                <ui:AssignOperation.To>
+                  <OutArgument x:TypeArguments="x:String">[strBearerToken]</OutArgument>
+                </ui:AssignOperation.To>
+                <ui:AssignOperation.Value>
+                  <InArgument x:TypeArguments="x:String">[jobjResult("result").ToString]</InArgument>
+                </ui:AssignOperation.Value>
+              </ui:AssignOperation>
+            </scg:List>
+          </ui:MultipleAssign.AssignOperations>
+        </ui:MultipleAssign>
+        <RemoveFromCollection x:TypeArguments="x:String" Collection="[listAssetFolders]" DisplayName="Remove From Collection: OrchAPI Folder" sap:VirtualizedContainerService.HintSize="462,22" sap2010:WorkflowViewState.IdRef="RemoveFromCollection`1_1" Item="[strFolderOrchAPI]" />
+      </Sequence>
+      <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each: Asset Folder Specified" sap:VirtualizedContainerService.HintSize="767,3067" sap2010:WorkflowViewState.IdRef="ForEach`1_12" Values="[listAssetFolders]">
+        <ui:ForEach.Body>
+          <ActivityAction x:TypeArguments="x:String">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="x:String" Name="folder" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Load All Assets" sap:VirtualizedContainerService.HintSize="731,2933" sap2010:WorkflowViewState.IdRef="Sequence_57">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="x:String" Name="strFolderId" />
+                <Variable x:TypeArguments="x:Int32" Name="intStatusCode" />
+              </Sequence.Variables>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:HttpClient Body="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseHeaders="{x:Null}" Username="{x:Null}" AcceptFormat="JSON" BodyFormat="application/json" ClientCertificate="[Nothing]" ClientCertificatePassword="[Nothing]" DisplayName="HTTP Request: Get Folder ID" EndPoint="[strServerURL + &quot;odata/Folders?$filter=FullyQualifiedName eq '&quot; + folder + &quot;'&amp;$select=Id&quot;]" sap:VirtualizedContainerService.HintSize="689,22" sap2010:WorkflowViewState.IdRef="HttpClient_8" Method="GET" Result="[strJSON]" StatusCode="[intStatusCode]" TimeoutMS="60000">
+                <ui:HttpClient.Attachments>
+                  <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+                </ui:HttpClient.Attachments>
+                <ui:HttpClient.Cookies>
+                  <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+                </ui:HttpClient.Cookies>
+                <ui:HttpClient.Headers>
+                  <InArgument x:TypeArguments="x:String" x:Key="Authorization">["Bearer " + strBearerToken]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="X-UIPATH-TenantName">[strTenantName]</InArgument>
+                </ui:HttpClient.Headers>
+                <ui:HttpClient.Parameters>
+                  <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+                </ui:HttpClient.Parameters>
+                <ui:HttpClient.UrlSegments>
+                  <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+                </ui:HttpClient.UrlSegments>
+              </ui:HttpClient>
+              <If Condition="[intStatusCode &lt;&gt; 200]" DisplayName="If: Folder Found" sap:VirtualizedContainerService.HintSize="689,324" sap2010:WorkflowViewState.IdRef="If_13">
+                <If.Then>
+                  <Sequence DisplayName="Folder Not Found" sap:VirtualizedContainerService.HintSize="242,176" sap2010:WorkflowViewState.IdRef="Sequence_68">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <el:Log_Failed_Activity DisplayName="Log Failed Activity" ExceptionType="Business" ExceptionsList="[listExceptions]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Log_Failed_Activity_1" LogMessage="[&quot;[&quot; + folder + &quot;] Folder not found in Orchestrator!&quot;]" />
+                    <ui:Break sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Break_1" />
+                  </Sequence>
+                </If.Then>
+                <If.Else>
+                  <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_61" LogLevel="Info" LogMessage="[&quot;Loading Settings [&quot; + folder + &quot;]...&quot;]" />
+                </If.Else>
+              </If>
+              <ui:MultipleAssign DisplayName="Multiple Assign: JSON Results" sap:VirtualizedContainerService.HintSize="689,129" sap2010:WorkflowViewState.IdRef="MultipleAssign_6">
+                <ui:MultipleAssign.AssignOperations>
+                  <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_20">
+                      <ui:AssignOperation.To>
+                        <OutArgument x:TypeArguments="njl:JObject">[jobjResult]</OutArgument>
+                      </ui:AssignOperation.To>
+                      <ui:AssignOperation.Value>
+                        <InArgument x:TypeArguments="njl:JObject">[JsonConvert.DeserializeObject(of JObject)(strJSON)]</InArgument>
+                      </ui:AssignOperation.Value>
+                    </ui:AssignOperation>
+                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_21">
+                      <ui:AssignOperation.To>
+                        <OutArgument x:TypeArguments="x:String">[strFolderId]</OutArgument>
+                      </ui:AssignOperation.To>
+                      <ui:AssignOperation.Value>
+                        <InArgument x:TypeArguments="x:String">[jobjResult("value")(0)("Id").ToString]</InArgument>
+                      </ui:AssignOperation.Value>
+                    </ui:AssignOperation>
+                  </scg:List>
+                </ui:MultipleAssign.AssignOperations>
+              </ui:MultipleAssign>
+              <ui:HttpClient Body="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseHeaders="{x:Null}" StatusCode="{x:Null}" Username="{x:Null}" AcceptFormat="JSON" BodyFormat="application/json" ClientCertificate="[Nothing]" ClientCertificatePassword="[Nothing]" DisplayName="HTTP Request: Get All Assets" EndPoint="[strServerURL + &quot;odata/Assets&quot;]" sap:VirtualizedContainerService.HintSize="689,22" sap2010:WorkflowViewState.IdRef="HttpClient_9" Method="GET" Result="[strJSON]" TimeoutMS="60000">
+                <ui:HttpClient.Attachments>
+                  <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+                </ui:HttpClient.Attachments>
+                <ui:HttpClient.Cookies>
+                  <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+                </ui:HttpClient.Cookies>
+                <ui:HttpClient.Headers>
+                  <InArgument x:TypeArguments="x:String" x:Key="Authorization">["Bearer " + strBearerToken]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="X-UIPATH-TenantName">[strTenantName]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="X-UIPATH-OrganizationUnitId">[strFolderId]</InArgument>
+                </ui:HttpClient.Headers>
+                <ui:HttpClient.Parameters>
+                  <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+                </ui:HttpClient.Parameters>
+                <ui:HttpClient.UrlSegments>
+                  <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+                </ui:HttpClient.UrlSegments>
+              </ui:HttpClient>
+              <Assign DisplayName="Assign: JSON Results" sap:VirtualizedContainerService.HintSize="689,60" sap2010:WorkflowViewState.IdRef="Assign_37">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="njl:JObject">[jobjResult]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="njl:JObject">[JsonConvert.DeserializeObject(of JObject)(strJSON)]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <ui:ForEach x:TypeArguments="njl:JObject" CurrentIndex="{x:Null}" DisplayName="For Each: Asset" sap:VirtualizedContainerService.HintSize="689,558" sap2010:WorkflowViewState.IdRef="ForEach`1_10" Values="[jobjResult(&quot;value&quot;)]">
+                <ui:ForEach.Body>
+                  <ActivityAction x:TypeArguments="njl:JObject">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="njl:JObject" Name="asset" />
+                    </ActivityAction.Argument>
+                    <If Condition="[Not asset(&quot;ValueType&quot;).ToString.Equals(&quot;Credential&quot;)]" DisplayName="If: Asset not a Credential" sap:VirtualizedContainerService.HintSize="653,424" sap2010:WorkflowViewState.IdRef="If_12">
+                      <If.Then>
+                        <Sequence DisplayName="Load to dicConfig" sap:VirtualizedContainerService.HintSize="304,214" sap2010:WorkflowViewState.IdRef="Sequence_58">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Assign DisplayName="Add Asset Value" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_43">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="s:Tuple(x:String, x:String)">[dicConfig(asset("Name").ToString)]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="s:Tuple(x:String, x:String)">[Tuple.Create(folder, asset("Value").ToString)]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_51" LogLevel="Trace" LogMessage="[&quot;Loaded [:&quot; + String.Join(&quot;:] [:&quot;, {folder, asset(&quot;Name&quot;).ToString}) + &quot;:]!&quot;]" />
+                        </Sequence>
+                      </If.Then>
+                      <If.Else>
+                        <Sequence DisplayName="Load to dicCredentials" sap:VirtualizedContainerService.HintSize="304,276" sap2010:WorkflowViewState.IdRef="Sequence_59">
+                          <Sequence.Variables>
+                            <Variable x:TypeArguments="ss:SecureString" Name="secstrPassword" />
+                            <Variable x:TypeArguments="x:String" Name="strUsername" />
+                          </Sequence.Variables>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:GetRobotCredential TimeoutMS="{x:Null}" AssetName="[asset(&quot;Name&quot;).ToString]" DisplayName="Get Credential" FolderPath="[folder]" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="GetRobotCredential_8" Password="[secstrPassword]" Username="[strUsername]" />
+                          <Assign DisplayName="Add Credential Value" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_45">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="s:Tuple(x:String, x:String, ss:SecureString)">[dicCredentials(asset("Name").ToString)]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="s:Tuple(x:String, x:String, ss:SecureString)">[Tuple.Create(folder, strUsername.Trim, secstrPassword)]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_53" LogLevel="Trace" LogMessage="[&quot;Loaded [:&quot; + String.Join(&quot;:] [:&quot;, {folder, asset(&quot;Name&quot;).ToString}) + &quot;:]!&quot;]" />
+                        </Sequence>
+                      </If.Else>
+                    </If>
+                  </ActivityAction>
+                </ui:ForEach.Body>
+              </ui:ForEach>
+              <Sequence DisplayName="Load JSON Settings" sap:VirtualizedContainerService.HintSize="689,1486" sap2010:WorkflowViewState.IdRef="Sequence_72">
+                <Sequence.Variables>
+                  <Variable x:TypeArguments="s:String[]" Name="arrSettingsFiles" />
+                </Sequence.Variables>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <Assign DisplayName="Assign: Initialize List Settings" sap:VirtualizedContainerService.HintSize="500,60" sap2010:WorkflowViewState.IdRef="Assign_59">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="s:String[]">[arrSettingsFiles]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="s:String[]">[New String() {}]</InArgument>
+                  </Assign.Value>
+                </Assign>
+                <TryCatch DisplayName="Try Catch: Load JSON Settings" sap:VirtualizedContainerService.HintSize="500,1294" sap2010:WorkflowViewState.IdRef="TryCatch_16">
+                  <TryCatch.Try>
+                    <Assign DisplayName="Assign: List Settings" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_56">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="s:String[]">[arrSettingsFiles]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="s:String[]">[Directory.GetFiles(dicConfig("Path.OrchestratorStorage").Item2.Replace("%USERNAME%", Environment.UserName) + "\" + folder)]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </TryCatch.Try>
+                  <TryCatch.Catches>
+                    <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="466,129" sap2010:WorkflowViewState.IdRef="Catch`1_16">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ActivityAction x:TypeArguments="s:Exception">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                        </ActivityAction.Argument>
+                        <Assign DisplayName="Assign: Initialize List Settings" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_60">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="s:String[]">[arrSettingsFiles]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="s:String[]">[New String() {}]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </ActivityAction>
+                    </Catch>
+                  </TryCatch.Catches>
+                  <TryCatch.Finally>
+                    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each: Settings File" sap:VirtualizedContainerService.HintSize="462,855" sap2010:WorkflowViewState.IdRef="ForEach`1_19" Values="[arrSettingsFiles.Where(Function(item) item.Contains(&quot;Settings&quot;) And item.Contains(&quot;.json&quot;))]">
+                      <ui:ForEach.Body>
+                        <ActivityAction x:TypeArguments="x:String">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="x:String" Name="file" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="Load JSON Settings" sap:VirtualizedContainerService.HintSize="426,721" sap2010:WorkflowViewState.IdRef="Sequence_65">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="384,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_59" LogLevel="Info" LogMessage="[&quot;Loading JSON Settings [&quot; + Path.GetFileName(file) + &quot;]...&quot;]" />
+                            <ui:ReadTextFile Content="[strJSON]" DisplayName="Read Text File: JSON" FileName="[file]" sap:VirtualizedContainerService.HintSize="384,79" sap2010:WorkflowViewState.IdRef="ReadTextFile_2" />
+                            <Assign DisplayName="Assign: JSON String to jObject" sap:VirtualizedContainerService.HintSize="384,60" sap2010:WorkflowViewState.IdRef="Assign_51">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="njl:JObject">[jobjResult]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="njl:JObject">[JsonConvert.DeserializeObject(of JObject)(strJSON)]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <ui:ForEach x:TypeArguments="njl:JProperty" CurrentIndex="{x:Null}" DisplayName="For Each: JProperty" sap:VirtualizedContainerService.HintSize="384,348" sap2010:WorkflowViewState.IdRef="ForEach`1_15" Values="[jobjResult]">
+                              <ui:ForEach.Body>
+                                <ActivityAction x:TypeArguments="njl:JProperty">
+                                  <ActivityAction.Argument>
+                                    <DelegateInArgument x:TypeArguments="njl:JProperty" Name="jprop" />
+                                  </ActivityAction.Argument>
+                                  <Sequence DisplayName="Load JSON Property" sap:VirtualizedContainerService.HintSize="304,214" sap2010:WorkflowViewState.IdRef="Sequence_64">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <Assign DisplayName="Assign: Property to Config" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_52">
+                                      <Assign.To>
+                                        <OutArgument x:TypeArguments="s:Tuple(x:String, x:String)">[dicConfig(jprop.Name)]</OutArgument>
+                                      </Assign.To>
+                                      <Assign.Value>
+                                        <InArgument x:TypeArguments="s:Tuple(x:String, x:String)">[Tuple.Create("Settings", jprop.Value.ToString)]</InArgument>
+                                      </Assign.Value>
+                                    </Assign>
+                                    <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_60" LogLevel="Trace" LogMessage="[&quot;Loaded [:&quot; + jprop.Name + &quot;:]!&quot;]" />
+                                  </Sequence>
+                                </ActivityAction>
+                              </ui:ForEach.Body>
+                            </ui:ForEach>
+                          </Sequence>
+                        </ActivityAction>
+                      </ui:ForEach.Body>
+                    </ui:ForEach>
+                  </TryCatch.Finally>
+                </TryCatch>
+              </Sequence>
+            </Sequence>
+          </ActivityAction>
+        </ui:ForEach.Body>
+      </ui:ForEach>
+    </Sequence>
+    <TryCatch DisplayName="Try Catch: Format Email Replacements" sap:VirtualizedContainerService.HintSize="809,636" sap2010:WorkflowViewState.IdRef="TryCatch_18">
+      <TryCatch.Try>
+        <ui:MultipleAssign DisplayName="Multiple Assign: Email String Replacements" sap:VirtualizedContainerService.HintSize="338,222" sap2010:WorkflowViewState.IdRef="MultipleAssign_10">
+          <ui:MultipleAssign.AssignOperations>
+            <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_28">
+                <ui:AssignOperation.To>
+                  <OutArgument x:TypeArguments="s:Tuple(x:String, x:String)">[dicConfig("Signature")]</OutArgument>
+                </ui:AssignOperation.To>
+                <ui:AssignOperation.Value>
+                  <InArgument x:TypeArguments="s:Tuple(x:String, x:String)">[Tuple.Create(dicConfig("Signature").Item1, dicConfig("Signature").Item2.Replace("[RobotName]", dicConfig("RobotName").Item2))]</InArgument>
+                </ui:AssignOperation.Value>
+              </ui:AssignOperation>
+              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_29">
+                <ui:AssignOperation.To>
+                  <OutArgument x:TypeArguments="s:Tuple(x:String, x:String)">[dicConfig("StatusSubject")]</OutArgument>
+                </ui:AssignOperation.To>
+                <ui:AssignOperation.Value>
+                  <InArgument x:TypeArguments="s:Tuple(x:String, x:String)">[Tuple.Create(dicConfig("StatusSubject").Item1, dicConfig("StatusSubject").Item2.Replace("[ProcessName]", dicConfig("ProjectName").Item2))]</InArgument>
+                </ui:AssignOperation.Value>
+              </ui:AssignOperation>
+              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_30">
+                <ui:AssignOperation.To>
+                  <OutArgument x:TypeArguments="s:Tuple(x:String, x:String)">[dicConfig("StatusBody")]</OutArgument>
+                </ui:AssignOperation.To>
+                <ui:AssignOperation.Value>
+                  <InArgument x:TypeArguments="s:Tuple(x:String, x:String)">[Tuple.Create(dicConfig("StatusBody").Item1, dicConfig("StatusBody").Item2.Replace("[RobotName]", dicConfig("RobotName").Item2).Replace("[ProcessName]", dicConfig("ProjectName").Item2).Replace("[Signature]", dicConfig("Signature").Item2))]</InArgument>
+                </ui:AssignOperation.Value>
+              </ui:AssignOperation>
+              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_31">
+                <ui:AssignOperation.To>
+                  <OutArgument x:TypeArguments="s:Tuple(x:String, x:String)">[dicConfig("FailSubject")]</OutArgument>
+                </ui:AssignOperation.To>
+                <ui:AssignOperation.Value>
+                  <InArgument x:TypeArguments="s:Tuple(x:String, x:String)">[Tuple.Create(dicConfig("FailSubject").Item1, dicConfig("FailSubject").Item2.Replace("[ProcessName]", dicConfig("ProjectName").Item2))]</InArgument>
+                </ui:AssignOperation.Value>
+              </ui:AssignOperation>
+              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_32">
+                <ui:AssignOperation.To>
+                  <OutArgument x:TypeArguments="s:Tuple(x:String, x:String)">[dicConfig("FailBody")]</OutArgument>
+                </ui:AssignOperation.To>
+                <ui:AssignOperation.Value>
+                  <InArgument x:TypeArguments="s:Tuple(x:String, x:String)">[Tuple.Create(dicConfig("FailBody").Item1, dicConfig("FailBody").Item2.Replace("[ProcessName]", dicConfig("ProjectName").Item2).Replace("[MachineName]", Environment.MachineName).Replace("[RobotName]", dicConfig("RobotName").Item2).Replace("[Signature]", dicConfig("Signature").Item2))]</InArgument>
+                </ui:AssignOperation.Value>
+              </ui:AssignOperation>
+            </scg:List>
+          </ui:MultipleAssign.AssignOperations>
+        </ui:MultipleAssign>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,104" sap2010:WorkflowViewState.IdRef="Catch`1_18">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+  </Sequence>
+</Activity>

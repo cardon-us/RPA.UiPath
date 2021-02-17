@@ -1,0 +1,303 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Retry_Reads" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1038,2073" sap2010:WorkflowViewState.IdRef="Retry_Reads_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:ec="clr-namespace:EZFramework.Cleaning;assembly=EZFramework" xmlns:el="clr-namespace:EZFramework.Logging;assembly=EZFramework" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="22">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="16">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Retry_Reads" sap:VirtualizedContainerService.HintSize="552,1968" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="strDateResult" />
+      <Variable x:TypeArguments="x:String" Name="strWordLabScan" />
+      <Variable x:TypeArguments="x:String" Name="strFirstName" />
+      <Variable x:TypeArguments="x:String" Name="strLastName" />
+      <Variable x:TypeArguments="x:String" Name="strDOB" />
+      <Variable x:TypeArguments="x:String" Name="strResult" />
+      <Variable x:TypeArguments="x:String" Name="strDateCollected" />
+      <Variable x:TypeArguments="x:String" Name="strFaxNumber" />
+      <Variable x:TypeArguments="x:String" Name="strContactType" />
+      <Variable x:TypeArguments="scg:List(x:String)" Name="listFailedExtracts" />
+      <Variable x:TypeArguments="x:String" Name="strQueueNameDispatcher" />
+      <Variable x:TypeArguments="scg:IEnumerable(x:String)" Name="arrAttachments" />
+      <Variable x:TypeArguments="x:Int32" Name="intPages" />
+      <Variable x:TypeArguments="x:String" Name="boolMailSuccess" />
+      <Variable x:TypeArguments="x:String" Name="strFileDocx" />
+      <Variable x:TypeArguments="s:Exception" Name="excException" />
+      <Variable x:TypeArguments="x:String" Name="strFullPathPage" />
+      <Variable x:TypeArguments="x:Boolean" Name="boolExistsFile" />
+      <Variable x:TypeArguments="x:String" Name="strPDFLabScan" />
+      <Variable x:TypeArguments="x:String" Name="strContactColor" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtRetries" />
+      <Variable x:TypeArguments="x:String" Name="strPathCSV" />
+      <Variable x:TypeArguments="s:DateTime" Name="datetimeReceived" />
+      <Variable x:TypeArguments="x:String" Name="strItemId" />
+      <Variable x:TypeArguments="x:String" Name="strCurrentFolder" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:MultipleAssign DisplayName="Multiple Assign: Declarations" sap:VirtualizedContainerService.HintSize="510,129" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+      <ui:MultipleAssign.AssignOperations>
+        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[strQueueNameDispatcher]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">Dispatcher.Systems</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[strPathCSV]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">C:\Users\rbrowning\Downloads\Lab Results Retry\Misreads Retry.csv</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+        </scg:List>
+      </ui:MultipleAssign.AssignOperations>
+    </ui:MultipleAssign>
+    <ui:ReadCsvFile Encoding="{x:Null}" DataTable="[dtRetries]" Delimitator="Comma" DisplayName="Read CSV" FilePath="[strPathCSV]" sap:VirtualizedContainerService.HintSize="510,152" sap2010:WorkflowViewState.IdRef="ReadCsvFile_1" />
+    <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dtRetries]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="510,1515" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+      <ui:ForEachRow.Body>
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Extract Data from File" sap:VirtualizedContainerService.HintSize="460,1367" sap2010:WorkflowViewState.IdRef="Sequence_6">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:MultipleAssign DisplayName="Multiple Assign: Defaults" sap:VirtualizedContainerService.HintSize="418,315" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+              <ui:MultipleAssign.AssignOperations>
+                <scg:List x:TypeArguments="ui:AssignOperation" Capacity="16">
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strFirstName]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">Unknown</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strLastName]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">Unknown</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strContactType]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">Unknown</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strDOB]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">Unknown</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strFullPathPage]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">[row("FullPathPage").ToString]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_22">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strItemId]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">[row("ItemId").ToString]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_23">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strCurrentFolder]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">[row("CurrentFolder").ToString]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_24">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="s:DateTime">[datetimeReceived]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="s:DateTime">[DateTime.Parse(row("DateTimeReceived").ToString)]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                </scg:List>
+              </ui:MultipleAssign.AssignOperations>
+            </ui:MultipleAssign>
+            <ui:RetryScope DisplayName="Retry Scope: Convert to Word" sap:VirtualizedContainerService.HintSize="418,604" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="5" RetryInterval="00:00:01">
+              <ui:RetryScope.ActivityBody>
+                <ActivityAction>
+                  <Sequence DisplayName="Extract Lab Data" sap:VirtualizedContainerService.HintSize="376,430" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_1" LogLevel="Info" LogMessage="[&quot;Working on [&quot; + Path.GetFileName(strFullPathPage) + &quot;]...&quot;]" />
+                    <ec:Kill_Processes DisplayName="Kill Processes" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Kill_Processes_1" Processes="[{&quot;Acrobat&quot;, &quot;WINWORD&quot;, &quot;chrome&quot;}]" />
+                    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Convert PDF to Word workflow" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Workflows\Convert PDF to Word.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="x:String" x:Key="file">
+                          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strFullPathPage.Replace(&quot;%USERNAME%&quot;, Environment.UserName)" />
+                        </InArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="strWordLabScan">
+                          <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="strWordLabScan" />
+                        </OutArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="strPDFLabScan">
+                          <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="strPDFLabScan" />
+                        </OutArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
+                    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Extract Data workflow" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Workflows\Extract Data.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="x:String" x:Key="strWordLabScan">[strWordLabScan]</InArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="strDateCollected">[strDateCollected]</OutArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="strContactType">[strContactType]</OutArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="strFaxNumber">[strFaxNumber]</OutArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="strDateResult">[strDateResult]</OutArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="strResult">[strResult]</OutArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="strDOB">[strDOB]</OutArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="strLastName">[strLastName]</OutArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="strFirstName">[strFirstName]</OutArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="strPDFLabScan">[strPDFLabScan]</InArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
+                  </Sequence>
+                </ActivityAction>
+              </ui:RetryScope.ActivityBody>
+              <ui:RetryScope.Condition>
+                <ActivityFunc x:TypeArguments="x:Boolean" />
+              </ui:RetryScope.Condition>
+            </ui:RetryScope>
+            <Sequence DisplayName="Add to Queue" sap:VirtualizedContainerService.HintSize="418,176" sap2010:WorkflowViewState.IdRef="Sequence_12">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item" DueDate="[datetimeReceived.AddDays(1)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="AddQueueItem_1" Priority="Normal" QueueType="[strQueueNameDispatcher]" Reference="[String.Join(&quot;_&quot;, {strItemId, strFirstName, strLastName})]">
+                <ui:AddQueueItem.ItemInformation>
+                  <InArgument x:TypeArguments="x:String" x:Key="CurrentFolder">
+                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strCurrentFolder" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="DateTimeAdded">
+                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="DateTime.Now.ToString(&quot;M/dd/yyyy HH:mm:ss&quot;)" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="Source">
+                    <Literal x:TypeArguments="x:String">Faxcore</Literal>
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="ItemId">
+                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strItemId" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="DateTimeReceived">
+                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="datetimeReceived.ToString(&quot;M/dd/yyyy HH:mm:ss&quot;)" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="FaxNumber">
+                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strFaxNumber" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="Lab">
+                    <Literal x:TypeArguments="x:String">IU</Literal>
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="ContactType">
+                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strContactType" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="FirstName">
+                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strFirstName" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="LastName">
+                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strLastName" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="ContactDOB">
+                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strDOB" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="DateTimeCollected">
+                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strDateCollected" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="Result">
+                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strResult" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="DateTimeResult">
+                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strDateResult" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="FullPathPage">
+                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strFullPathPage" />
+                  </InArgument>
+                </ui:AddQueueItem.ItemInformation>
+              </ui:AddQueueItem>
+              <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_3" LogLevel="Info" LogMessage="[&quot;Added to Dispatcher Queue [&quot; + String.Join(&quot;] [&quot;, {strItemId, strContactType, strFirstName, strLastName}) + &quot;]&quot;]" />
+            </Sequence>
+            <Assign sap:VirtualizedContainerService.HintSize="418,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Object">[row("Queued")]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Object">["True"]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEachRow.Body>
+    </ui:ForEachRow>
+  </Sequence>
+</Activity>

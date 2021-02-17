@@ -1,0 +1,81 @@
+[12/11/2020 11:04] [INFO]: Initializing Project Settings...
+[12/11/2020 11:04] [WARN]: Loading Development Environment...
+[12/11/2020 11:04] [WARN]: Loading Testing Environment...
+[12/11/2020 11:04] [INFO]: Loading Settings [Global]...
+[12/11/2020 11:04] [TRACE]: Loaded [:Global:] [:Emails.Developers:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Global:] [:Emails.Team:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Global:] [:Microsoft.Login:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Global:] [:Path.OrchestratorAPI:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Global:] [:Path.OrchestratorStorage:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Global:] [:ProcessesToKill:]!
+[12/11/2020 11:04] [INFO]: Loading JSON Settings [Emails.Settings.json]...
+[12/11/2020 11:04] [TRACE]: Loaded [:FailSubject:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:FailBody:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:StatusSubject:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:StatusBody:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Signature:]!
+[12/11/2020 11:04] [INFO]: Loading Settings [Corporate/COVID/Lab Results]...
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results:] [:Emails.Team.Resident:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results:] [:Emails.Team.Staff:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results:] [:Emails.Team.Staff.Community:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results:] [:Emails.Team.Unknown:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results:] [:Limit.ProcessingItems:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results:] [:OutlookFolder.Dispatched:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results:] [:OutlookFolder.Failed:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results:] [:OutlookFolder.Faxcore.New:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results:] [:OutlookFolder.InProgress:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results:] [:OutlookFolder.OptumLab.New:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results:] [:Path.CommunityEmails:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results:] [:Path.ScanExtract.Resident:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results:] [:Path.ScanExtract.Staff:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results:] [:Path.ScanExtract.Unknown:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results:] [:Path.SummaryLog:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results:] [:ProcessesToKill.Performers:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results:] [:QueueData.Dispatcher.Systems:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results:] [:QueueData.Handler.NeedsReview:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results:] [:QueueData.Performer.CATTS:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results:] [:QueueData.Performer.MatrixCare:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results:] [:QueueData.Receiver.Faxcore:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results:] [:QueueData.Receiver.OptumLab:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results:] [:Span.Days.DateCollected:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results:] [:URL.CATTS.Main:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results:] [:URL.MatrixCare.Main:]!
+[12/11/2020 11:04] [INFO]: Loading Settings [Toby Flenderson]...
+[12/11/2020 11:04] [TRACE]: Loaded [:Toby Flenderson:] [:MatrixCare.Login:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Toby Flenderson:] [:Microsoft.Login:]!
+[12/11/2020 11:04] [INFO]: Loading Settings [Corporate/COVID/Lab Results/Testing]...
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results/Testing:] [:Emails.Team.Resident:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results/Testing:] [:Emails.Team.Staff:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results/Testing:] [:Emails.Team.Staff.Community:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results/Testing:] [:Emails.Team.Unknown:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results/Testing:] [:OutlookFolder.Faxcore.New:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results/Testing:] [:OutlookFolder.OptumLab.New:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results/Testing:] [:Path.ScanExtract.Resident:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results/Testing:] [:Path.ScanExtract.Staff:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results/Testing:] [:Path.ScanExtract.Unknown:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results/Testing:] [:ProcessesToKill.Performers:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results/Testing:] [:QueueData.Dispatcher.Systems:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results/Testing:] [:QueueData.Handler.NeedsReview:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results/Testing:] [:QueueData.Performer.CATTS:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results/Testing:] [:QueueData.Performer.MatrixCare:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results/Testing:] [:QueueData.Receiver.Faxcore:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results/Testing:] [:TestingFolder:]!
+[12/11/2020 11:04] [TRACE]: Loaded [:Corporate/COVID/Lab Results/Testing:] [:URL.CATTS.Main:]!
+[12/11/2020 11:04] [INFO]: Starting process [COVID.LabResults.Receiver.OptumLab_Testing] on [CDF_RPA_SPL_LT]...
+[12/11/2020 11:04] [INFO]: Checking systems used for this process...
+[12/11/2020 11:04] [INFO]: Checking internet connection...
+[12/11/2020 11:04] [INFO]: Checking Outlook Exchange Server...
+[12/11/2020 11:04] [INFO]: Checking Queue [Corporate/COVID/Lab Results/Testing] [Dispatcher.Systems]...
+[12/11/2020 11:04] [INFO]: Checking Queue [Corporate/COVID/Lab Results/Testing] [Handler.NeedsReview]...
+[12/11/2020 11:04] [INFO]: Checking Queue [Corporate/COVID/Lab Results/Testing] [Performer.CATTS]...
+[12/11/2020 11:04] [INFO]: Checking Queue [Corporate/COVID/Lab Results/Testing] [Performer.MatrixCare]...
+[12/11/2020 11:04] [INFO]: Checking Queue [Corporate/COVID/Lab Results/Testing] [Receiver.Faxcore]...
+[12/11/2020 11:04] [INFO]: Checking Queue [Corporate/COVID/Lab Results] [Receiver.OptumLab]...
+[12/11/2020 11:04] [ERROR]: APPLICATION: Failed to find Queue [Corporate/COVID/Lab Results] [Receiver.OptumLab]. UiPath.System.Activities: An invalid result was encountered for parameter QueueName
+[12/11/2020 11:04] [ERROR]: System failures detected.
+[12/11/2020 11:04] [TRANSITION]: Ending 'Initialization' State.
+[12/11/2020 11:04] [TRANSITION]: Entering 'End Process' State.
+[12/11/2020 11:04] [INFO]: Ending process [COVID.LabResults.Receiver.OptumLab_Testing] on [CDF_RPA_SPL_LT]...
+[12/11/2020 11:04] [INFO]: Nothing was processed!
+[12/11/2020 11:04] [ERROR]: Errors Encountered: [Application, Failed to find Queue [Corporate/COVID/Lab Results] [Receiver.OptumLab]. UiPath.System.Activities: An invalid result was encountered for parameter QueueName]
+[12/11/2020 11:04] [INFO]: Sending Log file to Developer Team [rbrowning@cardon.us]...

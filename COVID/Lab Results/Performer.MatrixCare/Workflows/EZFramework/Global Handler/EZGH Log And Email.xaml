@@ -1,0 +1,152 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="EZGH_Log_And_Email" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:ec="clr-namespace:EZFramework.Cleaning;assembly=EZFramework" xmlns:el="clr-namespace:EZFramework.Logging;assembly=EZFramework" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uico="http://schemas.uipath.com/workflow/activities/contracts" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="errorInfo" Type="InArgument(uico:ExceptionHandlerArgs)">
+      <x:Property.Attributes>
+        <RequiredArgumentAttribute />
+      </x:Property.Attributes>
+    </x:Property>
+    <x:Property Name="strMessage" Type="InArgument(x:String)" />
+    <x:Property Name="dicCredentials" Type="InArgument(scg:Dictionary(x:String, s:Tuple(x:String, x:String, ss:SecureString)))" />
+    <x:Property Name="dicConfig" Type="InArgument(scg:Dictionary(x:String, s:Tuple(x:String, x:String)))" />
+    <x:Property Name="listExceptions" Type="InArgument(scg:List(scg:KeyValuePair(x:String, x:String)))" />
+  </x:Members>
+  <this:EZGH_Log_And_Email.dicCredentials>
+    <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String, ss:SecureString))" />
+  </this:EZGH_Log_And_Email.dicCredentials>
+  <this:EZGH_Log_And_Email.dicConfig>
+    <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String))" />
+  </this:EZGH_Log_And_Email.dicConfig>
+  <this:EZGH_Log_And_Email.listExceptions>
+    <InArgument x:TypeArguments="scg:List(scg:KeyValuePair(x:String, x:String))" />
+  </this:EZGH_Log_And_Email.listExceptions>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>992,1968</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>EZGHLogAndEmail_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="48">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>UiPath.Activities.Contracts</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>System.Security</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="52">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Activities.Contracts</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.CV</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.IntelligentOCR</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.Word</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.Azure</AssemblyReference>
+      <AssemblyReference>System.Security.SecureString</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPathTeam.SharePoint</AssemblyReference>
+      <AssemblyReference>OfficeDevPnP.Core</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="EZGH Log And Email" sap:VirtualizedContainerService.HintSize="421,873" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="fileScreenshot" />
+      <Variable x:TypeArguments="x:String" Name="fileOutput" />
+      <Variable x:TypeArguments="x:String" Name="fileLog" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="379,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_1" LogLevel="Error" LogMessage="[strMessage]" />
+    <ui:InvokeWorkflowFile ContinueOnError="True" DisplayName="Invoke: Set In Progress To Failed" sap:VirtualizedContainerService.HintSize="379,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Workflows/EZFramework/Orchestrator/Set In Progress To Failed.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String))" x:Key="dicConfig">[dicConfig]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="strReason">["ACTIVITY: " + errorInfo.ActivityInfo.Name + " ERROR: " + errorInfo.Exception.Message]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke: Log Item Status" sap:VirtualizedContainerService.HintSize="379,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Workflows\EZFramework\Orchestrator\Log Item Status.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="strSuccessMessage" />
+        <InArgument x:TypeArguments="x:String" x:Key="strFailMessage">
+          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="&quot;ACTIVITY: &quot; + errorInfo.ActivityInfo.Name + &quot; ERROR: &quot; + errorInfo.Exception.Message.Replace(&quot;&lt;&quot;, &quot;&amp;lt;&quot;).Replace(&quot;&gt;&quot;, &quot;&amp;gt;&quot;)" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:Boolean" x:Key="boolSuccess">
+          <Literal x:TypeArguments="x:Boolean" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:Boolean" x:Key="boolBusinessFailure">
+          <Literal x:TypeArguments="x:Boolean" />
+        </InArgument>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String))" x:Key="dicConfig">
+          <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String))" ExpressionText="dicConfig" />
+        </InArgument>
+        <InArgument x:TypeArguments="ui:QueueItem" x:Key="itemTransaction" />
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke: Timestamp Log Files" sap:VirtualizedContainerService.HintSize="379,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="Workflows\EZFramework\Logs &amp; Email\Timestamp Log Files.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <OutArgument x:TypeArguments="x:String" x:Key="fileOutput">[fileOutput]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="fileLog">[fileLog]</OutArgument>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String))" x:Key="dicConfig">[dicConfig]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ContinueOnError="True" DisplayName="Invoke: Send Status Email " sap:VirtualizedContainerService.HintSize="379,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Workflows/EZFramework/Logs &amp; Email/Send Status Email.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String))" x:Key="dicConfig">[dicConfig]</InArgument>
+        <InOutArgument x:TypeArguments="scg:List(scg:KeyValuePair(x:String, x:String))" x:Key="listExceptions">[listExceptions]</InOutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="strEmailSubject">Ended with Errors</InArgument>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String, ss:SecureString))" x:Key="dicCredentials">[dicCredentials]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="fileOutput">[fileOutput]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ContinueOnError="True" DisplayName="Invoke: Send Log Email" sap:VirtualizedContainerService.HintSize="379,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Workflows/EZFramework/Logs &amp; Email/Send Log Email.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String))" x:Key="dicConfig">[dicConfig]</InArgument>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String, ss:SecureString))" x:Key="dicCredentials">[dicCredentials]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="fileLog">[fileLog]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ec:Kill_Processes DisplayName="Kill Processes" sap:VirtualizedContainerService.HintSize="379,22" sap2010:WorkflowViewState.IdRef="Kill_Processes_4" Processes="[dicConfig(&quot;ProcessesToKill&quot;).Item2.Split(&quot;,&quot;c).Select(Function(item) item.Trim).ToArray()]" />
+    <ec:Clean_Runtime_Files DisplayName="Clean Runtime Files" sap:VirtualizedContainerService.HintSize="379,22" sap2010:WorkflowViewState.IdRef="Clean_Runtime_Files_1" />
+  </Sequence>
+</Activity>

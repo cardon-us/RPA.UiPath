@@ -1,0 +1,44 @@
+[11/09/2020 14:36] [INFO]: Initializing Project Settings...
+[11/09/2020 14:36] [INFO]: Loading Settings [Global]...
+[11/09/2020 14:36] [TRACE]: Loaded [:Global:] [:Emails.Developers:]!
+[11/09/2020 14:36] [TRACE]: Loaded [:Global:] [:Emails.Team:]!
+[11/09/2020 14:36] [TRACE]: Loaded [:Global:] [:Microsoft.Login:]!
+[11/09/2020 14:36] [TRACE]: Loaded [:Global:] [:Path.OrchestratorAPI:]!
+[11/09/2020 14:36] [TRACE]: Loaded [:Global:] [:Path.OrchestratorStorage:]!
+[11/09/2020 14:36] [TRACE]: Loaded [:Global:] [:ProcessesToKill:]!
+[11/09/2020 14:36] [INFO]: Loading JSON Settings [Emails.Settings.json]...
+[11/09/2020 14:36] [TRACE]: Loaded [:FailSubject:]!
+[11/09/2020 14:36] [TRACE]: Loaded [:FailBody:]!
+[11/09/2020 14:36] [TRACE]: Loaded [:StatusSubject:]!
+[11/09/2020 14:36] [TRACE]: Loaded [:StatusBody:]!
+[11/09/2020 14:36] [TRACE]: Loaded [:Signature:]!
+[11/09/2020 14:36] [INFO]: Loading Settings [Corporate/COVID/Communications]...
+[11/09/2020 14:36] [TRACE]: Loaded [:Corporate/COVID/Communications:] [:Bot.Assets:]!
+[11/09/2020 14:36] [TRACE]: Loaded [:Corporate/COVID/Communications:] [:Bot.Credentials.ManageWP:]!
+[11/09/2020 14:36] [TRACE]: Loaded [:Corporate/COVID/Communications:] [:Bot.Credentials.Microsoft:]!
+[11/09/2020 14:36] [TRACE]: Loaded [:Corporate/COVID/Communications:] [:Bot.Gender:]!
+[11/09/2020 14:36] [TRACE]: Loaded [:Corporate/COVID/Communications:] [:Bot.RPAEmail:]!
+[11/09/2020 14:36] [TRACE]: Loaded [:Corporate/COVID/Communications:] [:Bot.Selector:]!
+[11/09/2020 14:36] [TRACE]: Loaded [:Corporate/COVID/Communications:] [:CarDon.COVID.DailyEmails.Assets:]!
+[11/09/2020 14:36] [TRACE]: Loaded [:Corporate/COVID/Communications:] [:CarDon.COVID.DailyEmails.TeamEmails:]!
+[11/09/2020 14:36] [TRACE]: Loaded [:Corporate/COVID/Communications:] [:CarDon.COVID.SiteUpdates.TeamEmails:]!
+[11/09/2020 14:36] [INFO]: Loading Settings [Toby Flenderson]...
+[11/09/2020 14:36] [TRACE]: Loaded [:Toby Flenderson:] [:MatrixCare.Login:]!
+[11/09/2020 14:36] [TRACE]: Loaded [:Toby Flenderson:] [:Microsoft.Login:]!
+[11/09/2020 14:36] [INFO]: Starting process [Performer.SendEmails] on [CDF_RPA_SPL_LT]...
+[11/09/2020 14:36] [INFO]: Checking systems used for this process...
+[11/09/2020 14:36] [INFO]: Checking internet connection...
+[11/09/2020 14:36] [INFO]: Checking Outlook Exchange Server...
+[11/09/2020 14:36] [INFO]: All systems good!
+[11/09/2020 14:36] [TRANSITION]: Ending 'Initialization' State.
+[11/09/2020 14:36] [TRANSITION]: Entering 'Start Process' State.
+[11/09/2020 14:36] [INFO]: Checking for new items in [QueueName]...
+[11/09/2020 14:36] [ERROR]: APPLICATION: An unhandled exception occurred. System.Activities:  does not exist. Error code: 1002
+[11/09/2020 14:36] [WARN]: An unhandled exception occurred. System.Activities:  does not exist. Error code: 1002
+[11/09/2020 14:36] [INFO]: No more transactions to process.
+[11/09/2020 14:36] [TRANSITION]: Entering 'End Process' State.
+[11/09/2020 14:36] [INFO]: Ending process [Performer.SendEmails] on [CDF_RPA_SPL_LT]...
+[11/09/2020 14:36] [INFO]: [Success: 0] [Needs Review: 1]
+[11/09/2020 14:36] [INFO]: Sending Status Email to Team [rbrowning@cardon.us]...
+[11/09/2020 14:36] [ERROR]: Errors Encountered: [Application, An unhandled exception occurred. System.Activities:  does not exist. Error code: 1002]
+[11/09/2020 14:36] [INFO]: Sending Log file to Developer Team [rbrowning@cardon.us]...

@@ -1,0 +1,36 @@
+{
+  "id": "202101011500",
+  "datetimechecked": "2021-01-15T20:36:24.811Z",
+  "totalvendors": 2,
+  "totalexcluded": 0,
+  "vendors": {
+    "id": {
+      "firstname": "",
+      "midname": "",
+      "lastname": "",
+      "busname": "TestBusiness",
+      "address": "TestAddress",
+      "city": "TestCity",
+      "state": "TestState",
+      "zip": "1234",
+      "dob": "10/22/2020",
+      "excluded": false,
+      "excltype": "TestType",
+      "excdate": null
+    },
+    "id": {
+      "firstname": "TestFirstname",
+      "midname": "TestMidName",
+      "lastname": "TestLastName",
+      "busname": "",
+      "address": "TestAddress",
+      "city": "TestCity",
+      "state": "TestState",
+      "zip": "1234",
+      "dob": "10/22/2020",
+      "excluded": false,
+      "excltype": "TestType",
+      "excdate": null
+    }
+  }
+}

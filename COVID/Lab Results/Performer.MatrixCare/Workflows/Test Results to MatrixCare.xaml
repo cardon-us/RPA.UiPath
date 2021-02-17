@@ -1,0 +1,396 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Test_Results_to_MatrixCare" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:el="clr-namespace:EZFramework.Logging;assembly=EZFramework" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="uiBrowserMatrixCare" Type="InArgument(ui:Browser)" />
+    <x:Property Name="datetimeResult" Type="InArgument(s:DateTime)" />
+    <x:Property Name="itemTransaction" Type="InArgument(ui:QueueItem)" />
+    <x:Property Name="listExceptions" Type="InOutArgument(scg:List(scg:KeyValuePair(x:String, x:String)))" />
+    <x:Property Name="strFirstName" Type="InArgument(x:String)" />
+    <x:Property Name="strLastName" Type="InArgument(x:String)" />
+    <x:Property Name="strContactDOB" Type="InArgument(x:String)" />
+    <x:Property Name="strFullPathPage" Type="InArgument(x:String)" />
+    <x:Property Name="datetimeCollected" Type="InArgument(s:DateTime)" />
+    <x:Property Name="strResult" Type="InArgument(x:String)" />
+    <x:Property Name="strLab" Type="InArgument(x:String)" />
+    <x:Property Name="dicConfig" Type="InArgument(scg:Dictionary(x:String, s:Tuple(x:String, x:String)))" />
+    <x:Property Name="strFailReason" Type="InOutArgument(x:String)" />
+    <x:Property Name="strContactLink" Type="OutArgument(x:String)" />
+    <x:Property Name="strContactFacility" Type="OutArgument(x:String)" />
+    <x:Property Name="strFailCode" Type="OutArgument(x:String)" />
+    <x:Property Name="dicCredentials" Type="InArgument(scg:Dictionary(x:String, s:Tuple(x:String, x:String, ss:SecureString)))" />
+    <x:Property Name="strItemId" Type="InArgument(x:String)" />
+    <x:Property Name="datetimeReceived" Type="InArgument(s:DateTime)" />
+  </x:Members>
+  <this:Test_Results_to_MatrixCare.uiBrowserMatrixCare>
+    <InArgument x:TypeArguments="ui:Browser" />
+  </this:Test_Results_to_MatrixCare.uiBrowserMatrixCare>
+  <this:Test_Results_to_MatrixCare.datetimeResult>
+    <InArgument x:TypeArguments="s:DateTime" />
+  </this:Test_Results_to_MatrixCare.datetimeResult>
+  <this:Test_Results_to_MatrixCare.itemTransaction>
+    <InArgument x:TypeArguments="ui:QueueItem" />
+  </this:Test_Results_to_MatrixCare.itemTransaction>
+  <this:Test_Results_to_MatrixCare.strFirstName>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Test_Results_to_MatrixCare.strFirstName>
+  <this:Test_Results_to_MatrixCare.strLastName>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Test_Results_to_MatrixCare.strLastName>
+  <this:Test_Results_to_MatrixCare.strContactDOB>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Test_Results_to_MatrixCare.strContactDOB>
+  <this:Test_Results_to_MatrixCare.strFullPathPage>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Test_Results_to_MatrixCare.strFullPathPage>
+  <this:Test_Results_to_MatrixCare.datetimeCollected>
+    <InArgument x:TypeArguments="s:DateTime" />
+  </this:Test_Results_to_MatrixCare.datetimeCollected>
+  <this:Test_Results_to_MatrixCare.strResult>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Test_Results_to_MatrixCare.strResult>
+  <this:Test_Results_to_MatrixCare.strLab>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Test_Results_to_MatrixCare.strLab>
+  <this:Test_Results_to_MatrixCare.dicConfig>
+    <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String))" />
+  </this:Test_Results_to_MatrixCare.dicConfig>
+  <this:Test_Results_to_MatrixCare.dicCredentials>
+    <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String, ss:SecureString))" />
+  </this:Test_Results_to_MatrixCare.dicCredentials>
+  <this:Test_Results_to_MatrixCare.strItemId>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Test_Results_to_MatrixCare.strItemId>
+  <this:Test_Results_to_MatrixCare.datetimeReceived>
+    <InArgument x:TypeArguments="s:DateTime" />
+  </this:Test_Results_to_MatrixCare.datetimeReceived>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1082,2637</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Test_Results_to_MatrixCare_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="42">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="27">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.CV</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.Word</AssemblyReference>
+      <AssemblyReference>OfficeDevPnP.Core</AssemblyReference>
+      <AssemblyReference>UiPathTeam.SharePoint</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <sap:WorkflowViewStateService.ViewState>
+    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+      <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
+    </scg:Dictionary>
+  </sap:WorkflowViewStateService.ViewState>
+  <Sequence DisplayName="Test_Results_to_MatrixCare" sap:VirtualizedContainerService.HintSize="1092,2572" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:Boolean" Name="boolFoundResident" />
+      <Variable x:TypeArguments="ui:Browser" Name="uiBrowserResident" />
+      <Variable x:TypeArguments="x:String" Name="strStatusObservation" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="1050,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_1" LogLevel="Info" LogMessage="[&quot;Trying: [&quot; + String.Join(&quot;] [&quot;, {strItemId, strFirstName, strLastName, &quot;DOB: &quot; + strContactDOB, &quot;Date Collected: &quot; + datetimeCollected.ToString(&quot;MM/dd/yyyy HH:mm&quot;), &quot;Result: &quot; + strResult, &quot;Date Result: &quot; + datetimeResult.ToString(&quot;MM/dd/yyyy HH:mm&quot;)}) + &quot;]...&quot;]" />
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Find Resident workflow" sap:VirtualizedContainerService.HintSize="1050,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Workflows\Find Resident.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="ui:Browser" x:Key="uiBrowserMatrixCare">[uiBrowserMatrixCare]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="strContactDOB">[strContactDOB]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="strFirstName">[strFirstName]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="strLastName">[strLastName]</InArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="strContactFacility">[strContactFacility]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="strContactLink">[strContactLink]</OutArgument>
+        <OutArgument x:TypeArguments="ui:Browser" x:Key="uiBrowserResident">[uiBrowserResident]</OutArgument>
+        <OutArgument x:TypeArguments="x:Boolean" x:Key="boolFoundResident">[boolFoundResident]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <If Condition="[boolFoundResident]" DisplayName="If: Resident Found" sap:VirtualizedContainerService.HintSize="1050,2291" sap2010:WorkflowViewState.IdRef="If_2">
+      <If.Then>
+        <Sequence DisplayName="Process Resident" sap:VirtualizedContainerService.HintSize="625,2143" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign DisplayName="Assign: Empty Fail Reason" sap:VirtualizedContainerService.HintSize="583,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[strFailReason]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[Nothing]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <If Condition="[Not strResult.ToLower.Contains(&quot;negative&quot;)]" DisplayName="If: Result is Not Negative" sap:VirtualizedContainerService.HintSize="583,649" sap2010:WorkflowViewState.IdRef="If_4">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If.Then>
+              <TryCatch DisplayName="Try Catch: Email Community of Result" sap:VirtualizedContainerService.HintSize="438,501" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                <TryCatch.Try>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Email Result to Community workflow" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_11" UnSafe="False" WorkflowFileName="Workflows\Email Result to Community.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="strContactFacility">
+                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strContactFacility" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="strFullPathPage">
+                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strFullPathPage" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="strResult">
+                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strResult" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="strFirstName">
+                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strFirstName" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="strLastName">
+                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strLastName" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeCollected">
+                        <mva:VisualBasicValue x:TypeArguments="s:DateTime" ExpressionText="datetimeCollected" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeResult">
+                        <mva:VisualBasicValue x:TypeArguments="s:DateTime" ExpressionText="datetimeResult" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="strContactDOB">
+                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strContactDOB" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="strContactLink">
+                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strContactLink" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String, ss:SecureString))" x:Key="dicCredentials">
+                        <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String, ss:SecureString))" ExpressionText="dicCredentials" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String))" x:Key="dicConfig">
+                        <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String))" ExpressionText="dicConfig" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="strLab">
+                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strLab" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeReceived">
+                        <mva:VisualBasicValue x:TypeArguments="s:DateTime" ExpressionText="datetimeReceived" />
+                      </InArgument>
+                      <InOutArgument x:TypeArguments="scg:List(scg:KeyValuePair(x:String, x:String))" x:Key="listExceptions">
+                        <mva:VisualBasicReference x:TypeArguments="scg:List(scg:KeyValuePair(x:String, x:String))" ExpressionText="listExceptions" />
+                      </InOutArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                </TryCatch.Try>
+                <TryCatch.Catches>
+                  <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,104" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ActivityAction x:TypeArguments="s:Exception">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                      </ActivityAction.Argument>
+                      <el:Log_Failed_Activity ExceptionType="{x:Null}" DisplayName="Log Failed Activity" ExceptionsList="[listExceptions]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Log_Failed_Activity_1" LogMessage="[&quot;Failed to email Community the Result&quot; + &quot;: &quot; + exception.Message]" />
+                    </ActivityAction>
+                  </Catch>
+                </TryCatch.Catches>
+              </TryCatch>
+            </If.Then>
+          </If>
+          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Add Test Results workflow" sap:VirtualizedContainerService.HintSize="583,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="Workflows/Add Test Results.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="ui:Browser" x:Key="uiBrowserResident">
+                <mva:VisualBasicValue x:TypeArguments="ui:Browser" ExpressionText="uiBrowserResident" />
+              </InArgument>
+              <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeCollected">
+                <mva:VisualBasicValue x:TypeArguments="s:DateTime" ExpressionText="datetimeCollected" />
+              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="strResult">
+                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strResult" />
+              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="strLab">
+                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strLab" />
+              </InArgument>
+              <InOutArgument x:TypeArguments="x:String" x:Key="strFailReason">
+                <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="strFailReason" />
+              </InOutArgument>
+              <InOutArgument x:TypeArguments="x:String" x:Key="strFailCode">
+                <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="strFailCode" />
+              </InOutArgument>
+              <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeResult">
+                <mva:VisualBasicValue x:TypeArguments="s:DateTime" ExpressionText="datetimeResult" />
+              </InArgument>
+              <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeReceived">
+                <mva:VisualBasicValue x:TypeArguments="s:DateTime" ExpressionText="datetimeReceived" />
+              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="strItemId">
+                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strItemId" />
+              </InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+          <If Condition="[Not strFullPathPage.ToLower.Contains(&quot;no file&quot;)]" DisplayName="If: File is Present" sap:VirtualizedContainerService.HintSize="583,235" sap2010:WorkflowViewState.IdRef="If_5">
+            <If.Then>
+              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Add PDF Lab workflow" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="Workflows\Add PDF Lab.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="ui:Browser" x:Key="uiBrowserResident">[uiBrowserResident]</InArgument>
+                  <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeCollected">[datetimeCollected]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="strResult">[strResult]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="strLab">[strLab]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="strFullPathPage">[strFullPathPage]</InArgument>
+                  <InOutArgument x:TypeArguments="x:String" x:Key="strFailReason">[strFailReason]</InOutArgument>
+                  <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeResult">[datetimeResult]</InArgument>
+                  <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeReceived">[datetimeReceived]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="strItemId">[strItemId]</InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+            </If.Then>
+          </If>
+          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Search for Observation workflow" sap:VirtualizedContainerService.HintSize="583,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="Workflows\Search for Observation.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="strResult">[strResult]</InArgument>
+              <InArgument x:TypeArguments="ui:Browser" x:Key="uiBrowserResident">[uiBrowserResident]</InArgument>
+              <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeCollected">[datetimeCollected]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="strLab">[strLab]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="strFullPathPage">[strFullPathPage]</InArgument>
+              <InOutArgument x:TypeArguments="x:String" x:Key="strFailReason">[strFailReason]</InOutArgument>
+              <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeResult">[datetimeResult]</InArgument>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String))" x:Key="dicConfig">[dicConfig]</InArgument>
+              <OutArgument x:TypeArguments="x:String" x:Key="strStatusObservation">[strStatusObservation]</OutArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+          <Switch x:TypeArguments="x:String" DisplayName="Switch: Observation Status" Expression="[strStatusObservation]" sap:VirtualizedContainerService.HintSize="583,733" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+            <Switch.Default>
+              <Sequence DisplayName="No Pending Observation" sap:VirtualizedContainerService.HintSize="380,252" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="338,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_3" LogLevel="Warn" LogMessage="No pending Observations found!" />
+                <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="338,98" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+                  <ui:MultipleAssign.AssignOperations>
+                    <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
+                        <ui:AssignOperation.To>
+                          <OutArgument x:TypeArguments="x:String">[strFailReason]</OutArgument>
+                        </ui:AssignOperation.To>
+                        <ui:AssignOperation.Value>
+                          <InArgument x:TypeArguments="x:String">[String.Join(" ", {strFailReason, "No pending Observation found!"}.Where(Function(item) Not String.IsNullOrEmpty(item)))]</InArgument>
+                        </ui:AssignOperation.Value>
+                      </ui:AssignOperation>
+                    </scg:List>
+                  </ui:MultipleAssign.AssignOperations>
+                </ui:MultipleAssign>
+              </Sequence>
+            </Switch.Default>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" x:Key="Pending" DisplayName="Invoke Complete Observation workflow" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_10" UnSafe="False" WorkflowFileName="Workflows\Complete Observation.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeCollected">[datetimeCollected]</InArgument>
+                <InArgument x:TypeArguments="ui:Browser" x:Key="uiBrowserResident">[uiBrowserResident]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeResult">[datetimeResult]</InArgument>
+                <InOutArgument x:TypeArguments="x:String" x:Key="strFailReason">[strFailReason]</InOutArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="strResult">[strResult]</InArgument>
+                <InOutArgument x:TypeArguments="scg:List(scg:KeyValuePair(x:String, x:String))" x:Key="listExceptions">[listExceptions]</InOutArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:MultipleAssign x:Key="Exists" DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="338,98" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
+              <ui:MultipleAssign.AssignOperations>
+                <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strFailReason]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">[String.Join(" ", {strFailReason, "Observation may already be completed!"}.Where(Function(item) Not String.IsNullOrEmpty(item)))]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                </scg:List>
+              </ui:MultipleAssign.AssignOperations>
+            </ui:MultipleAssign>
+          </Switch>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Contact not Found" sap:VirtualizedContainerService.HintSize="380,283" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="338,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_2" LogLevel="Warn" LogMessage="Contact not found!" />
+          <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="338,129" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+            <ui:MultipleAssign.AssignOperations>
+              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="x:String">[strFailReason]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="x:String">[String.Join(" ", {strFailReason, "Contact not found in MatrixCare!"}.Where(Function(item) Not String.IsNullOrEmpty(item)))]</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="x:String">[strFailCode]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="x:String">CNF</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+              </scg:List>
+            </ui:MultipleAssign.AssignOperations>
+          </ui:MultipleAssign>
+        </Sequence>
+      </If.Else>
+    </If>
+  </Sequence>
+</Activity>

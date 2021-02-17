@@ -1,0 +1,42 @@
+{
+    "id": "202101200942",
+    "datetimechecked": "2021-01-15T20:36:24.811Z",
+    "type": "Staff",    
+    "totalstaff": 2,
+    "totalexcluded": 0,
+    "staff": {
+        "1_202101152036": {
+            "firstname": "",
+            "midname": "",
+            "lastname": "",
+            "busname": "TestBusiness",
+            "address": "TestAddress",
+            "city": "TestCity",
+            "state": "TestState",
+            "zip": "1234",
+            "dob": "10/22/2020",
+            "excluded": false,
+            "excltype": "TestType",
+            "excdate": null
+        },
+        "2_202101152036": {
+            "firstname": "TestFirstname",
+            "midname": "TestMidName",
+            "lastname": "TestLastName",
+            "busname": "",
+            "address": "TestAddress",
+            "city": "TestCity",
+            "state": "TestState",
+            "zip": "1234",
+            "dob": "10/22/2020",
+            "excluded": false,
+            "excltype": "TestType",
+            "excdate": null
+        }
+    },
+    "_rid": "Ws4wAOEqGwkDAAAAAAAAAA==",
+    "_self": "dbs/Ws4wAA==/colls/Ws4wAOEqGwk=/docs/Ws4wAOEqGwkDAAAAAAAAAA==/",
+    "_etag": "\"36000233-0000-0300-0000-600705ab0000\"",
+    "_attachments": "attachments/",
+    "_ts": 1611072939
+}

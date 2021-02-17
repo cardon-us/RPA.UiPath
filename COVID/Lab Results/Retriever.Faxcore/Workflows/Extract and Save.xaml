@@ -1,0 +1,666 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Extract_and_Save" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:ec="clr-namespace:EZFramework.Cleaning;assembly=EZFramework" xmlns:el="clr-namespace:EZFramework.Logging;assembly=EZFramework" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://schemas.microsoft.com/workflow/2012/07/xaml/activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="dicConfig" Type="InArgument(scg:Dictionary(x:String, s:Tuple(x:String, x:String)))" />
+    <x:Property Name="listExceptions" Type="InOutArgument(scg:List(scg:KeyValuePair(x:String, x:String)))" />
+    <x:Property Name="strFolderInput" Type="InArgument(x:String)" />
+    <x:Property Name="dicCredentials" Type="InArgument(scg:Dictionary(x:String, s:Tuple(x:String, x:String, ss:SecureString)))" />
+    <x:Property Name="datetimeReceived" Type="InArgument(s:DateTime)" />
+    <x:Property Name="listSuccessExtracts" Type="OutArgument(scg:List(x:String))" />
+    <x:Property Name="strItemId" Type="InArgument(x:String)" />
+  </x:Members>
+  <this:Extract_and_Save.dicConfig>
+    <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String))" />
+  </this:Extract_and_Save.dicConfig>
+  <this:Extract_and_Save.strFolderInput>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Extract_and_Save.strFolderInput>
+  <this:Extract_and_Save.dicCredentials>
+    <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String, ss:SecureString))" />
+  </this:Extract_and_Save.dicCredentials>
+  <this:Extract_and_Save.datetimeReceived>
+    <InArgument x:TypeArguments="s:DateTime" />
+  </this:Extract_and_Save.datetimeReceived>
+  <this:Extract_and_Save.strItemId>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Extract_and_Save.strItemId>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1314,3875</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Testing_OCR_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="31">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Adobe.DocumentServices.PDFTools</x:String>
+      <x:String>Adobe.DocumentServices.PDFTools.auth</x:String>
+      <x:String>Adobe.DocumentServices.PDFTools.exception</x:String>
+      <x:String>Adobe.DocumentServices.PDFTools.io</x:String>
+      <x:String>Adobe.DocumentServices.PDFTools.options.exportpdf</x:String>
+      <x:String>Adobe.DocumentServices.PDFTools.pdfops</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>System.Net</x:String>
+      <x:String>System.Security</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="28">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>Adobe.DocumentServices.PDFTools</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPathTeam.SharePoint</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.CV</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Word</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>OfficeDevPnP.Core</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <sap:WorkflowViewStateService.ViewState>
+    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+      <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
+    </scg:Dictionary>
+  </sap:WorkflowViewStateService.ViewState>
+  <Sequence DisplayName="Extract and Save" sap:VirtualizedContainerService.HintSize="781,3770" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="strWordLabScan" />
+      <Variable x:TypeArguments="x:String" Name="strFirstName" />
+      <Variable x:TypeArguments="x:String" Name="strLastName" />
+      <Variable x:TypeArguments="x:String" Name="strDOB" />
+      <Variable x:TypeArguments="x:String" Name="strResult" />
+      <Variable x:TypeArguments="x:String" Name="strDateCollected" />
+      <Variable x:TypeArguments="x:String" Name="strDateResult" />
+      <Variable x:TypeArguments="x:String" Name="strFaxNumber" />
+      <Variable x:TypeArguments="x:String" Name="strContactType" />
+      <Variable x:TypeArguments="scg:List(x:String)" Name="listFailedExtracts" />
+      <Variable x:TypeArguments="x:String" Name="strQueueNameDispatcher" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:MultipleAssign DisplayName="Multiple Assign: Declarations" sap:VirtualizedContainerService.HintSize="739,160" sap2010:WorkflowViewState.IdRef="MultipleAssign_26">
+      <ui:MultipleAssign.AssignOperations>
+        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_132">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="scg:List(x:String)">[listFailedExtracts]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="scg:List(x:String)">[New List(of String)]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_142">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="scg:List(x:String)">[listSuccessExtracts]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="scg:List(x:String)">[New List(of String)]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_131">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[strQueueNameDispatcher]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">QueueData.Dispatcher.Systems</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+        </scg:List>
+      </ui:MultipleAssign.AssignOperations>
+    </ui:MultipleAssign>
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each: File" sap:VirtualizedContainerService.HintSize="739,2785" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[Directory.GetFiles(strFolderInput, &quot;*.pdf&quot;)]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="x:String">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:String" Name="file" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Extract Data from File" sap:VirtualizedContainerService.HintSize="703,2651" sap2010:WorkflowViewState.IdRef="Sequence_46">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:MultipleAssign DisplayName="Multiple Assign: Defaults" sap:VirtualizedContainerService.HintSize="661,191" sap2010:WorkflowViewState.IdRef="MultipleAssign_50">
+              <ui:MultipleAssign.AssignOperations>
+                <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_96">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strFirstName]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">Unknown</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_97">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strLastName]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">Unknown</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_98">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strContactType]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">Unknown</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_133">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strDOB]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">Unknown</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                </scg:List>
+              </ui:MultipleAssign.AssignOperations>
+            </ui:MultipleAssign>
+            <TryCatch DisplayName="Try Catch: Convert and Extract" sap:VirtualizedContainerService.HintSize="661,2328" sap2010:WorkflowViewState.IdRef="TryCatch_17">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <TryCatch.Try>
+                <ui:RetryScope DisplayName="Retry Scope: Convert to Word" sap:VirtualizedContainerService.HintSize="623,1773" sap2010:WorkflowViewState.IdRef="RetryScope_7" NumberOfRetries="5" RetryInterval="00:00:01">
+                  <ui:RetryScope.ActivityBody>
+                    <ActivityAction>
+                      <Sequence DisplayName="Extract Lab Data" sap:VirtualizedContainerService.HintSize="581,1599" sap2010:WorkflowViewState.IdRef="Sequence_41">
+                        <Sequence.Variables>
+                          <Variable x:TypeArguments="x:String" Name="strFileDocx" />
+                          <Variable x:TypeArguments="x:String" Name="strFullPathPage" />
+                          <Variable x:TypeArguments="x:Boolean" Name="boolExistsFile" />
+                          <Variable x:TypeArguments="x:String" Name="strPDFLabScan" />
+                          <Variable x:TypeArguments="x:String" Name="strSuccessMessage" />
+                        </Sequence.Variables>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="539,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_14" LogLevel="Info" LogMessage="[&quot;Working on [&quot; + Path.GetFileName(file) + &quot;]...&quot;]" />
+                        <ec:Kill_Processes DisplayName="Kill Processes" sap:VirtualizedContainerService.HintSize="539,22" sap2010:WorkflowViewState.IdRef="Kill_Processes_1" Processes="[{&quot;Acrobat&quot;, &quot;WINWORD&quot;, &quot;chrome&quot;}]" />
+                        <ui:CommentOut sap2010:Annotation.AnnotationText="Adobe API to Convert from PDF to Word" DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="539,93" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+                          <ui:CommentOut.Body>
+                            <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="422,486" sap2010:WorkflowViewState.IdRef="Sequence_29">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <Sequence DisplayName="Convert to Word with Adobe API" sap:VirtualizedContainerService.HintSize="380,394" sap2010:WorkflowViewState.IdRef="Sequence_52">
+                                <Sequence.Variables>
+                                  <Variable x:TypeArguments="x:String" Name="strAdobeAPICredentials" />
+                                </Sequence.Variables>
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <ui:MultipleAssign DisplayName="Multiple Assign: Adobe API Tools Path" sap:VirtualizedContainerService.HintSize="338,98" sap2010:WorkflowViewState.IdRef="MultipleAssign_53">
+                                  <ui:MultipleAssign.AssignOperations>
+                                    <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_106">
+                                        <ui:AssignOperation.To>
+                                          <OutArgument x:TypeArguments="x:String">[strAdobeAPICredentials]</OutArgument>
+                                        </ui:AssignOperation.To>
+                                        <ui:AssignOperation.Value>
+                                          <InArgument x:TypeArguments="x:String">[dicConfig("Path.CredentialsJSON").Item2.Replace("[USERNAME]", Environment.UserName)]</InArgument>
+                                        </ui:AssignOperation.Value>
+                                      </ui:AssignOperation>
+                                    </scg:List>
+                                  </ui:MultipleAssign.AssignOperations>
+                                </ui:MultipleAssign>
+                                <ui:InvokeCode ContinueOnError="{x:Null}" Code="Try&#xA;&#x9;Dim credentials As Credentials = Credentials.ServiceAccountCredentialsBuilder().FromFile(strAdobeAPICredentials).Build()&#xA;&#x9;Dim executionContext As ExecutionContext = ExecutionContext.Create(credentials)&#xA;&#x9;Dim exportPdfOperation As ExportPDFOperation = ExportPDFOperation.CreateNew(ExportPDFTargetFormat.DOCX)&#xA;&#x9;Dim sourceFileRef As FileRef = FileRef.CreateFromLocalFile(file)&#xA;&#x9;exportPdfOperation.SetInput(sourceFileRef)&#xA;&#x9;&#xA;&#x9;Dim result As FileRef = exportPdfOperation.Execute(executionContext)&#xA;&#x9;result.SaveAs(strFileDocx)&#xA;&#xA;Catch ex As Exception&#xA;&#x9;Console.WriteLine(&quot;Exception occurred with Adobe API: &quot; + ex.Message)&#xA;End Try" DisplayName="Invoke code: Convert File to docx" sap:VirtualizedContainerService.HintSize="338,164" sap2010:WorkflowViewState.IdRef="InvokeCode_3">
+                                  <ui:InvokeCode.Arguments>
+                                    <InArgument x:TypeArguments="x:String" x:Key="file">[file]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="strFileDocx">[strFileDocx]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="strAdobeAPICredentials">[strAdobeAPICredentials]</InArgument>
+                                  </ui:InvokeCode.Arguments>
+                                </ui:InvokeCode>
+                              </Sequence>
+                            </Sequence>
+                          </ui:CommentOut.Body>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:CommentOut>
+                        <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Convert PDF to Word workflow" sap:VirtualizedContainerService.HintSize="539,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Workflows\Convert PDF to Word.xaml">
+                          <ui:InvokeWorkflowFile.Arguments>
+                            <InArgument x:TypeArguments="x:String" x:Key="file">[file]</InArgument>
+                            <OutArgument x:TypeArguments="x:String" x:Key="strWordLabScan">[strWordLabScan]</OutArgument>
+                            <OutArgument x:TypeArguments="x:String" x:Key="strPDFLabScan">[strPDFLabScan]</OutArgument>
+                          </ui:InvokeWorkflowFile.Arguments>
+                        </ui:InvokeWorkflowFile>
+                        <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Extract Data workflow" sap:VirtualizedContainerService.HintSize="539,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Workflows\Extract Data.xaml">
+                          <ui:InvokeWorkflowFile.Arguments>
+                            <InArgument x:TypeArguments="x:String" x:Key="strWordLabScan">[strWordLabScan]</InArgument>
+                            <OutArgument x:TypeArguments="x:String" x:Key="strDateCollected">[strDateCollected]</OutArgument>
+                            <OutArgument x:TypeArguments="x:String" x:Key="strContactType">[strContactType]</OutArgument>
+                            <OutArgument x:TypeArguments="x:String" x:Key="strFaxNumber">[strFaxNumber]</OutArgument>
+                            <OutArgument x:TypeArguments="x:String" x:Key="strDateResult">[strDateResult]</OutArgument>
+                            <OutArgument x:TypeArguments="x:String" x:Key="strResult">[strResult]</OutArgument>
+                            <OutArgument x:TypeArguments="x:String" x:Key="strDOB">[strDOB]</OutArgument>
+                            <OutArgument x:TypeArguments="x:String" x:Key="strLastName">[strLastName]</OutArgument>
+                            <OutArgument x:TypeArguments="x:String" x:Key="strFirstName">[strFirstName]</OutArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="strPDFLabScan">[strPDFLabScan]</InArgument>
+                          </ui:InvokeWorkflowFile.Arguments>
+                        </ui:InvokeWorkflowFile>
+                        <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Save and Rename File workflow" sap:VirtualizedContainerService.HintSize="539,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Workflows\Save and Rename File.xaml">
+                          <ui:InvokeWorkflowFile.Arguments>
+                            <InArgument x:TypeArguments="x:String" x:Key="strFirstName">[strFirstName]</InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="strLastName">[strLastName]</InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="strDateResult">[strDateResult]</InArgument>
+                            <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String))" x:Key="dicConfig">[dicConfig]</InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="file">[file]</InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="strContactType">[strContactType]</InArgument>
+                            <OutArgument x:TypeArguments="x:String" x:Key="strFullPathPage">[strFullPathPage]</OutArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="strItemId">[strItemId]</InArgument>
+                          </ui:InvokeWorkflowFile.Arguments>
+                        </ui:InvokeWorkflowFile>
+                        <Sequence DisplayName="Add to Queue" sap:VirtualizedContainerService.HintSize="539,176" sap2010:WorkflowViewState.IdRef="Sequence_39">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item" DueDate="[datetimeReceived.AddDays(1)]" FolderPath="[dicConfig(strQueueNameDispatcher).Item1]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="AddQueueItem_2" Priority="Normal" QueueType="[dicConfig(strQueueNameDispatcher).Item2]" Reference="[String.Join(&quot;_&quot;, {strItemId, strFirstName, strLastName})]">
+                            <ui:AddQueueItem.ItemInformation>
+                              <InArgument x:TypeArguments="x:String" x:Key="CurrentFolder">[dicConfig(strQueueNameDispatcher).Item1]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="DateTimeAdded">[DateTime.Now.ToString("M/dd/yyyy HH:mm:ss")]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="Source">Faxcore</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="ItemId">[strItemId]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="DateTimeReceived">[datetimeReceived.ToString("M/dd/yyyy HH:mm:ss")]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="FaxNumber">[strFaxNumber]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="Lab">IU</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="ContactType">[strContactType]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="FirstName">[strFirstName]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="LastName">[strLastName]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="ContactDOB">[strDOB]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="DateTimeCollected">[strDateCollected]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="Result">[strResult]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="DateTimeResult">[strDateResult]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="FullPathPage">[strFullPathPage]</InArgument>
+                            </ui:AddQueueItem.ItemInformation>
+                          </ui:AddQueueItem>
+                          <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_26" LogLevel="Info" LogMessage="[&quot;Added to Dispatcher Queue [&quot; + String.Join(&quot;] [&quot;, {strItemId, strContactType, strFirstName, strLastName}) + &quot;]&quot;]" />
+                        </Sequence>
+                        <Sequence DisplayName="Formatting" sap:VirtualizedContainerService.HintSize="539,591" sap2010:WorkflowViewState.IdRef="Sequence_65">
+                          <Sequence.Variables>
+                            <Variable x:TypeArguments="x:String" Name="strContactColor" />
+                          </Sequence.Variables>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Switch x:TypeArguments="x:String" DisplayName="Switch: Contact Color" Expression="[strContactType]" sap:VirtualizedContainerService.HintSize="497,299" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+                            <Switch.Default>
+                              <ui:MultipleAssign DisplayName="Multiple Assign: Formatting" sap:VirtualizedContainerService.HintSize="338,98" sap2010:WorkflowViewState.IdRef="MultipleAssign_72">
+                                <ui:MultipleAssign.AssignOperations>
+                                  <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_138">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:String">[strContactColor]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:String">ff6600</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                  </scg:List>
+                                </ui:MultipleAssign.AssignOperations>
+                              </ui:MultipleAssign>
+                            </Switch.Default>
+                            <ui:MultipleAssign x:Key="Staff" DisplayName="Multiple Assign: Formatting" sap:VirtualizedContainerService.HintSize="338,98" sap2010:WorkflowViewState.IdRef="MultipleAssign_70">
+                              <ui:MultipleAssign.AssignOperations>
+                                <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_136">
+                                    <ui:AssignOperation.To>
+                                      <OutArgument x:TypeArguments="x:String">[strContactColor]</OutArgument>
+                                    </ui:AssignOperation.To>
+                                    <ui:AssignOperation.Value>
+                                      <InArgument x:TypeArguments="x:String">008000</InArgument>
+                                    </ui:AssignOperation.Value>
+                                  </ui:AssignOperation>
+                                </scg:List>
+                              </ui:MultipleAssign.AssignOperations>
+                            </ui:MultipleAssign>
+                            <ui:MultipleAssign x:Key="Resident" DisplayName="Multiple Assign: Formatting" sap:VirtualizedContainerService.HintSize="338,98" sap2010:WorkflowViewState.IdRef="MultipleAssign_71">
+                              <ui:MultipleAssign.AssignOperations>
+                                <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_137">
+                                    <ui:AssignOperation.To>
+                                      <OutArgument x:TypeArguments="x:String">[strContactColor]</OutArgument>
+                                    </ui:AssignOperation.To>
+                                    <ui:AssignOperation.Value>
+                                      <InArgument x:TypeArguments="x:String">800080</InArgument>
+                                    </ui:AssignOperation.Value>
+                                  </ui:AssignOperation>
+                                </scg:List>
+                              </ui:MultipleAssign.AssignOperations>
+                            </ui:MultipleAssign>
+                          </Switch>
+                          <ui:MultipleAssign DisplayName="Multiple Assign: Formatting" sap:VirtualizedContainerService.HintSize="497,160" sap2010:WorkflowViewState.IdRef="MultipleAssign_69">
+                            <ui:MultipleAssign.AssignOperations>
+                              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_134">
+                                  <ui:AssignOperation.To>
+                                    <OutArgument x:TypeArguments="x:String">[strResult]</OutArgument>
+                                  </ui:AssignOperation.To>
+                                  <ui:AssignOperation.Value>
+                                    <InArgument x:TypeArguments="x:String">[If (Not strResult.ToLower.Contains("negative"), "&lt;span style=""color: #ff0000;""&gt;&lt;strong&gt;" + strResult + "&lt;/strong&gt;&lt;/span&gt;", strResult)]</InArgument>
+                                  </ui:AssignOperation.Value>
+                                </ui:AssignOperation>
+                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_135">
+                                  <ui:AssignOperation.To>
+                                    <OutArgument x:TypeArguments="x:String">[strContactType]</OutArgument>
+                                  </ui:AssignOperation.To>
+                                  <ui:AssignOperation.Value>
+                                    <InArgument x:TypeArguments="x:String">["&lt;span style=""color: #" + strContactColor + ";""&gt;&lt;strong&gt;" + strContactType +"&lt;/strong&gt;&lt;/span&gt;"]</InArgument>
+                                  </ui:AssignOperation.Value>
+                                </ui:AssignOperation>
+                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_139">
+                                  <ui:AssignOperation.To>
+                                    <OutArgument x:TypeArguments="x:String">[strSuccessMessage]</OutArgument>
+                                  </ui:AssignOperation.To>
+                                  <ui:AssignOperation.Value>
+                                    <InArgument x:TypeArguments="x:String">[("&lt;li&gt;[" + String.Join("] [", {"ID: " + strItemId, "Type: " + strContactType, "Name: " + strFirstName + " " + strLastName, "DOB: " + strDOB, "Date Collected: " + strDateCollected, "Result: " + strResult, "Date Result: " + strDateresult}) + "]&lt;/li&gt;").Replace("Misread", "&lt;span style=""color: #ff0000;""&gt;&lt;strong&gt;Misread&lt;/strong&gt;&lt;/span&gt;")]</InArgument>
+                                  </ui:AssignOperation.Value>
+                                </ui:AssignOperation>
+                              </scg:List>
+                            </ui:MultipleAssign.AssignOperations>
+                          </ui:MultipleAssign>
+                        </Sequence>
+                        <AddToCollection x:TypeArguments="x:String" Collection="[listSuccessExtracts]" DisplayName="Add To Collection: Successes" sap:VirtualizedContainerService.HintSize="539,22" sap2010:WorkflowViewState.IdRef="AddToCollection`1_3" Item="[strSuccessMessage]" />
+                      </Sequence>
+                    </ActivityAction>
+                  </ui:RetryScope.ActivityBody>
+                  <ui:RetryScope.Condition>
+                    <ActivityFunc x:TypeArguments="x:Boolean" />
+                  </ui:RetryScope.Condition>
+                </ui:RetryScope>
+              </TryCatch.Try>
+              <TryCatch.Catches>
+                <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="627,245" sap2010:WorkflowViewState.IdRef="Catch`1_17">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ActivityAction x:TypeArguments="s:Exception">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                    </ActivityAction.Argument>
+                    <Sequence DisplayName="Extract Failed" sap:VirtualizedContainerService.HintSize="242,176" sap2010:WorkflowViewState.IdRef="Sequence_51">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <el:Log_Failed_Activity DisplayName="Log Failed Activity" ExceptionType="Application" ExceptionsList="[listExceptions]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Log_Failed_Activity_1" LogMessage="[&quot;Failed to Extract Data from [&quot; + Path.GetFileName(file) + &quot;]. &quot; + exception.Source + &quot;: &quot; + exception.Message]" />
+                      <AddToCollection x:TypeArguments="x:String" Collection="[listFailedExtracts]" DisplayName="Add To Collection: Failed Extract" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="AddToCollection`1_2" Item="[file]" />
+                    </Sequence>
+                  </ActivityAction>
+                </Catch>
+              </TryCatch.Catches>
+            </TryCatch>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:ForEach>
+    <If Condition="[listFailedExtracts.Any]" DisplayName="If: Files Failed to Extract" sap:VirtualizedContainerService.HintSize="739,653" sap2010:WorkflowViewState.IdRef="If_8">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <TryCatch DisplayName="Try Catch: Send Failed Extracts Email" sap:VirtualizedContainerService.HintSize="438,505" sap2010:WorkflowViewState.IdRef="TryCatch_23">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <TryCatch.Try>
+            <ui:RetryScope DisplayName="Retry Scope: Send Failed Extract Files" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="RetryScope_21" NumberOfRetries="5" RetryInterval="00:00:10">
+              <ui:RetryScope.ActivityBody>
+                <ActivityAction>
+                  <Sequence DisplayName="Send Exchange Email" sap:VirtualizedContainerService.HintSize="380,637" sap2010:WorkflowViewState.IdRef="Sequence_62">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="x:String" Name="strUsername" />
+                      <Variable x:TypeArguments="ss:SecureString" Name="secstrPassword" />
+                      <Variable x:TypeArguments="x:String" Name="strSubject" />
+                      <Variable x:TypeArguments="x:String" Name="strBody" />
+                    </Sequence.Variables>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:MultipleAssign DisplayName="Multiple Assign: Email Text" sap:VirtualizedContainerService.HintSize="338,129" sap2010:WorkflowViewState.IdRef="MultipleAssign_73">
+                      <ui:MultipleAssign.AssignOperations>
+                        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_140">
+                            <ui:AssignOperation.To>
+                              <OutArgument x:TypeArguments="x:String">[strSubject]</OutArgument>
+                            </ui:AssignOperation.To>
+                            <ui:AssignOperation.Value>
+                              <InArgument x:TypeArguments="x:String">[Bot] Failed to Extract IU Lab Results</InArgument>
+                            </ui:AssignOperation.Value>
+                          </ui:AssignOperation>
+                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_141">
+                            <ui:AssignOperation.To>
+                              <OutArgument x:TypeArguments="x:String">[strBody]</OutArgument>
+                            </ui:AssignOperation.To>
+                            <ui:AssignOperation.Value>
+                              <InArgument x:TypeArguments="x:String">["&lt;p&gt;&lt;span style=""font-family: Arial,Helvetica,sans-serif; font-size: 12px;""&gt;I could not extract data from the attached lab result scans.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=""font-family: Arial,Helvetica,sans-serif; font-size: 12px;""&gt;[" + String.Join("] [", {"ID: " + strItemId, "Date Received: " + datetimeReceived.ToString("MM/dd/yyyy HH:mm:ss")}) + "]&lt;/p&gt;&lt;p&gt;&lt;span style=""font-family: Arial,Helvetica,sans-serif; font-size: 12px;""&gt;&lt;strong&gt;Developers have been informed.&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;"+ dicConfig("Signature").Item2]</InArgument>
+                            </ui:AssignOperation.Value>
+                          </ui:AssignOperation>
+                        </scg:List>
+                      </ui:MultipleAssign.AssignOperations>
+                    </ui:MultipleAssign>
+                    <ui:MultipleAssign DisplayName="Multiple Assign: Microsoft Login" sap:VirtualizedContainerService.HintSize="338,129" sap2010:WorkflowViewState.IdRef="MultipleAssign_66">
+                      <ui:MultipleAssign.AssignOperations>
+                        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_127">
+                            <ui:AssignOperation.To>
+                              <OutArgument x:TypeArguments="x:String">[strUsername]</OutArgument>
+                            </ui:AssignOperation.To>
+                            <ui:AssignOperation.Value>
+                              <InArgument x:TypeArguments="x:String">[dicCredentials("Microsoft.Login").Item2]</InArgument>
+                            </ui:AssignOperation.Value>
+                          </ui:AssignOperation>
+                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_128">
+                            <ui:AssignOperation.To>
+                              <OutArgument x:TypeArguments="ss:SecureString">[secstrPassword]</OutArgument>
+                            </ui:AssignOperation.To>
+                            <ui:AssignOperation.Value>
+                              <InArgument x:TypeArguments="ss:SecureString">[dicCredentials("Microsoft.Login").Item3]</InArgument>
+                            </ui:AssignOperation.Value>
+                          </ui:AssignOperation>
+                        </scg:List>
+                      </ui:MultipleAssign.AssignOperations>
+                    </ui:MultipleAssign>
+                    <ui:SendExchangeMail ApplicationId="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" DirectoryId="{x:Null}" Domain="{x:Null}" EmailAutodiscover="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" AttachmentsCollection="[listFailedExtracts]" AuthenticationMode="UserNameAndPassword" Body="[strBody]" DisplayName="Send Exchange Mail Message: Failed Extracts" ExchangeVersion="Exchange2007_SP1" sap:VirtualizedContainerService.HintSize="338,145" sap2010:WorkflowViewState.IdRef="SendExchangeMail_9" IsBodyHtml="True" IsDraft="False" Password="[New Net.NetworkCredential(String.Empty, secstrPassword).Password]" SaveCopy="True" Server="https://outlook.office365.com/" Subject="[strSubject]" To="[dicConfig(&quot;Emails.Team.Unknown&quot;).Item2]" User="[strUsername]" />
+                    <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="338,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_47" LogLevel="Error" LogMessage="Sent failed-to-extract files to team for manual fixing." />
+                  </Sequence>
+                </ActivityAction>
+              </ui:RetryScope.ActivityBody>
+              <ui:RetryScope.Condition>
+                <ActivityFunc x:TypeArguments="x:Boolean" />
+              </ui:RetryScope.Condition>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:RetryScope>
+          </TryCatch.Try>
+          <TryCatch.Catches>
+            <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,135" sap2010:WorkflowViewState.IdRef="Catch`1_23">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ActivityAction x:TypeArguments="s:Exception">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Copy Files to Local Folder" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_64">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:String" Name="strPathFailedFolder" />
+                    <Variable x:TypeArguments="x:Boolean" Name="boolExistsFailedFolder" />
+                    <Variable x:TypeArguments="x:String" Name="strFullPathFailedFile" />
+                  </Sequence.Variables>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <el:Log_Failed_Activity DisplayName="Log Failed Activity" ExceptionType="Application" ExceptionsList="[listExceptions]" sap:VirtualizedContainerService.HintSize="504,22" sap2010:WorkflowViewState.IdRef="Log_Failed_Activity_2" LogMessage="[&quot;Failed to send email with failed-to-extract files to team. &quot; + exception.Source + &quot;: &quot; + exception.Message]" />
+                  <ui:MultipleAssign DisplayName="Multiple Assign: Local Path, Failed Folder" sap:VirtualizedContainerService.HintSize="504,98" sap2010:WorkflowViewState.IdRef="MultipleAssign_67">
+                    <ui:MultipleAssign.AssignOperations>
+                      <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_129">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[strPathFailedFolder]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[Environment.CurrentDirectory + "\Data\FailedFiles\"]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                      </scg:List>
+                    </ui:MultipleAssign.AssignOperations>
+                  </ui:MultipleAssign>
+                  <ui:RetryScope DisplayName="Retry Scope: Check and Create Failed Folder" sap:VirtualizedContainerService.HintSize="504,260" sap2010:WorkflowViewState.IdRef="RetryScope_22" NumberOfRetries="60" RetryInterval="00:00:01">
+                    <ui:RetryScope.ActivityBody>
+                      <ActivityAction>
+                        <ui:CreateDirectory ContinueOnError="True" DisplayName="Create Folder: Failed Folder" sap:VirtualizedContainerService.HintSize="334,79" sap2010:WorkflowViewState.IdRef="CreateDirectory_6" Path="[strPathFailedFolder]" />
+                      </ActivityAction>
+                    </ui:RetryScope.ActivityBody>
+                    <ui:RetryScope.Condition>
+                      <ActivityFunc x:TypeArguments="x:Boolean">
+                        <p:IsTrue DisplayName="Is true" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="IsTrue_22" Input="[Directory.Exists(strPathFailedFolder)]" />
+                      </ActivityFunc>
+                    </ui:RetryScope.Condition>
+                  </ui:RetryScope>
+                  <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="504,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_49" LogLevel="Error" LogMessage="[&quot;Copying files locally to [&quot; + strPathFailedFolder + &quot;]...&quot;]" />
+                  <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each: File" sap:VirtualizedContainerService.HintSize="504,764" sap2010:WorkflowViewState.IdRef="ForEach`1_5" Values="[listFailedExtracts]">
+                    <ui:ForEach.Body>
+                      <ActivityAction x:TypeArguments="x:String">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="x:String" Name="file" />
+                        </ActivityAction.Argument>
+                        <Sequence DisplayName="Save File to Local Folder" sap:VirtualizedContainerService.HintSize="468,630" sap2010:WorkflowViewState.IdRef="Sequence_63">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:MultipleAssign DisplayName="Multiple Assign: Full Path Name" sap:VirtualizedContainerService.HintSize="426,98" sap2010:WorkflowViewState.IdRef="MultipleAssign_68">
+                            <ui:MultipleAssign.AssignOperations>
+                              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_130">
+                                  <ui:AssignOperation.To>
+                                    <OutArgument x:TypeArguments="x:String">[strFullPathFailedFile]</OutArgument>
+                                  </ui:AssignOperation.To>
+                                  <ui:AssignOperation.Value>
+                                    <InArgument x:TypeArguments="x:String">[strPathFailedFolder + Path.GetFileName(file)]</InArgument>
+                                  </ui:AssignOperation.Value>
+                                </ui:AssignOperation>
+                              </scg:List>
+                            </ui:MultipleAssign.AssignOperations>
+                          </ui:MultipleAssign>
+                          <ui:RetryScope DisplayName="Retry Scope: Copy to Local Folder" sap:VirtualizedContainerService.HintSize="426,338" sap2010:WorkflowViewState.IdRef="RetryScope_23" NumberOfRetries="60" RetryInterval="00:00:01">
+                            <ui:RetryScope.ActivityBody>
+                              <ActivityAction>
+                                <ui:CopyFile ContinueOnError="True" Destination="[strFullPathFailedFile]" DisplayName="Copy File: To Local Folder" sap:VirtualizedContainerService.HintSize="384,157" sap2010:WorkflowViewState.IdRef="CopyFile_8" Overwrite="False" Path="[file]" />
+                              </ActivityAction>
+                            </ui:RetryScope.ActivityBody>
+                            <ui:RetryScope.Condition>
+                              <ActivityFunc x:TypeArguments="x:Boolean">
+                                <p:IsTrue DisplayName="Is true" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="IsTrue_23" Input="[System.IO.File.Exists(strFullPathFailedFile)]" />
+                              </ActivityFunc>
+                            </ui:RetryScope.Condition>
+                          </ui:RetryScope>
+                          <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="426,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_50" LogLevel="Error" LogMessage="[&quot;Copied file [&quot; + Path.GetFileName(file) + &quot;] to Failed Folder.&quot;]" />
+                        </Sequence>
+                      </ActivityAction>
+                    </ui:ForEach.Body>
+                  </ui:ForEach>
+                </Sequence>
+              </ActivityAction>
+            </Catch>
+          </TryCatch.Catches>
+        </TryCatch>
+      </If.Then>
+    </If>
+  </Sequence>
+</Activity>

@@ -1,0 +1,321 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Test_Results_to_CATTS" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:el="clr-namespace:EZFramework.Logging;assembly=EZFramework" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="uiBrowserCATTS" Type="InArgument(ui:Browser)" />
+    <x:Property Name="itemTransaction" Type="InArgument(ui:QueueItem)" />
+    <x:Property Name="listExceptions" Type="InOutArgument(scg:List(scg:KeyValuePair(x:String, x:String)))" />
+    <x:Property Name="strFirstName" Type="InArgument(x:String)" />
+    <x:Property Name="strLastName" Type="InArgument(x:String)" />
+    <x:Property Name="strContactDOB" Type="InArgument(x:String)" />
+    <x:Property Name="strFullPathPage" Type="InArgument(x:String)" />
+    <x:Property Name="datetimeCollected" Type="InArgument(s:DateTime)" />
+    <x:Property Name="strResult" Type="InArgument(x:String)" />
+    <x:Property Name="datetimeResult" Type="InArgument(s:DateTime)" />
+    <x:Property Name="strLab" Type="InArgument(x:String)" />
+    <x:Property Name="dicConfig" Type="InArgument(scg:Dictionary(x:String, s:Tuple(x:String, x:String)))" />
+    <x:Property Name="strFailReason" Type="InOutArgument(x:String)" />
+    <x:Property Name="strContactLink" Type="OutArgument(x:String)" />
+    <x:Property Name="strTestDate" Type="OutArgument(x:String)" />
+    <x:Property Name="strTestName" Type="OutArgument(x:String)" />
+    <x:Property Name="strTestLink" Type="OutArgument(x:String)" />
+    <x:Property Name="strContactFacility" Type="OutArgument(x:String)" />
+    <x:Property Name="intPendingTests" Type="OutArgument(x:Int32)" />
+    <x:Property Name="strFailCode" Type="OutArgument(x:String)" />
+    <x:Property Name="dicCredentials" Type="InArgument(scg:Dictionary(x:String, s:Tuple(x:String, x:String, ss:SecureString)))" />
+    <x:Property Name="strItemId" Type="InArgument(x:String)" />
+    <x:Property Name="datetimeReceived" Type="InArgument(s:DateTime)" />
+    <x:Property Name="listStatusAttachments" Type="InOutArgument(scg:List(x:String))" />
+  </x:Members>
+  <this:Test_Results_to_CATTS.itemTransaction>
+    <InArgument x:TypeArguments="ui:QueueItem" />
+  </this:Test_Results_to_CATTS.itemTransaction>
+  <this:Test_Results_to_CATTS.strFirstName>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Test_Results_to_CATTS.strFirstName>
+  <this:Test_Results_to_CATTS.strLastName>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Test_Results_to_CATTS.strLastName>
+  <this:Test_Results_to_CATTS.strContactDOB>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Test_Results_to_CATTS.strContactDOB>
+  <this:Test_Results_to_CATTS.strFullPathPage>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Test_Results_to_CATTS.strFullPathPage>
+  <this:Test_Results_to_CATTS.datetimeCollected>
+    <InArgument x:TypeArguments="s:DateTime" />
+  </this:Test_Results_to_CATTS.datetimeCollected>
+  <this:Test_Results_to_CATTS.strResult>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Test_Results_to_CATTS.strResult>
+  <this:Test_Results_to_CATTS.datetimeResult>
+    <InArgument x:TypeArguments="s:DateTime" />
+  </this:Test_Results_to_CATTS.datetimeResult>
+  <this:Test_Results_to_CATTS.strLab>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Test_Results_to_CATTS.strLab>
+  <this:Test_Results_to_CATTS.dicConfig>
+    <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String))" />
+  </this:Test_Results_to_CATTS.dicConfig>
+  <this:Test_Results_to_CATTS.dicCredentials>
+    <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String, ss:SecureString))" />
+  </this:Test_Results_to_CATTS.dicCredentials>
+  <this:Test_Results_to_CATTS.strItemId>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Test_Results_to_CATTS.strItemId>
+  <this:Test_Results_to_CATTS.datetimeReceived>
+    <InArgument x:TypeArguments="s:DateTime" />
+  </this:Test_Results_to_CATTS.datetimeReceived>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1040,2141</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Test_Results_to_CATTS_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="44">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>System.Security</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="27">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.CV</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.Word</AssemblyReference>
+      <AssemblyReference>UiPathTeam.SharePoint</AssemblyReference>
+      <AssemblyReference>OfficeDevPnP.Core</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <sap:WorkflowViewStateService.ViewState>
+    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+      <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
+    </scg:Dictionary>
+  </sap:WorkflowViewStateService.ViewState>
+  <Sequence DisplayName="Test_Results_to_CATTS" sap:VirtualizedContainerService.HintSize="1050,2036" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:Boolean" Name="boolExistsContacts" />
+      <Variable x:TypeArguments="x:Boolean" Name="boolFoundContact" />
+      <Variable x:TypeArguments="x:String" Name="strStatusTest" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="1008,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_2" LogLevel="Info" LogMessage="[&quot;Trying: [&quot; + String.Join(&quot;] [&quot;, {strItemId, strFirstName, strLastName, &quot;DOB: &quot; + strContactDOB, &quot;Date Collected: &quot; + datetimeCollected.ToString(&quot;MM/dd/yyyy HH:mm&quot;), &quot;Result: &quot; + strResult, &quot;Date Result: &quot; + datetimeResult.ToString(&quot;MM/dd/yyyy HH:mm&quot;)}) + &quot;]...&quot;]" />
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Find Contact workflow" sap:VirtualizedContainerService.HintSize="1008,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Workflows/Find Contact.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="strFirstName">[strFirstName]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="strLastName">[strLastName]</InArgument>
+        <OutArgument x:TypeArguments="x:Boolean" x:Key="boolExistsContacts">[boolExistsContacts]</OutArgument>
+        <InArgument x:TypeArguments="ui:Browser" x:Key="uiBrowserCATTS">[uiBrowserCATTS]</InArgument>
+        <InOutArgument x:TypeArguments="x:String" x:Key="strFailReason">[strFailReason]</InOutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="strContactLink">[strContactLink]</OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="strContactDOB">[strContactDOB]</InArgument>
+        <OutArgument x:TypeArguments="x:Boolean" x:Key="boolFoundContact">[boolFoundContact]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="strContactFacility">[strContactFacility]</OutArgument>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String))" x:Key="dicConfig">[dicConfig]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <If Condition="[boolFoundContact]" DisplayName="If: Contact Found" sap:VirtualizedContainerService.HintSize="1008,1755" sap2010:WorkflowViewState.IdRef="If_12">
+      <If.Then>
+        <Sequence DisplayName="Resolve Test Results" sap:VirtualizedContainerService.HintSize="625,1607" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign DisplayName="Assign: Empty Fail Reason" sap:VirtualizedContainerService.HintSize="583,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[strFailReason]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[Nothing]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Search for Test workflow" sap:VirtualizedContainerService.HintSize="583,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Workflows\Search for Test.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="strLab">[strLab]</InArgument>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String))" x:Key="dicConfig">[dicConfig]</InArgument>
+              <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeCollected">[datetimeCollected]</InArgument>
+              <OutArgument x:TypeArguments="x:String" x:Key="strTestLink">[strTestLink]</OutArgument>
+              <OutArgument x:TypeArguments="x:String" x:Key="strTestName">[strTestName]</OutArgument>
+              <InArgument x:TypeArguments="ui:Browser" x:Key="uiBrowserCATTS">[uiBrowserCATTS]</InArgument>
+              <OutArgument x:TypeArguments="x:String" x:Key="strTestDate">[strTestDate]</OutArgument>
+              <OutArgument x:TypeArguments="x:Int32" x:Key="intPendingTests">[intPendingTests]</OutArgument>
+              <OutArgument x:TypeArguments="x:String" x:Key="strStatusTest">[strStatusTest]</OutArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+          <Switch x:TypeArguments="x:String" DisplayName="Switch: Test Status" Expression="[strStatusTest]" sap:VirtualizedContainerService.HintSize="583,599" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+            <Switch.Default>
+              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Create New Test workflow" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_12" UnSafe="False" WorkflowFileName="Workflows\Create New Test.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="ui:Browser" x:Key="uiBrowserCATTS">[uiBrowserCATTS]</InArgument>
+                  <InOutArgument x:TypeArguments="scg:List(scg:KeyValuePair(x:String, x:String))" x:Key="listExceptions">[listExceptions]</InOutArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="strFirstName">[strFirstName]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="strLastName">[strLastName]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="strFullPathPage">[strFullPathPage]</InArgument>
+                  <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeCollected">[datetimeCollected]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="strResult">[strResult]</InArgument>
+                  <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeResult">[datetimeResult]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="strLab">[strLab]</InArgument>
+                  <InOutArgument x:TypeArguments="x:String" x:Key="strFailReason">[strFailReason]</InOutArgument>
+                  <OutArgument x:TypeArguments="x:String" x:Key="strTestName">[strTestName]</OutArgument>
+                  <OutArgument x:TypeArguments="x:String" x:Key="strTestLink">[strTestLink]</OutArgument>
+                  <OutArgument x:TypeArguments="x:String" x:Key="strTestDate">[strTestDate]</OutArgument>
+                  <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeReceived">[datetimeReceived]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="strItemId">[strItemId]</InArgument>
+                  <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="listStatusAttachments">[listStatusAttachments]</InOutArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="strContactLink">[strContactLink]</InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+            </Switch.Default>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" x:Key="Pending" DisplayName="Invoke Update Test workflow" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_13" UnSafe="False" WorkflowFileName="Workflows\Update Test.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="strTestLink">[strTestLink]</InArgument>
+                <InArgument x:TypeArguments="ui:Browser" x:Key="uiBrowserCATTS">[uiBrowserCATTS]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeCollected">[datetimeCollected]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeResult">[datetimeResult]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="strResult">[strResult]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="strLab">[strLab]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="strFullPathPage">[strFullPathPage]</InArgument>
+                <InOutArgument x:TypeArguments="scg:List(scg:KeyValuePair(x:String, x:String))" x:Key="listExceptions">[listExceptions]</InOutArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeReceived">[datetimeReceived]</InArgument>
+                <InOutArgument x:TypeArguments="x:String" x:Key="strFailReason">[strFailReason]</InOutArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="strItemId">[strItemId]</InArgument>
+                <InOutArgument x:TypeArguments="scg:List(x:String)" x:Key="listStatusAttachments">[listStatusAttachments]</InOutArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:MultipleAssign x:Key="Exists" DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="338,129" sap2010:WorkflowViewState.IdRef="MultipleAssign_6">
+              <ui:MultipleAssign.AssignOperations>
+                <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_16">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strFailCode]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">TAE</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_17">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strFailReason]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">[String.Join(" ", {strFailReason, "Test may already exist!"}.Where(Function(item) Not String.IsNullOrEmpty(item)))]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                </scg:List>
+              </ui:MultipleAssign.AssignOperations>
+            </ui:MultipleAssign>
+          </Switch>
+          <If Condition="[Not strResult.ToLower.Contains(&quot;negative&quot;)]" DisplayName="If: Result is Not Negative" sap:VirtualizedContainerService.HintSize="583,649" sap2010:WorkflowViewState.IdRef="If_13">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If.Then>
+              <TryCatch DisplayName="Try Catch: Email Community of Result" sap:VirtualizedContainerService.HintSize="438,501" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                <TryCatch.Try>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Email Result to Community workflow" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_14" UnSafe="False" WorkflowFileName="Workflows\Email Result to Community.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="strContactFacility">[strContactFacility]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="strFullPathPage">[strFullPathPage]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="strResult">[strResult]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="strFirstName">[strFirstName]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="strLastName">[strLastName]</InArgument>
+                      <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeCollected">[datetimeCollected]</InArgument>
+                      <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeResult">[datetimeResult]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="strContactDOB">[strContactDOB]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="strContactLink">[strContactLink]</InArgument>
+                      <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String, ss:SecureString))" x:Key="dicCredentials">[dicCredentials]</InArgument>
+                      <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String))" x:Key="dicConfig">[dicConfig]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="strLab">[strLab]</InArgument>
+                      <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeReceived">[datetimeReceived]</InArgument>
+                      <InOutArgument x:TypeArguments="scg:List(scg:KeyValuePair(x:String, x:String))" x:Key="listExceptions">[listExceptions]</InOutArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                </TryCatch.Try>
+                <TryCatch.Catches>
+                  <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,104" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ActivityAction x:TypeArguments="s:Exception">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                      </ActivityAction.Argument>
+                      <el:Log_Failed_Activity ExceptionType="{x:Null}" DisplayName="Log Failed Activity" ExceptionsList="[listExceptions]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Log_Failed_Activity_1" LogMessage="[&quot;Failed to email Community the Result&quot; + &quot;: &quot; + exception.Message]" />
+                    </ActivityAction>
+                  </Catch>
+                </TryCatch.Catches>
+              </TryCatch>
+            </If.Then>
+          </If>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="338,98" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
+          <ui:MultipleAssign.AssignOperations>
+            <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_12">
+                <ui:AssignOperation.To>
+                  <OutArgument x:TypeArguments="x:String">[strFailCode]</OutArgument>
+                </ui:AssignOperation.To>
+                <ui:AssignOperation.Value>
+                  <InArgument x:TypeArguments="x:String">CNF</InArgument>
+                </ui:AssignOperation.Value>
+              </ui:AssignOperation>
+            </scg:List>
+          </ui:MultipleAssign.AssignOperations>
+        </ui:MultipleAssign>
+      </If.Else>
+    </If>
+  </Sequence>
+</Activity>

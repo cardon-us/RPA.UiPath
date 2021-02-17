@@ -1,0 +1,1 @@
+<li>[11/9/2020 2:52 PM]: <strong><span style="color: #ff0000;">NEEDS REVIEW</span></strong>: An unhandled exception occurred. System.Activities: Can not assign 'dicCOVIDAssets("foldResources").ToString + dicCOVIDAssets("Resources").ToString + dicCOVIDAssets("Communities").ToString' to 'strCommunitiesPath'.<br /><br /></li>
