@@ -1,0 +1,7 @@
+﻿Name,Description,Journal Type,S.Tax,Voucher Series,# Sequence,Name Journal,Constant,Alpha,Code
+Allocation,Allocation Journal,Allocation,FALSE,Allocation,Allocations,Allocation Journal,ALLOC-,7,Alloc_
+Cutover,Cutover (Data Migration),Daily,FALSE,Cutover,Cutover,Cutover Journal,CTOVER-,7,Ctvr_
+GenJrnl,General Journal,Daily,FALSE,GenJrnl,GenJrnl,General Journal,GNJL-,7,GnJr_
+GenJrnlT,General Journal + Template,Daily,FALSE,GenJrnTmp,GenJrnTmp,General Journal + Template,GENJLT-,7,GJrT_
+InterCo,InterCompany Journal,Daily,FALSE,InterComp,InterComp,InterCompany Journal,ICOJL-,7,InCo_
+Periodic,Periodic Journal,Periodic,FALSE,Periodic,Periodic,Periodic Journal,PERJ-,7,Peri_

@@ -1,0 +1,17 @@
+<li>[2/18/2021 11:29 AM] <strong><span style="color: #008000;">PROCESSED</span></strong>: Created Dynamics Entity for [Riverview Bell Trace HL]<br><br></li>
+<li>[2/18/2021 11:39 AM] <strong><span style="color: #008000;">PROCESSED</span></strong>: Created Dynamics Entity for [Riverview Brown Cty]<br><br></li>
+<li>[2/18/2021 11:48 AM] <strong><span style="color: #008000;">PROCESSED</span></strong>: Created Dynamics Entity for [Riverview Carmel]<br><br></li>
+<li>[2/18/2021 11:57 AM] <strong><span style="color: #008000;">PROCESSED</span></strong>: Created Dynamics Entity for [Riverview Copper Trace]<br><br></li>
+<li>[2/18/2021 12:06 PM] <strong><span style="color: #008000;">PROCESSED</span></strong>: Created Dynamics Entity for [Riverview Countryside]<br><br></li>
+<li>[2/18/2021 12:15 PM] <strong><span style="color: #008000;">PROCESSED</span></strong>: Created Dynamics Entity for [Riverview Cumberland T]<br><br></li>
+<li>[2/18/2021 12:25 PM] <strong><span style="color: #008000;">PROCESSED</span></strong>: Created Dynamics Entity for [Riverview Greenwood]<br><br></li>
+<li>[2/18/2021 12:34 PM] <strong><span style="color: #008000;">PROCESSED</span></strong>: Created Dynamics Entity for [Riverview Harbour Manor]<br><br></li>
+<li>[2/18/2021 12:44 PM] <strong><span style="color: #008000;">PROCESSED</span></strong>: Created Dynamics Entity for [Rivervew Lincoln Hills]<br><br></li>
+<li>[2/18/2021 12:59 PM] <strong><span style="color: #008000;">PROCESSED</span></strong>: Created Dynamics Entity for [Riverview Morristown M]<br><br></li>
+<li>[2/18/2021 1:37 PM] <strong><span style="color: #008000;">PROCESSED</span></strong>: Created Dynamics Entity for [Riverview Paoli]<br><br></li>
+<li>[2/18/2021 1:47 PM] <strong><span style="color: #008000;">PROCESSED</span></strong>: Created Dynamics Entity for [Riverview Rawlins]<br><br></li>
+<li>[2/18/2021 1:56 PM] <strong><span style="color: #008000;">PROCESSED</span></strong>: Created Dynamics Entity for [Riverview University]<br><br></li>
+<li>[2/18/2021 2:06 PM] <strong><span style="color: #008000;">PROCESSED</span></strong>: Created Dynamics Entity for [Good Samaritan Terrace]<br><br></li>
+<li>[2/18/2021 2:15 PM] <strong><span style="color: #008000;">PROCESSED</span></strong>: Created Dynamics Entity for [Hendricks Hamilton ]<br><br></li>
+<li>[2/18/2021 2:24 PM] <strong><span style="color: #008000;">PROCESSED</span></strong>: Created Dynamics Entity for [Solarbron Pointe]<br><br></li>
+<li>[2/18/2021 2:34 PM] <strong><span style="color: #008000;">PROCESSED</span></strong>: Created Dynamics Entity for [ISH Cedar Village]<br><br></li>

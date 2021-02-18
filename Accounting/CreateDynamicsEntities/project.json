@@ -1,0 +1,45 @@
+{
+  "name": "Accounting.CreateDynamicsEntities.Performer",
+  "description": "One-time process to create new Entities in Dynamics.",
+  "main": "Accounting.CreateDynamicsEntities.Performer.xaml",
+  "dependencies": {
+    "EZFramework": "[3.5.7]",
+    "Microsoft.Activities": "[1.0.1]",
+    "UiPath.Cognitive.Activities": "[2.2.4]",
+    "UiPath.Credentials.Activities": "[1.1.6479.13204]",
+    "UiPath.Excel.Activities": "[2.9.3]",
+    "UiPath.Mail.Activities": "[1.9.3]",
+    "UiPath.MicrosoftOffice365.Activities": "[1.6.0]",
+    "UiPath.PDF.Activities": "[3.3.0]",
+    "UiPath.System.Activities": "[20.4.0]",
+    "UiPath.UIAutomation.Activities": "[20.4.3]",
+    "UiPath.WebAPI.Activities": "[1.6.0]",
+    "UiPath.Word.Activities": "[1.5.3]",
+    "UiPathTeam.SharePoint.Activities": "[1.5.2]"
+  },
+  "webServices": [],
+  "schemaVersion": "4.0",
+  "studioVersion": "20.4.3.0",
+  "projectVersion": "1.0.0",
+  "runtimeOptions": {
+    "autoDispose": false,
+    "isPausable": true,
+    "requiresUserInteraction": true,
+    "supportsPersistence": false,
+    "excludedLoggedData": [
+      "Private:*",
+      "*password*"
+    ],
+    "executionType": "Workflow"
+  },
+  "designOptions": {
+    "projectProfile": "Developement",
+    "outputType": "Process",
+    "libraryOptions": {
+      "includeOriginalXaml": false,
+      "privateWorkflows": []
+    },
+    "fileInfoCollection": []
+  },
+  "expressionLanguage": "VisualBasic"
+}
