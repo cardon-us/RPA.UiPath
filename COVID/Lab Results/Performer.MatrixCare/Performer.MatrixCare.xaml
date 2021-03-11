@@ -5,7 +5,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1035,2012</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1314,2012</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Main_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="32">
@@ -299,11 +299,11 @@
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <Transition.To>
-            <State x:Name="__ReferenceID1" sap2010:Annotation.AnnotationText="Workflows to process." DisplayName="Process" sap:VirtualizedContainerService.HintSize="1413,7564" sap2010:WorkflowViewState.IdRef="State_2">
+            <State x:Name="__ReferenceID1" sap2010:Annotation.AnnotationText="Workflows to process." DisplayName="Process" sap:VirtualizedContainerService.HintSize="1413,7212" sap2010:WorkflowViewState.IdRef="State_2">
               <State.Entry>
-                <TryCatch DisplayName="Try Catch: Process Workflows" sap:VirtualizedContainerService.HintSize="1367,7146" sap2010:WorkflowViewState.IdRef="TryCatch_3">
+                <TryCatch DisplayName="Try Catch: Process Workflows" sap:VirtualizedContainerService.HintSize="1367,6794" sap2010:WorkflowViewState.IdRef="TryCatch_3">
                   <TryCatch.Try>
-                    <Sequence DisplayName="Processing" sap:VirtualizedContainerService.HintSize="1329,6426" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                    <Sequence DisplayName="Processing" sap:VirtualizedContainerService.HintSize="1329,6074" sap2010:WorkflowViewState.IdRef="Sequence_28">
                       <Sequence.Variables>
                         <Variable x:TypeArguments="x:String" Name="strQueueNameCATTS" />
                         <Variable x:TypeArguments="x:String" Name="strQueueNameHandler" />
@@ -370,9 +370,9 @@
                           <InArgument x:TypeArguments="s:String[]" x:Key="arrEqualsReleaseNames">[{"Dispatcher.Systems"}]</InArgument>
                         </ui:InvokeWorkflowFile.Arguments>
                       </ui:InvokeWorkflowFile>
-                      <If Condition="[itemTransaction IsNot Nothing]" DisplayName="If: Transaction Exists" sap:VirtualizedContainerService.HintSize="1287,5976" sap2010:WorkflowViewState.IdRef="If_11">
+                      <If Condition="[itemTransaction IsNot Nothing]" DisplayName="If: Transaction Exists" sap:VirtualizedContainerService.HintSize="1287,5624" sap2010:WorkflowViewState.IdRef="If_11">
                         <If.Then>
-                          <Sequence DisplayName="Process into MatrixCare" sap:VirtualizedContainerService.HintSize="1142,5828" sap2010:WorkflowViewState.IdRef="Sequence_27">
+                          <Sequence DisplayName="Process into MatrixCare" sap:VirtualizedContainerService.HintSize="1142,5476" sap2010:WorkflowViewState.IdRef="Sequence_27">
                             <Sequence.Variables>
                               <Variable x:TypeArguments="x:String" Name="strItemId" />
                               <Variable x:TypeArguments="x:String" Name="strFirstName" />
@@ -387,13 +387,14 @@
                               <Variable x:TypeArguments="x:String" Name="strContactDOB" />
                               <Variable x:TypeArguments="x:String" Name="strContactType" />
                               <Variable x:TypeArguments="x:String" Name="strFailReason" />
+                              <Variable x:TypeArguments="x:String" Name="strContactFacility" />
                             </Sequence.Variables>
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <ui:MultipleAssign DisplayName="Multiple Assign: Transaction Data" sap:VirtualizedContainerService.HintSize="1100,439" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+                            <ui:MultipleAssign DisplayName="Multiple Assign: Transaction Data" sap:VirtualizedContainerService.HintSize="1100,501" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
                               <ui:MultipleAssign.AssignOperations>
                                 <scg:List x:TypeArguments="ui:AssignOperation" Capacity="32">
                                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
@@ -444,6 +445,14 @@
                                       <InArgument x:TypeArguments="x:String">[itemTransaction.SpecificContent("ContactType").ToString]</InArgument>
                                     </ui:AssignOperation.Value>
                                   </ui:AssignOperation>
+                                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_62">
+                                    <ui:AssignOperation.To>
+                                      <OutArgument x:TypeArguments="x:String">[strContactFacility]</OutArgument>
+                                    </ui:AssignOperation.To>
+                                    <ui:AssignOperation.Value>
+                                      <InArgument x:TypeArguments="x:String">[If (itemTransaction.SpecificContent.ContainsKey("ContactFacility"), itemTransaction.SpecificContent("ContactFacility").ToString, String.Empty)]</InArgument>
+                                    </ui:AssignOperation.Value>
+                                  </ui:AssignOperation>
                                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_9">
                                     <ui:AssignOperation.To>
                                       <OutArgument x:TypeArguments="x:String">[strLab]</OutArgument>
@@ -492,6 +501,14 @@
                                       <InArgument x:TypeArguments="x:Boolean">[CType(itemTransaction.SpecificContent("TriedCATTS"), Boolean)]</InArgument>
                                     </ui:AssignOperation.Value>
                                   </ui:AssignOperation>
+                                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_63">
+                                    <ui:AssignOperation.To>
+                                      <OutArgument x:TypeArguments="x:String">[strFailReason]</OutArgument>
+                                    </ui:AssignOperation.To>
+                                    <ui:AssignOperation.Value>
+                                      <InArgument x:TypeArguments="x:String">[If (itemTransaction.SpecificContent.ContainsKey("FailReason"), itemTransaction.SpecificContent("FailReason").ToString, String.Empty)]</InArgument>
+                                    </ui:AssignOperation.Value>
+                                  </ui:AssignOperation>
                                 </scg:List>
                               </ui:MultipleAssign.AssignOperations>
                               <sap:WorkflowViewStateService.ViewState>
@@ -501,38 +518,10 @@
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
                             </ui:MultipleAssign>
-                            <TryCatch DisplayName="Try Catch: Assign FailReason if Exists" sap:VirtualizedContainerService.HintSize="1100,474" sap2010:WorkflowViewState.IdRef="TryCatch_8">
-                              <TryCatch.Try>
-                                <Assign DisplayName="Assign: FailReason" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_29">
-                                  <Assign.To>
-                                    <OutArgument x:TypeArguments="x:String">[strFailReason]</OutArgument>
-                                  </Assign.To>
-                                  <Assign.Value>
-                                    <InArgument x:TypeArguments="x:String">[itemTransaction.SpecificContent("FailReason").ToString]</InArgument>
-                                  </Assign.Value>
-                                </Assign>
-                              </TryCatch.Try>
-                              <TryCatch.Catches>
-                                <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,104" sap2010:WorkflowViewState.IdRef="Catch`1_8">
-                                  <sap:WorkflowViewStateService.ViewState>
-                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                    </scg:Dictionary>
-                                  </sap:WorkflowViewStateService.ViewState>
-                                  <ActivityAction x:TypeArguments="s:Exception">
-                                    <ActivityAction.Argument>
-                                      <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
-                                    </ActivityAction.Argument>
-                                  </ActivityAction>
-                                </Catch>
-                              </TryCatch.Catches>
-                            </TryCatch>
-                            <TryCatch DisplayName="Try Catch: Add Test Results to MatrixCare" sap:VirtualizedContainerService.HintSize="1100,4743" sap2010:WorkflowViewState.IdRef="TryCatch_4">
+                            <TryCatch DisplayName="Try Catch: Add Test Results to MatrixCare" sap:VirtualizedContainerService.HintSize="1100,4843" sap2010:WorkflowViewState.IdRef="TryCatch_4">
                               <TryCatch.Variables>
                                 <Variable x:TypeArguments="s:Exception" Name="excError" />
                                 <Variable x:TypeArguments="x:String" Name="strContactLink" />
-                                <Variable x:TypeArguments="x:String" Name="strContactFacility" />
                                 <Variable x:TypeArguments="x:String" Name="strFailCode" />
                               </TryCatch.Variables>
                               <TryCatch.Try>
@@ -543,63 +532,26 @@
                                         <TryCatch.Try>
                                           <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Test Results to MatrixCare workflow" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_58" UnSafe="False" WorkflowFileName="Workflows\Test Results to MatrixCare.xaml">
                                             <ui:InvokeWorkflowFile.Arguments>
-                                              <InArgument x:TypeArguments="ui:Browser" x:Key="uiBrowserMatrixCare">
-                                                <mva:VisualBasicValue x:TypeArguments="ui:Browser" ExpressionText="uiBrowserMatrixCare" />
-                                              </InArgument>
-                                              <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeResult">
-                                                <mva:VisualBasicValue x:TypeArguments="s:DateTime" ExpressionText="datetimeResult" />
-                                              </InArgument>
-                                              <InArgument x:TypeArguments="ui:QueueItem" x:Key="itemTransaction">
-                                                <mva:VisualBasicValue x:TypeArguments="ui:QueueItem" ExpressionText="itemTransaction" />
-                                              </InArgument>
-                                              <InOutArgument x:TypeArguments="scg:List(scg:KeyValuePair(x:String, x:String))" x:Key="listExceptions">
-                                                <mva:VisualBasicReference x:TypeArguments="scg:List(scg:KeyValuePair(x:String, x:String))" ExpressionText="listExceptions" />
-                                              </InOutArgument>
-                                              <InArgument x:TypeArguments="x:String" x:Key="strFirstName">
-                                                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strFirstName" />
-                                              </InArgument>
-                                              <InArgument x:TypeArguments="x:String" x:Key="strLastName">
-                                                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strLastName" />
-                                              </InArgument>
-                                              <InArgument x:TypeArguments="x:String" x:Key="strContactDOB">
-                                                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strContactDOB" />
-                                              </InArgument>
-                                              <InArgument x:TypeArguments="x:String" x:Key="strFullPathPage">
-                                                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strFullPathPage" />
-                                              </InArgument>
-                                              <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeCollected">
-                                                <mva:VisualBasicValue x:TypeArguments="s:DateTime" ExpressionText="datetimeCollected" />
-                                              </InArgument>
-                                              <InArgument x:TypeArguments="x:String" x:Key="strResult">
-                                                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strResult" />
-                                              </InArgument>
-                                              <InArgument x:TypeArguments="x:String" x:Key="strLab">
-                                                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strLab" />
-                                              </InArgument>
-                                              <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String))" x:Key="dicConfig">
-                                                <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String))" ExpressionText="dicConfig" />
-                                              </InArgument>
-                                              <InOutArgument x:TypeArguments="x:String" x:Key="strFailReason">
-                                                <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="strFailReason" />
-                                              </InOutArgument>
-                                              <OutArgument x:TypeArguments="x:String" x:Key="strContactLink">
-                                                <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="strContactLink" />
-                                              </OutArgument>
-                                              <OutArgument x:TypeArguments="x:String" x:Key="strContactFacility">
-                                                <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="strContactFacility" />
-                                              </OutArgument>
-                                              <OutArgument x:TypeArguments="x:String" x:Key="strFailCode">
-                                                <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="strFailCode" />
-                                              </OutArgument>
-                                              <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String, ss:SecureString))" x:Key="dicCredentials">
-                                                <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String, ss:SecureString))" ExpressionText="dicCredentials" />
-                                              </InArgument>
-                                              <InArgument x:TypeArguments="x:String" x:Key="strItemId">
-                                                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="strItemId" />
-                                              </InArgument>
-                                              <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeReceived">
-                                                <mva:VisualBasicValue x:TypeArguments="s:DateTime" ExpressionText="datetimeReceived" />
-                                              </InArgument>
+                                              <InArgument x:TypeArguments="ui:Browser" x:Key="uiBrowserMatrixCare">[uiBrowserMatrixCare]</InArgument>
+                                              <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeResult">[datetimeResult]</InArgument>
+                                              <InArgument x:TypeArguments="ui:QueueItem" x:Key="itemTransaction">[itemTransaction]</InArgument>
+                                              <InOutArgument x:TypeArguments="scg:List(scg:KeyValuePair(x:String, x:String))" x:Key="listExceptions">[listExceptions]</InOutArgument>
+                                              <InArgument x:TypeArguments="x:String" x:Key="strFirstName">[strFirstName]</InArgument>
+                                              <InArgument x:TypeArguments="x:String" x:Key="strLastName">[strLastName]</InArgument>
+                                              <InArgument x:TypeArguments="x:String" x:Key="strContactDOB">[strContactDOB]</InArgument>
+                                              <InArgument x:TypeArguments="x:String" x:Key="strFullPathPage">[strFullPathPage]</InArgument>
+                                              <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeCollected">[datetimeCollected]</InArgument>
+                                              <InArgument x:TypeArguments="x:String" x:Key="strResult">[strResult]</InArgument>
+                                              <InArgument x:TypeArguments="x:String" x:Key="strLab">[strLab]</InArgument>
+                                              <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String))" x:Key="dicConfig">[dicConfig]</InArgument>
+                                              <InOutArgument x:TypeArguments="x:String" x:Key="strFailReason">[strFailReason]</InOutArgument>
+                                              <OutArgument x:TypeArguments="x:String" x:Key="strContactLink">[strContactLink]</OutArgument>
+                                              <InOutArgument x:TypeArguments="x:String" x:Key="strContactFacility">[strContactFacility]</InOutArgument>
+                                              <OutArgument x:TypeArguments="x:String" x:Key="strFailCode">[strFailCode]</OutArgument>
+                                              <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Tuple(x:String, x:String, ss:SecureString))" x:Key="dicCredentials">[dicCredentials]</InArgument>
+                                              <InArgument x:TypeArguments="x:String" x:Key="strItemId">[strItemId]</InArgument>
+                                              <InArgument x:TypeArguments="s:DateTime" x:Key="datetimeReceived">[datetimeReceived]</InArgument>
+                                              <InArgument x:TypeArguments="x:String" x:Key="strContactType">[strContactType]</InArgument>
                                             </ui:InvokeWorkflowFile.Arguments>
                                           </ui:InvokeWorkflowFile>
                                         </TryCatch.Try>
@@ -718,7 +670,7 @@
                                 </Catch>
                               </TryCatch.Catches>
                               <TryCatch.Finally>
-                                <Sequence DisplayName="Determine Item Status" sap:VirtualizedContainerService.HintSize="1062,2815" sap2010:WorkflowViewState.IdRef="Sequence_26">
+                                <Sequence DisplayName="Determine Item Status" sap:VirtualizedContainerService.HintSize="1062,2915" sap2010:WorkflowViewState.IdRef="Sequence_26">
                                   <Sequence.Variables>
                                     <Variable x:TypeArguments="x:Boolean" Name="boolSuccessItem" />
                                     <Variable x:TypeArguments="x:String" Name="strSentTo" />
@@ -743,9 +695,9 @@
                                       </scg:List>
                                     </ui:MultipleAssign.AssignOperations>
                                   </ui:MultipleAssign>
-                                  <If Condition="[Not boolSuccessItem]" DisplayName="If: Item Failed" sap:VirtualizedContainerService.HintSize="1020,1257" sap2010:WorkflowViewState.IdRef="If_10">
+                                  <If Condition="[Not boolSuccessItem]" DisplayName="If: Item Failed" sap:VirtualizedContainerService.HintSize="1020,1357" sap2010:WorkflowViewState.IdRef="If_10">
                                     <If.Then>
-                                      <Sequence DisplayName="Resend to Dispatcher" sap:VirtualizedContainerService.HintSize="539,1109" sap2010:WorkflowViewState.IdRef="Sequence_43">
+                                      <Sequence DisplayName="Resend to Dispatcher" sap:VirtualizedContainerService.HintSize="539,1209" sap2010:WorkflowViewState.IdRef="Sequence_43">
                                         <Sequence.Variables>
                                           <Variable x:TypeArguments="x:String" Name="strSource" />
                                         </Sequence.Variables>
@@ -809,6 +761,14 @@
                                             </scg:List>
                                           </ui:MultipleAssign.AssignOperations>
                                         </ui:MultipleAssign>
+                                        <Assign DisplayName="Assign: Skip Other System" sap:VirtualizedContainerService.HintSize="497,60" sap2010:WorkflowViewState.IdRef="Assign_29">
+                                          <Assign.To>
+                                            <OutArgument x:TypeArguments="x:String">[strSentTo]</OutArgument>
+                                          </Assign.To>
+                                          <Assign.Value>
+                                            <InArgument x:TypeArguments="x:String">Handler</InArgument>
+                                          </Assign.Value>
+                                        </Assign>
                                         <Switch x:TypeArguments="x:String" DisplayName="Switch: System Color" Expression="[strSentTo.ToLower]" sap:VirtualizedContainerService.HintSize="497,476" sap2010:WorkflowViewState.IdRef="Switch`1_3">
                                           <Switch.Default>
                                             <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_28">

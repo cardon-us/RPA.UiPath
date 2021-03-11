@@ -4,7 +4,7 @@
     <x:Property Name="strContactDOB" Type="InArgument(x:String)" />
     <x:Property Name="strFirstName" Type="InArgument(x:String)" />
     <x:Property Name="strLastName" Type="InArgument(x:String)" />
-    <x:Property Name="strContactFacility" Type="OutArgument(x:String)" />
+    <x:Property Name="strContactFacility" Type="InOutArgument(x:String)" />
     <x:Property Name="strContactLink" Type="OutArgument(x:String)" />
     <x:Property Name="uiBrowserResident" Type="OutArgument(ui:Browser)" />
     <x:Property Name="boolFoundResident" Type="OutArgument(x:Boolean)" />
@@ -24,7 +24,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>991,3334</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1314,3334</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Find_Resident_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="22">

@@ -8,7 +8,7 @@
     <x:Property Name="strContactLink" Type="OutArgument(x:String)" />
     <x:Property Name="strContactDOB" Type="InArgument(x:String)" />
     <x:Property Name="boolFoundContact" Type="OutArgument(x:Boolean)" />
-    <x:Property Name="strContactFacility" Type="OutArgument(x:String)" />
+    <x:Property Name="strContactFacility" Type="InOutArgument(x:String)" />
     <x:Property Name="dicConfig" Type="InArgument(scg:Dictionary(x:String, s:Tuple(x:String, x:String)))" />
   </x:Members>
   <this:Search_for_Contact.strFirstName>

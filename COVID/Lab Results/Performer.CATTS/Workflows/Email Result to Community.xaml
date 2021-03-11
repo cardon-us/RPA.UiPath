@@ -14,6 +14,7 @@
     <x:Property Name="strLab" Type="InArgument(x:String)" />
     <x:Property Name="datetimeReceived" Type="InArgument(s:DateTime)" />
     <x:Property Name="listExceptions" Type="InOutArgument(scg:List(scg:KeyValuePair(x:String, x:String)))" />
+    <x:Property Name="strFailCode" Type="InArgument(x:String)" />
   </x:Members>
   <this:Email_Result_to_Community.strFullPathPage>
     <InArgument x:TypeArguments="x:String" />
@@ -48,10 +49,10 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1035,2850</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1314,2535</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Email_Result_to_Community_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="46">
+    <scg:List x:TypeArguments="x:String" Capacity="24">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -109,7 +110,7 @@
       <AssemblyReference>System.Data.Entity</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Email_Result_to_Community" sap:VirtualizedContainerService.HintSize="877,2745" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Email_Result_to_Community" sap:VirtualizedContainerService.HintSize="877,2430" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="strMessageBody" />
       <Variable x:TypeArguments="x:String" Name="strSignature" />
@@ -119,13 +120,16 @@
       <Variable x:TypeArguments="sd:DataTable" Name="dtCommunityEmails" />
       <Variable x:TypeArguments="x:String" Name="strCommunityEmail" />
       <Variable x:TypeArguments="x:String" Name="strFilePath" />
+      <Variable x:TypeArguments="x:String" Name="strOutcomeMessage" />
+      <Variable x:TypeArguments="x:String" Name="strMessageSubject" />
+      <Variable x:TypeArguments="x:Boolean" Name="boolCNF" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="835,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_1" LogLevel="Info" LogMessage="Non-Negative detected! Informing Community..." />
+    <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="835,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_1" LogLevel="Info" LogMessage="Informing Community..." />
     <ui:MultipleAssign DisplayName="Multiple Assign: Declarations" sap:VirtualizedContainerService.HintSize="835,129" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
@@ -134,7 +138,7 @@
               <OutArgument x:TypeArguments="x:String">[strFilePathCommunityEmails]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">[dicConfig("Path.CommunityEmails").Item2.Replace("%USERNAME%", Environment.UserName)]</InArgument>
+              <InArgument x:TypeArguments="x:String">[dicConfig("Path.AssociateEmails").Item2.Replace("%USERNAME%", Environment.UserName)]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_10">
@@ -148,66 +152,42 @@
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
     </ui:MultipleAssign>
-    <ui:CommentOut sap2010:Annotation.AnnotationText="For when distribution lists are created per community, rather than a default team." DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="835,680" sap2010:WorkflowViewState.IdRef="CommentOut_1">
-      <ui:CommentOut.Body>
-        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="480,571" sap2010:WorkflowViewState.IdRef="Sequence_3">
+    <ui:ReadCsvFile Encoding="{x:Null}" DataTable="[dtCommunityEmails]" Delimitator="Comma" DisplayName="Read CSV: Community Emails" FilePath="[strFilePathCommunityEmails]" sap:VirtualizedContainerService.HintSize="835,152" sap2010:WorkflowViewState.IdRef="ReadCsvFile_1" />
+    <TryCatch DisplayName="Try Catch: Get Community Email" sap:VirtualizedContainerService.HintSize="835,287" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch.Try>
+        <Assign DisplayName="Assign: Community Email" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[strCommunityEmail]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String">[dtCommunityEmails.AsEnumerable().Where(Function(item) strContactFacility.ToLower.StartsWith(item(0).ToString.ToLower))(0)(1).ToString]</InArgument>
+          </Assign.Value>
+        </Assign>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:ReadCsvFile Encoding="{x:Null}" DataTable="[dtCommunityEmails]" Delimitator="Comma" DisplayName="Read CSV: Community Emails" FilePath="[strFilePathCommunityEmails]" sap:VirtualizedContainerService.HintSize="438,152" sap2010:WorkflowViewState.IdRef="ReadCsvFile_1" />
-          <TryCatch DisplayName="Try Catch: Get Community Email" sap:VirtualizedContainerService.HintSize="438,287" sap2010:WorkflowViewState.IdRef="TryCatch_1">
-            <TryCatch.Try>
-              <Assign DisplayName="Assign: Community Email" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_2">
-                <Assign.To>
-                  <OutArgument x:TypeArguments="x:String">[strCommunityEmail]</OutArgument>
-                </Assign.To>
-                <Assign.Value>
-                  <InArgument x:TypeArguments="x:String">[dtCommunityEmails.AsEnumerable().Where(Function(item) strContactFacility.ToLower.Contains(item("Community").ToString.ToLower))(0)(1).ToString]</InArgument>
-                </Assign.Value>
-              </Assign>
-            </TryCatch.Try>
-            <TryCatch.Catches>
-              <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
-                <sap:WorkflowViewStateService.ViewState>
-                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                  </scg:Dictionary>
-                </sap:WorkflowViewStateService.ViewState>
-                <ActivityAction x:TypeArguments="s:Exception">
-                  <ActivityAction.Argument>
-                    <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
-                  </ActivityAction.Argument>
-                  <Assign DisplayName="Assign: Community Email" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_3">
-                    <Assign.To>
-                      <OutArgument x:TypeArguments="x:String">[strCommunityEmail]</OutArgument>
-                    </Assign.To>
-                    <Assign.Value>
-                      <InArgument x:TypeArguments="x:String">[dtCommunityEmails.Select("[Community] = 'Error'").First()(1).ToString]</InArgument>
-                    </Assign.Value>
-                  </Assign>
-                </ActivityAction>
-              </Catch>
-            </TryCatch.Catches>
-          </TryCatch>
-        </Sequence>
-      </ui:CommentOut.Body>
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-    </ui:CommentOut>
-    <Assign DisplayName="Assign: Testing Community Email" sap:VirtualizedContainerService.HintSize="835,60" sap2010:WorkflowViewState.IdRef="Assign_6">
-      <Assign.To>
-        <OutArgument x:TypeArguments="x:String">[strCommunityEmail]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[dicConfig("Emails.Team.Staff.Community").Item2]</InArgument>
-      </Assign.Value>
-    </Assign>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <Assign DisplayName="Assign: Community Email" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[strCommunityEmail]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[dtCommunityEmails.Select("[Community] = 'Error'").First()(1).ToString]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
     <If Condition="[dicConfig.ContainsKey(&quot;TestingFolder&quot;)]" DisplayName="If: In Test" sap:VirtualizedContainerService.HintSize="835,208" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Then>
         <Assign DisplayName="Assign: Test Email" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_7">
@@ -220,21 +200,7 @@
         </Assign>
       </If.Then>
     </If>
-    <ui:MultipleAssign DisplayName="Multiple Assign: Body" sap:VirtualizedContainerService.HintSize="835,98" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
-      <ui:MultipleAssign.AssignOperations>
-        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
-          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
-            <ui:AssignOperation.To>
-              <OutArgument x:TypeArguments="x:String">[strMessageBody]</OutArgument>
-            </ui:AssignOperation.To>
-            <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String" xml:space="preserve">["&lt;p&gt;&lt;span style=""font-family: Arial,Helvetica,sans-serif; font-size: 12px;""&gt;Hello team,&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=""font-family: Arial,Helvetica,sans-serif; font-size: 12px;""&gt;I've detected a [&lt;span style=""color: #ff0000;""&gt;&lt;strong&gt;" + strResult + "&lt;/strong&gt;&lt;/span&gt;] result at [&lt;strong&gt;" + strContactFacility + "&lt;/strong&gt;] in my latest processing batch.&lt;br&gt;Please see below and attached.&lt;/p&gt;&lt;p&gt;&lt;span style=""font-family: Arial,Helvetica,sans-serif; font-size: 12px;""&gt;[ResultString]&lt;br /&gt;&lt;/span&gt;&lt;/p&gt;"  + dicConfig("Signature").Item2]</InArgument>
-            </ui:AssignOperation.Value>
-          </ui:AssignOperation>
-        </scg:List>
-      </ui:MultipleAssign.AssignOperations>
-    </ui:MultipleAssign>
-    <ui:MultipleAssign DisplayName="Multiple Assign: Result String" sap:VirtualizedContainerService.HintSize="835,160" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+    <ui:MultipleAssign DisplayName="Multiple Assign: Message Body" sap:VirtualizedContainerService.HintSize="835,284" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
@@ -245,20 +211,52 @@
               <InArgument x:TypeArguments="x:String">[strFirstName + " " + strLastName]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
-          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_17">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:Boolean">[boolCNF]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:Boolean">[If (strFailCode.ToLower.Contains("cnf"), True, False)]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_19">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[strMessageSubject]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[If (boolCNF, "[Bot] COVID-19 Contact Not Found!", "[Bot] COVID-19 " + strResult + " Result Detected!")]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_20">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[strResult]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[If (Not strResult.ToLower.Contains("negative"), "&lt;span style=""color: #ff0000;""&gt;&lt;strong&gt;" + strResult + "&lt;/strong&gt;&lt;/span&gt;", strResult)]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_14">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[strOutcomeMessage]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[If (boolCNF, "I could not find the contact [&lt;strong&gt;" + strFullName + "&lt;/strong&gt;] in CATTS", "I've detected a [" + strResult + "] result")]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_15">
             <ui:AssignOperation.To>
               <OutArgument x:TypeArguments="x:String">[strResultString]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String" xml:space="preserve">["[" + String.Join("] [", {"&lt;a href=""" + strContactLink + """&gt;" +  strFullName + "&lt;/a&gt;", "DOB: " + strContactDOB, "Facility: " + strContactFacility, "Lab: " + strLab, "Date Collected: " + datetimeCollected.ToString("MM/dd/yyyy h:mm tt"), "Date Result: " + datetimeResult.ToString("MM/dd/yyyy h:mm tt"), "Date Received: " + datetimeReceived.ToString("MM/dd/yyyy h:mm tt")}) + "]"]</InArgument>
+              <InArgument x:TypeArguments="x:String" xml:space="preserve">["[" + String.Join("] [", {"&lt;a href=""" + strContactLink + """&gt;" +  strFullName + "&lt;/a&gt;", "DOB: " + strContactDOB, "Facility: " + strContactFacility, "Lab: " + strLab, "Date Collected: " + datetimeCollected.ToString("MM/dd/yyyy h:mm tt"), "Result: " + strResult, "Date Result: " + datetimeResult.ToString("MM/dd/yyyy h:mm tt"), "Date Received: " + datetimeReceived.ToString("MM/dd/yyyy h:mm tt")}) + "]"]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
-          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_16">
             <ui:AssignOperation.To>
               <OutArgument x:TypeArguments="x:String">[strMessageBody]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">[strMessageBody.Replace("[ResultString]", strResultString)]</InArgument>
+              <InArgument x:TypeArguments="x:String" xml:space="preserve">["&lt;p&gt;&lt;span style=""font-family: Arial,Helvetica,sans-serif; font-size: 12px;""&gt;Hello team,&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=""font-family: Arial,Helvetica,sans-serif; font-size: 12px;""&gt;" + strOutcomeMessage + " at [&lt;strong&gt;" + strContactFacility + "&lt;/strong&gt;] in my latest processing batch.&lt;br&gt;Please see below" + If (Not strResult.ToLower.Contains("rejected"), " and attached", "") + ".&lt;/p&gt;&lt;p&gt;&lt;span style=""font-family: Arial,Helvetica,sans-serif; font-size: 12px;""&gt;" + strResultString + "&lt;br /&gt;&lt;/span&gt;&lt;/p&gt;"  + dicConfig("Signature").Item2]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
         </scg:List>
@@ -304,14 +302,14 @@
               <ActivityAction>
                 <If Condition="[Not strFullPathPage.ToLower.Contains(&quot;no file&quot;)]" DisplayName="If: File is Present" sap:VirtualizedContainerService.HintSize="713,292" sap2010:WorkflowViewState.IdRef="If_2">
                   <If.Then>
-                    <ui:SendExchangeMail ApplicationId="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" DirectoryId="{x:Null}" Domain="{x:Null}" EmailAutodiscover="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" AuthenticationMode="UserNameAndPassword" Body="[strMessageBody]" DisplayName="Send Exchange Mail Message: COVID Email with Attachment" ExchangeVersion="Exchange2007_SP1" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="SendExchangeMail_1" IsBodyHtml="True" IsDraft="False" Password="[New System.Net.NetworkCredential(String.Empty, secstrPassword).Password]" SaveCopy="True" Server="https://outlook.office365.com/" Subject="[&quot;[Bot] COVID-19 &quot; + strResult + &quot; Result Detected!&quot;]" To="[strCommunityEmail]" User="[strUsername]">
+                    <ui:SendExchangeMail ApplicationId="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" DirectoryId="{x:Null}" Domain="{x:Null}" EmailAutodiscover="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" AuthenticationMode="UserNameAndPassword" Body="[strMessageBody]" DisplayName="Send Exchange Mail Message: COVID Email with Attachment" ExchangeVersion="Exchange2007_SP1" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="SendExchangeMail_1" IsBodyHtml="True" IsDraft="False" Password="[New System.Net.NetworkCredential(String.Empty, secstrPassword).Password]" SaveCopy="True" Server="https://outlook.office365.com/" Subject="[strMessageSubject]" To="[strCommunityEmail]" User="[strUsername]">
                       <ui:SendExchangeMail.Files>
                         <InArgument x:TypeArguments="x:String">[strFullPathPage]</InArgument>
                       </ui:SendExchangeMail.Files>
                     </ui:SendExchangeMail>
                   </If.Then>
                   <If.Else>
-                    <ui:SendExchangeMail ApplicationId="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" DirectoryId="{x:Null}" Domain="{x:Null}" EmailAutodiscover="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" AuthenticationMode="UserNameAndPassword" Body="[strMessageBody]" DisplayName="Send Exchange Mail Message: COVID Email No Attachment" ExchangeVersion="Exchange2007_SP1" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="SendExchangeMail_2" IsBodyHtml="True" IsDraft="False" Password="[New System.Net.NetworkCredential(String.Empty, secstrPassword).Password]" SaveCopy="True" Server="https://outlook.office365.com/" Subject="[&quot;[Bot] COVID-19 &quot; + strResult + &quot; Result Detected!&quot;]" To="[strCommunityEmail]" User="[strUsername]" />
+                    <ui:SendExchangeMail ApplicationId="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" DirectoryId="{x:Null}" Domain="{x:Null}" EmailAutodiscover="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" AuthenticationMode="UserNameAndPassword" Body="[strMessageBody]" DisplayName="Send Exchange Mail Message: COVID Email No Attachment" ExchangeVersion="Exchange2007_SP1" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="SendExchangeMail_2" IsBodyHtml="True" IsDraft="False" Password="[New System.Net.NetworkCredential(String.Empty, secstrPassword).Password]" SaveCopy="True" Server="https://outlook.office365.com/" Subject="[strMessageSubject]" To="[strCommunityEmail]" User="[strUsername]" />
                   </If.Else>
                 </If>
               </ActivityAction>

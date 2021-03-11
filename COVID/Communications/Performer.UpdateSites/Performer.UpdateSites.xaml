@@ -5,7 +5,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1038,2012</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1314,2012</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Main_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="32">
@@ -303,11 +303,11 @@
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <Transition.To>
-            <State x:Name="__ReferenceID1" sap2010:Annotation.AnnotationText="Workflows to process." DisplayName="Process" sap:VirtualizedContainerService.HintSize="1328,8410" sap2010:WorkflowViewState.IdRef="State_2">
+            <State x:Name="__ReferenceID1" sap2010:Annotation.AnnotationText="Workflows to process." DisplayName="Process" sap:VirtualizedContainerService.HintSize="1328,9293" sap2010:WorkflowViewState.IdRef="State_2">
               <State.Entry>
-                <TryCatch DisplayName="Try Catch: Process Workflows" sap:VirtualizedContainerService.HintSize="1282,7992" sap2010:WorkflowViewState.IdRef="TryCatch_3">
+                <TryCatch DisplayName="Try Catch: Process Workflows" sap:VirtualizedContainerService.HintSize="1282,8875" sap2010:WorkflowViewState.IdRef="TryCatch_3">
                   <TryCatch.Try>
-                    <Sequence DisplayName="Processing" sap:VirtualizedContainerService.HintSize="1244,7272" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                    <Sequence DisplayName="Processing" sap:VirtualizedContainerService.HintSize="1244,8155" sap2010:WorkflowViewState.IdRef="Sequence_17">
                       <Sequence.Variables>
                         <Variable x:TypeArguments="x:String" Name="strCOVIDPath" />
                         <Variable x:TypeArguments="x:Boolean" Name="boolNoRefresh" />
@@ -778,7 +778,7 @@
                           </ui:SendExchangeMail.Files>
                         </ui:SendExchangeMail>
                       </Sequence>
-                      <If Condition="[Not boolNoRefresh]" DisplayName="If: Report is Current" sap:VirtualizedContainerService.HintSize="1202,6628" sap2010:WorkflowViewState.IdRef="If_12">
+                      <If Condition="[Not boolNoRefresh]" DisplayName="If: Report is Current" sap:VirtualizedContainerService.HintSize="1202,7511" sap2010:WorkflowViewState.IdRef="If_12">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -786,13 +786,13 @@
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
                         <If.Then>
-                          <ui:OpenBrowser CommunicationMethod="{x:Null}" Hidden="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Open Browser: ManageWP" sap:VirtualizedContainerService.HintSize="778,6480" sap2010:WorkflowViewState.IdRef="OpenBrowser_2" NewSession="True" Private="True" Url="https://cardon.us/mgr">
+                          <ui:OpenBrowser CommunicationMethod="{x:Null}" Hidden="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Open Browser: ManageWP" sap:VirtualizedContainerService.HintSize="778,7363" sap2010:WorkflowViewState.IdRef="OpenBrowser_2" NewSession="True" Private="True" Url="https://cardon.us/mgr">
                             <ui:OpenBrowser.Body>
                               <ActivityAction x:TypeArguments="x:Object">
                                 <ActivityAction.Argument>
                                   <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
                                 </ActivityAction.Argument>
-                                <Sequence DisplayName="Update WordPress Site" sap:VirtualizedContainerService.HintSize="744,6379" sap2010:WorkflowViewState.IdRef="Sequence_36">
+                                <Sequence DisplayName="Update WordPress Site" sap:VirtualizedContainerService.HintSize="744,7262" sap2010:WorkflowViewState.IdRef="Sequence_36">
                                   <Sequence.Variables>
                                     <Variable x:TypeArguments="x:Boolean" Name="boolLeave" />
                                   </Sequence.Variables>
@@ -901,7 +901,7 @@
                                       </ui:UiElementExists.Target>
                                     </ui:UiElementExists>
                                   </Sequence>
-                                  <Sequence DisplayName="Process COVID Data" sap:VirtualizedContainerService.HintSize="702,4235" sap2010:WorkflowViewState.IdRef="Sequence_35">
+                                  <Sequence DisplayName="Process COVID Data" sap:VirtualizedContainerService.HintSize="702,5118" sap2010:WorkflowViewState.IdRef="Sequence_35">
                                     <Sequence.Variables>
                                       <Variable x:TypeArguments="sd:DataTable" Name="dtCOVIDReport" />
                                       <Variable x:TypeArguments="sd:DataTable" Name="dtCommunities" />
@@ -915,13 +915,13 @@
                                     <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="660,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_25" LogLevel="Info" LogMessage="Reading COVID csv..." />
                                     <ui:ReadCsvFile Encoding="{x:Null}" DataTable="[dtCommunities]" Delimitator="Comma" DisplayName="Read CSV: Communities" FilePath="[strCommunitiesPath]" sap:VirtualizedContainerService.HintSize="660,152" sap2010:WorkflowViewState.IdRef="ReadCsvFile_1" />
                                     <ui:ReadCsvFile Encoding="{x:Null}" DataTable="[dtCOVIDReport]" Delimitator="Comma" DisplayName="Read CSV: COVID Report" FilePath="[strCOVIDPath]" sap:VirtualizedContainerService.HintSize="660,152" sap2010:WorkflowViewState.IdRef="ReadCsvFile_2" />
-                                    <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dtCommunities.AsEnumerable.Where(Function(row) row(4).ToString &lt;&gt; &quot;N/A&quot;).CopyToDataTable]" DisplayName="For Each Row: Community" sap:VirtualizedContainerService.HintSize="660,3697" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+                                    <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dtCommunities.AsEnumerable.Where(Function(row) row(4).ToString &lt;&gt; &quot;N/A&quot;).CopyToDataTable]" DisplayName="For Each Row: Community" sap:VirtualizedContainerService.HintSize="660,4580" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
                                       <ui:ForEachRow.Body>
                                         <ActivityAction x:TypeArguments="sd:DataRow">
                                           <ActivityAction.Argument>
                                             <DelegateInArgument x:TypeArguments="sd:DataRow" Name="community" />
                                           </ActivityAction.Argument>
-                                          <Sequence DisplayName="Update COVID Numbers" sap:VirtualizedContainerService.HintSize="610,3550" sap2010:WorkflowViewState.IdRef="Sequence_34">
+                                          <Sequence DisplayName="Update COVID Numbers" sap:VirtualizedContainerService.HintSize="610,4433" sap2010:WorkflowViewState.IdRef="Sequence_34">
                                             <Sequence.Variables>
                                               <Variable x:TypeArguments="sd:DataTable" Name="dtRowCOVID" />
                                             </Sequence.Variables>
@@ -1000,197 +1000,240 @@
                                                 </ActivityAction>
                                               </ui:ForEach.Body>
                                             </ui:ForEach>
-                                            <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="568,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_27" LogLevel="Info" LogMessage="[&quot;Populating [&quot; + dtRowCOVID(0)(0).ToString + &quot;]...&quot;]" />
-                                            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into 'Total Active Associates'" EmptyField="True" sap:VirtualizedContainerService.HintSize="568,96" sap2010:WorkflowViewState.IdRef="TypeInto_3" Text="[Cint(dtRowCOVID(0)(1)).ToString(&quot;N0&quot;)]">
-                                              <ui:TypeInto.Target>
-                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="7fd152d0-8c3b-4995-aed5-a733bcf22d82" Selector="&lt;webctrl id='acf-field_5ea1f4498fe8f' tag='INPUT' /&gt;">
-                                                  <ui:Target.TimeoutMS>
-                                                    <InArgument x:TypeArguments="x:Int32" />
-                                                  </ui:Target.TimeoutMS>
-                                                  <ui:Target.WaitForReady>
-                                                    <InArgument x:TypeArguments="ui:WaitForReady" />
-                                                  </ui:Target.WaitForReady>
-                                                </ui:Target>
-                                              </ui:TypeInto.Target>
-                                            </ui:TypeInto>
-                                            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into 'Associates Positive'" EmptyField="True" sap:VirtualizedContainerService.HintSize="568,96" sap2010:WorkflowViewState.IdRef="TypeInto_4" Text="[Cint(dtRowCOVID(0)(2)).ToString(&quot;N0&quot;)]">
-                                              <ui:TypeInto.Target>
-                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="440e0e54-8480-4a34-86da-70133d714945" Selector="&lt;webctrl id='acf-field_5ea1f4578fe90' tag='INPUT' /&gt;">
-                                                  <ui:Target.TimeoutMS>
-                                                    <InArgument x:TypeArguments="x:Int32" />
-                                                  </ui:Target.TimeoutMS>
-                                                  <ui:Target.WaitForReady>
-                                                    <InArgument x:TypeArguments="ui:WaitForReady" />
-                                                  </ui:Target.WaitForReady>
-                                                </ui:Target>
-                                              </ui:TypeInto.Target>
-                                            </ui:TypeInto>
-                                            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into 'Percent of Workforce'" EmptyField="True" sap:VirtualizedContainerService.HintSize="568,96" sap2010:WorkflowViewState.IdRef="TypeInto_5" Text="[CDbl(dtRowCOVID(0)(3).ToString.Replace(&quot;%&quot;, &quot;&quot;)).ToString(&quot;N2&quot;)]">
-                                              <ui:TypeInto.Target>
-                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="b7c749e9-0f72-41cb-8dd1-672b5004cfa9" Selector="&lt;webctrl id='acf-field_5ea1f4678fe91' tag='INPUT' /&gt;">
-                                                  <ui:Target.TimeoutMS>
-                                                    <InArgument x:TypeArguments="x:Int32" />
-                                                  </ui:Target.TimeoutMS>
-                                                  <ui:Target.WaitForReady>
-                                                    <InArgument x:TypeArguments="ui:WaitForReady" />
-                                                  </ui:Target.WaitForReady>
-                                                </ui:Target>
-                                              </ui:TypeInto.Target>
-                                            </ui:TypeInto>
-                                            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into 'Total Residents'" EmptyField="True" sap:VirtualizedContainerService.HintSize="568,96" sap2010:WorkflowViewState.IdRef="TypeInto_6" Text="[Cint(dtRowCOVID(0)(5)).ToString(&quot;N0&quot;)]">
-                                              <ui:TypeInto.Target>
-                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="d93df03b-d18b-4dde-b09b-b93af0100872" Selector="&lt;webctrl id='acf-field_5ea1f4798fe92' tag='INPUT' /&gt;">
-                                                  <ui:Target.TimeoutMS>
-                                                    <InArgument x:TypeArguments="x:Int32" />
-                                                  </ui:Target.TimeoutMS>
-                                                  <ui:Target.WaitForReady>
-                                                    <InArgument x:TypeArguments="ui:WaitForReady" />
-                                                  </ui:Target.WaitForReady>
-                                                </ui:Target>
-                                              </ui:TypeInto.Target>
-                                            </ui:TypeInto>
-                                            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into 'In House Residents Postive or Presumed'" EmptyField="True" sap:VirtualizedContainerService.HintSize="568,96" sap2010:WorkflowViewState.IdRef="TypeInto_7" Text="[Cint(dtRowCOVID(0)(6)).ToString(&quot;N0&quot;)]">
-                                              <ui:TypeInto.Target>
-                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="6b3a206d-6826-4bd8-9326-dd352747ba65" Selector="&lt;webctrl id='acf-field_5ea1f49b8fe93' tag='INPUT' /&gt;">
-                                                  <ui:Target.TimeoutMS>
-                                                    <InArgument x:TypeArguments="x:Int32" />
-                                                  </ui:Target.TimeoutMS>
-                                                  <ui:Target.WaitForReady>
-                                                    <InArgument x:TypeArguments="ui:WaitForReady" />
-                                                  </ui:Target.WaitForReady>
-                                                </ui:Target>
-                                              </ui:TypeInto.Target>
-                                            </ui:TypeInto>
-                                            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into 'Percent Residents Positive'" EmptyField="True" sap:VirtualizedContainerService.HintSize="568,96" sap2010:WorkflowViewState.IdRef="TypeInto_8" Text="[CDbl(dtRowCOVID(0)(7).ToString.Replace(&quot;%&quot;, &quot;&quot;)).ToString(&quot;N2&quot;)]">
-                                              <ui:TypeInto.Target>
-                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="8d64b952-1699-4379-b1fc-ed0736b59e5c" Selector="&lt;webctrl id='acf-field_5ea1f4c08fe94' tag='INPUT' /&gt;">
-                                                  <ui:Target.TimeoutMS>
-                                                    <InArgument x:TypeArguments="x:Int32" />
-                                                  </ui:Target.TimeoutMS>
-                                                  <ui:Target.WaitForReady>
-                                                    <InArgument x:TypeArguments="ui:WaitForReady" />
-                                                  </ui:Target.WaitForReady>
-                                                </ui:Target>
-                                              </ui:TypeInto.Target>
-                                            </ui:TypeInto>
-                                            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into 'Total Residents and Associates'" EmptyField="True" sap:VirtualizedContainerService.HintSize="568,96" sap2010:WorkflowViewState.IdRef="TypeInto_9" Text="[Cint(dtRowCOVID(0)(8)).ToString(&quot;N0&quot;)]">
-                                              <ui:TypeInto.Target>
-                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="2493f3b3-9c0e-40e2-a1d2-b2bfe6dd4076" Selector="&lt;webctrl id='acf-field_5eab138aea1d9' tag='INPUT' /&gt;">
-                                                  <ui:Target.TimeoutMS>
-                                                    <InArgument x:TypeArguments="x:Int32" />
-                                                  </ui:Target.TimeoutMS>
-                                                  <ui:Target.WaitForReady>
-                                                    <InArgument x:TypeArguments="ui:WaitForReady" />
-                                                  </ui:Target.WaitForReady>
-                                                </ui:Target>
-                                              </ui:TypeInto.Target>
-                                            </ui:TypeInto>
-                                            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into 'Total Recovered Residents'" EmptyField="True" sap:VirtualizedContainerService.HintSize="568,96" sap2010:WorkflowViewState.IdRef="TypeInto_10" Text="[Cint(dtRowCOVID(0)(9)).ToString(&quot;N0&quot;)]">
-                                              <ui:TypeInto.Target>
-                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="b9d14291-ec32-411d-9c63-80127ebdc2a9" Selector="&lt;webctrl id='acf-field_5eab13b4ea1da' tag='INPUT' /&gt;">
-                                                  <ui:Target.TimeoutMS>
-                                                    <InArgument x:TypeArguments="x:Int32" />
-                                                  </ui:Target.TimeoutMS>
-                                                  <ui:Target.WaitForReady>
-                                                    <InArgument x:TypeArguments="ui:WaitForReady" />
-                                                  </ui:Target.WaitForReady>
-                                                </ui:Target>
-                                              </ui:TypeInto.Target>
-                                            </ui:TypeInto>
-                                            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into 'In house residents passed away'" EmptyField="True" sap:VirtualizedContainerService.HintSize="568,96" sap2010:WorkflowViewState.IdRef="TypeInto_11" Text="[Cint(dtRowCOVID(0)(10)).ToString(&quot;N0&quot;)]">
-                                              <ui:TypeInto.Target>
-                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="fd8bfcf5-e3e9-4d70-8060-20dd80628660" Selector="&lt;webctrl id='acf-field_5eab13ceea1db' tag='INPUT' /&gt;">
-                                                  <ui:Target.TimeoutMS>
-                                                    <InArgument x:TypeArguments="x:Int32" />
-                                                  </ui:Target.TimeoutMS>
-                                                  <ui:Target.WaitForReady>
-                                                    <InArgument x:TypeArguments="ui:WaitForReady" />
-                                                  </ui:Target.WaitForReady>
-                                                </ui:Target>
-                                              </ui:TypeInto.Target>
-                                            </ui:TypeInto>
-                                            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into 'Cumulative Residents Passed Away'" EmptyField="True" sap:VirtualizedContainerService.HintSize="568,96" sap2010:WorkflowViewState.IdRef="TypeInto_12" Text="[Cint(dtRowCOVID(0)(11)).ToString(&quot;N0&quot;)]">
-                                              <ui:TypeInto.Target>
-                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="fbd37fa4-3876-4e8d-9ecc-3041142e30a8" Selector="&lt;webctrl id='acf-field_5ecd190102b88' tag='INPUT' /&gt;">
-                                                  <ui:Target.TimeoutMS>
-                                                    <InArgument x:TypeArguments="x:Int32" />
-                                                  </ui:Target.TimeoutMS>
-                                                  <ui:Target.WaitForReady>
-                                                    <InArgument x:TypeArguments="ui:WaitForReady" />
-                                                  </ui:Target.WaitForReady>
-                                                </ui:Target>
-                                              </ui:TypeInto.Target>
-                                            </ui:TypeInto>
-                                            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into 'New Positive Residents Today'" EmptyField="True" sap:VirtualizedContainerService.HintSize="568,96" sap2010:WorkflowViewState.IdRef="TypeInto_13" Text="[Cint(dtRowCOVID(0)(12)).ToString(&quot;N0&quot;)]">
-                                              <ui:TypeInto.Target>
-                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="eb149351-37ab-41f5-836b-9ceb5628623a" Selector="&lt;webctrl id='acf-field_5eab1405ea1dc' tag='INPUT' /&gt;">
-                                                  <ui:Target.TimeoutMS>
-                                                    <InArgument x:TypeArguments="x:Int32" />
-                                                  </ui:Target.TimeoutMS>
-                                                  <ui:Target.WaitForReady>
-                                                    <InArgument x:TypeArguments="ui:WaitForReady" />
-                                                  </ui:Target.WaitForReady>
-                                                </ui:Target>
-                                              </ui:TypeInto.Target>
-                                            </ui:TypeInto>
-                                            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into 'New Cases Residents 14 Days'" EmptyField="True" sap:VirtualizedContainerService.HintSize="568,96" sap2010:WorkflowViewState.IdRef="TypeInto_14" Text="[Cint(dtRowCOVID(0)(13)).ToString(&quot;N0&quot;)]">
-                                              <ui:TypeInto.Target>
-                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="49a75d5b-9a93-40c8-b607-506e3a369c44" Selector="&lt;webctrl id='acf-field_5eab1417ea1dd' tag='INPUT' /&gt;">
-                                                  <ui:Target.TimeoutMS>
-                                                    <InArgument x:TypeArguments="x:Int32" />
-                                                  </ui:Target.TimeoutMS>
-                                                  <ui:Target.WaitForReady>
-                                                    <InArgument x:TypeArguments="ui:WaitForReady" />
-                                                  </ui:Target.WaitForReady>
-                                                </ui:Target>
-                                              </ui:TypeInto.Target>
-                                            </ui:TypeInto>
-                                            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into 'Total Positive Associates and Resident Percentage Today'" EmptyField="True" sap:VirtualizedContainerService.HintSize="568,96" sap2010:WorkflowViewState.IdRef="TypeInto_15" Text="[CDbl(dtRowCOVID(0)(14).ToString.Replace(&quot;%&quot;, &quot;&quot;)).ToString(&quot;N2&quot;)]">
-                                              <ui:TypeInto.Target>
-                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="90e2c25a-4c0e-49f2-b9fe-ee583bd751bb" Selector="&lt;webctrl id='acf-field_5eab1431ea1de' tag='INPUT' /&gt;">
-                                                  <ui:Target.TimeoutMS>
-                                                    <InArgument x:TypeArguments="x:Int32" />
-                                                  </ui:Target.TimeoutMS>
-                                                  <ui:Target.WaitForReady>
-                                                    <InArgument x:TypeArguments="ui:WaitForReady" />
-                                                  </ui:Target.WaitForReady>
-                                                </ui:Target>
-                                              </ui:TypeInto.Target>
-                                            </ui:TypeInto>
-                                            <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DisplayName="Click 'Update'" sap:VirtualizedContainerService.HintSize="568,68" sap2010:WorkflowViewState.IdRef="Click_13" KeyModifiers="None" MouseButton="BTN_LEFT" SimulateClick="True">
-                                              <ui:Click.CursorPosition>
-                                                <ui:CursorPosition Position="Center">
-                                                  <ui:CursorPosition.OffsetX>
-                                                    <InArgument x:TypeArguments="x:Int32" />
-                                                  </ui:CursorPosition.OffsetX>
-                                                  <ui:CursorPosition.OffsetY>
-                                                    <InArgument x:TypeArguments="x:Int32" />
-                                                  </ui:CursorPosition.OffsetY>
-                                                </ui:CursorPosition>
-                                              </ui:Click.CursorPosition>
-                                              <ui:Click.Target>
-                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="059a1b78-8204-4f96-b5cf-784bdd650425" Selector="&lt;webctrl id='publish' tag='INPUT' /&gt;">
-                                                  <ui:Target.TimeoutMS>
-                                                    <InArgument x:TypeArguments="x:Int32" />
-                                                  </ui:Target.TimeoutMS>
-                                                  <ui:Target.WaitForReady>
-                                                    <InArgument x:TypeArguments="ui:WaitForReady" />
-                                                  </ui:Target.WaitForReady>
-                                                </ui:Target>
-                                              </ui:Click.Target>
-                                            </ui:Click>
-                                            <ui:UiElementExists Exists="{x:Null}" DisplayName="Element Exists 'Updated'" sap:VirtualizedContainerService.HintSize="568,68" sap2010:WorkflowViewState.IdRef="UiElementExists_8">
-                                              <ui:UiElementExists.Target>
-                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="c0f6d2c8-2d3c-45b9-a9c9-5857b6ca2570" Selector="&lt;webctrl parentid='message' tag='P' /&gt;">
-                                                  <ui:Target.TimeoutMS>
-                                                    <InArgument x:TypeArguments="x:Int32" />
-                                                  </ui:Target.TimeoutMS>
-                                                  <ui:Target.WaitForReady>
-                                                    <InArgument x:TypeArguments="ui:WaitForReady" />
-                                                  </ui:Target.WaitForReady>
-                                                </ui:Target>
-                                              </ui:UiElementExists.Target>
-                                            </ui:UiElementExists>
+                                            <ui:RetryScope DisplayName="Retry Scope: Populate Fields" sap:VirtualizedContainerService.HintSize="568,2889" sap2010:WorkflowViewState.IdRef="RetryScope_3" NumberOfRetries="5" RetryInterval="00:00:10">
+                                              <ui:RetryScope.ActivityBody>
+                                                <ActivityAction>
+                                                  <TryCatch DisplayName="Try Catch: Populate Fields" sap:VirtualizedContainerService.HintSize="438,2715" sap2010:WorkflowViewState.IdRef="TryCatch_7">
+                                                    <TryCatch.Try>
+                                                      <Sequence DisplayName="Populate Fields" sap:VirtualizedContainerService.HintSize="376,2098" sap2010:WorkflowViewState.IdRef="Sequence_41">
+                                                        <sap:WorkflowViewStateService.ViewState>
+                                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                          </scg:Dictionary>
+                                                        </sap:WorkflowViewStateService.ViewState>
+                                                        <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_27" LogLevel="Info" LogMessage="[&quot;Populating [&quot; + dtRowCOVID(0)(0).ToString + &quot;]...&quot;]" />
+                                                        <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into 'Total Active Associates'" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,96" sap2010:WorkflowViewState.IdRef="TypeInto_3" Text="[Cint(dtRowCOVID(0)(1)).ToString(&quot;N0&quot;)]">
+                                                          <ui:TypeInto.Target>
+                                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="7fd152d0-8c3b-4995-aed5-a733bcf22d82" Selector="&lt;webctrl id='acf-field_5ea1f4498fe8f' tag='INPUT' /&gt;" TimeoutMS="60000">
+                                                              <ui:Target.WaitForReady>
+                                                                <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                              </ui:Target.WaitForReady>
+                                                            </ui:Target>
+                                                          </ui:TypeInto.Target>
+                                                        </ui:TypeInto>
+                                                        <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into 'Associates Positive'" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,96" sap2010:WorkflowViewState.IdRef="TypeInto_4" Text="[Cint(dtRowCOVID(0)(2)).ToString(&quot;N0&quot;)]">
+                                                          <ui:TypeInto.Target>
+                                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="440e0e54-8480-4a34-86da-70133d714945" Selector="&lt;webctrl id='acf-field_5ea1f4578fe90' tag='INPUT' /&gt;">
+                                                              <ui:Target.TimeoutMS>
+                                                                <InArgument x:TypeArguments="x:Int32" />
+                                                              </ui:Target.TimeoutMS>
+                                                              <ui:Target.WaitForReady>
+                                                                <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                              </ui:Target.WaitForReady>
+                                                            </ui:Target>
+                                                          </ui:TypeInto.Target>
+                                                        </ui:TypeInto>
+                                                        <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into 'Percent of Workforce'" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,96" sap2010:WorkflowViewState.IdRef="TypeInto_5" Text="[CDbl(dtRowCOVID(0)(3).ToString.Replace(&quot;%&quot;, &quot;&quot;)).ToString(&quot;N2&quot;)]">
+                                                          <ui:TypeInto.Target>
+                                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="b7c749e9-0f72-41cb-8dd1-672b5004cfa9" Selector="&lt;webctrl id='acf-field_5ea1f4678fe91' tag='INPUT' /&gt;">
+                                                              <ui:Target.TimeoutMS>
+                                                                <InArgument x:TypeArguments="x:Int32" />
+                                                              </ui:Target.TimeoutMS>
+                                                              <ui:Target.WaitForReady>
+                                                                <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                              </ui:Target.WaitForReady>
+                                                            </ui:Target>
+                                                          </ui:TypeInto.Target>
+                                                        </ui:TypeInto>
+                                                        <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into 'Total Residents'" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,96" sap2010:WorkflowViewState.IdRef="TypeInto_6" Text="[Cint(dtRowCOVID(0)(5)).ToString(&quot;N0&quot;)]">
+                                                          <ui:TypeInto.Target>
+                                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="d93df03b-d18b-4dde-b09b-b93af0100872" Selector="&lt;webctrl id='acf-field_5ea1f4798fe92' tag='INPUT' /&gt;">
+                                                              <ui:Target.TimeoutMS>
+                                                                <InArgument x:TypeArguments="x:Int32" />
+                                                              </ui:Target.TimeoutMS>
+                                                              <ui:Target.WaitForReady>
+                                                                <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                              </ui:Target.WaitForReady>
+                                                            </ui:Target>
+                                                          </ui:TypeInto.Target>
+                                                        </ui:TypeInto>
+                                                        <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into 'In House Residents Postive or Presumed'" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,96" sap2010:WorkflowViewState.IdRef="TypeInto_7" Text="[Cint(dtRowCOVID(0)(6)).ToString(&quot;N0&quot;)]">
+                                                          <ui:TypeInto.Target>
+                                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="6b3a206d-6826-4bd8-9326-dd352747ba65" Selector="&lt;webctrl id='acf-field_5ea1f49b8fe93' tag='INPUT' /&gt;">
+                                                              <ui:Target.TimeoutMS>
+                                                                <InArgument x:TypeArguments="x:Int32" />
+                                                              </ui:Target.TimeoutMS>
+                                                              <ui:Target.WaitForReady>
+                                                                <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                              </ui:Target.WaitForReady>
+                                                            </ui:Target>
+                                                          </ui:TypeInto.Target>
+                                                        </ui:TypeInto>
+                                                        <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into 'Percent Residents Positive'" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,96" sap2010:WorkflowViewState.IdRef="TypeInto_8" Text="[CDbl(dtRowCOVID(0)(7).ToString.Replace(&quot;%&quot;, &quot;&quot;)).ToString(&quot;N2&quot;)]">
+                                                          <ui:TypeInto.Target>
+                                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="8d64b952-1699-4379-b1fc-ed0736b59e5c" Selector="&lt;webctrl id='acf-field_5ea1f4c08fe94' tag='INPUT' /&gt;">
+                                                              <ui:Target.TimeoutMS>
+                                                                <InArgument x:TypeArguments="x:Int32" />
+                                                              </ui:Target.TimeoutMS>
+                                                              <ui:Target.WaitForReady>
+                                                                <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                              </ui:Target.WaitForReady>
+                                                            </ui:Target>
+                                                          </ui:TypeInto.Target>
+                                                        </ui:TypeInto>
+                                                        <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into 'Total Residents and Associates'" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,96" sap2010:WorkflowViewState.IdRef="TypeInto_9" Text="[Cint(dtRowCOVID(0)(8)).ToString(&quot;N0&quot;)]">
+                                                          <ui:TypeInto.Target>
+                                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="2493f3b3-9c0e-40e2-a1d2-b2bfe6dd4076" Selector="&lt;webctrl id='acf-field_5eab138aea1d9' tag='INPUT' /&gt;">
+                                                              <ui:Target.TimeoutMS>
+                                                                <InArgument x:TypeArguments="x:Int32" />
+                                                              </ui:Target.TimeoutMS>
+                                                              <ui:Target.WaitForReady>
+                                                                <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                              </ui:Target.WaitForReady>
+                                                            </ui:Target>
+                                                          </ui:TypeInto.Target>
+                                                        </ui:TypeInto>
+                                                        <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into 'Total Recovered Residents'" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,96" sap2010:WorkflowViewState.IdRef="TypeInto_10" Text="[Cint(dtRowCOVID(0)(9)).ToString(&quot;N0&quot;)]">
+                                                          <ui:TypeInto.Target>
+                                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="b9d14291-ec32-411d-9c63-80127ebdc2a9" Selector="&lt;webctrl id='acf-field_5eab13b4ea1da' tag='INPUT' /&gt;">
+                                                              <ui:Target.TimeoutMS>
+                                                                <InArgument x:TypeArguments="x:Int32" />
+                                                              </ui:Target.TimeoutMS>
+                                                              <ui:Target.WaitForReady>
+                                                                <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                              </ui:Target.WaitForReady>
+                                                            </ui:Target>
+                                                          </ui:TypeInto.Target>
+                                                        </ui:TypeInto>
+                                                        <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into 'In house residents passed away'" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,96" sap2010:WorkflowViewState.IdRef="TypeInto_11" Text="[Cint(dtRowCOVID(0)(10)).ToString(&quot;N0&quot;)]">
+                                                          <ui:TypeInto.Target>
+                                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="fd8bfcf5-e3e9-4d70-8060-20dd80628660" Selector="&lt;webctrl id='acf-field_5eab13ceea1db' tag='INPUT' /&gt;">
+                                                              <ui:Target.TimeoutMS>
+                                                                <InArgument x:TypeArguments="x:Int32" />
+                                                              </ui:Target.TimeoutMS>
+                                                              <ui:Target.WaitForReady>
+                                                                <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                              </ui:Target.WaitForReady>
+                                                            </ui:Target>
+                                                          </ui:TypeInto.Target>
+                                                        </ui:TypeInto>
+                                                        <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into 'Cumulative Residents Passed Away'" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,96" sap2010:WorkflowViewState.IdRef="TypeInto_12" Text="[Cint(dtRowCOVID(0)(11)).ToString(&quot;N0&quot;)]">
+                                                          <ui:TypeInto.Target>
+                                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="fbd37fa4-3876-4e8d-9ecc-3041142e30a8" Selector="&lt;webctrl id='acf-field_5ecd190102b88' tag='INPUT' /&gt;">
+                                                              <ui:Target.TimeoutMS>
+                                                                <InArgument x:TypeArguments="x:Int32" />
+                                                              </ui:Target.TimeoutMS>
+                                                              <ui:Target.WaitForReady>
+                                                                <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                              </ui:Target.WaitForReady>
+                                                            </ui:Target>
+                                                          </ui:TypeInto.Target>
+                                                        </ui:TypeInto>
+                                                        <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into 'New Positive Residents Today'" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,96" sap2010:WorkflowViewState.IdRef="TypeInto_13" Text="[Cint(dtRowCOVID(0)(12)).ToString(&quot;N0&quot;)]">
+                                                          <ui:TypeInto.Target>
+                                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="eb149351-37ab-41f5-836b-9ceb5628623a" Selector="&lt;webctrl id='acf-field_5eab1405ea1dc' tag='INPUT' /&gt;">
+                                                              <ui:Target.TimeoutMS>
+                                                                <InArgument x:TypeArguments="x:Int32" />
+                                                              </ui:Target.TimeoutMS>
+                                                              <ui:Target.WaitForReady>
+                                                                <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                              </ui:Target.WaitForReady>
+                                                            </ui:Target>
+                                                          </ui:TypeInto.Target>
+                                                        </ui:TypeInto>
+                                                        <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into 'New Cases Residents 14 Days'" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,96" sap2010:WorkflowViewState.IdRef="TypeInto_14" Text="[Cint(dtRowCOVID(0)(13)).ToString(&quot;N0&quot;)]">
+                                                          <ui:TypeInto.Target>
+                                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="49a75d5b-9a93-40c8-b607-506e3a369c44" Selector="&lt;webctrl id='acf-field_5eab1417ea1dd' tag='INPUT' /&gt;">
+                                                              <ui:Target.TimeoutMS>
+                                                                <InArgument x:TypeArguments="x:Int32" />
+                                                              </ui:Target.TimeoutMS>
+                                                              <ui:Target.WaitForReady>
+                                                                <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                              </ui:Target.WaitForReady>
+                                                            </ui:Target>
+                                                          </ui:TypeInto.Target>
+                                                        </ui:TypeInto>
+                                                        <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into 'Total Positive Associates and Resident Percentage Today'" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,96" sap2010:WorkflowViewState.IdRef="TypeInto_15" Text="[CDbl(dtRowCOVID(0)(14).ToString.Replace(&quot;%&quot;, &quot;&quot;)).ToString(&quot;N2&quot;)]">
+                                                          <ui:TypeInto.Target>
+                                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="90e2c25a-4c0e-49f2-b9fe-ee583bd751bb" Selector="&lt;webctrl id='acf-field_5eab1431ea1de' tag='INPUT' /&gt;">
+                                                              <ui:Target.TimeoutMS>
+                                                                <InArgument x:TypeArguments="x:Int32" />
+                                                              </ui:Target.TimeoutMS>
+                                                              <ui:Target.WaitForReady>
+                                                                <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                              </ui:Target.WaitForReady>
+                                                            </ui:Target>
+                                                          </ui:TypeInto.Target>
+                                                        </ui:TypeInto>
+                                                        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DisplayName="Click 'Update'" sap:VirtualizedContainerService.HintSize="334,68" sap2010:WorkflowViewState.IdRef="Click_13" KeyModifiers="None" MouseButton="BTN_LEFT" SimulateClick="True">
+                                                          <ui:Click.CursorPosition>
+                                                            <ui:CursorPosition Position="Center">
+                                                              <ui:CursorPosition.OffsetX>
+                                                                <InArgument x:TypeArguments="x:Int32" />
+                                                              </ui:CursorPosition.OffsetX>
+                                                              <ui:CursorPosition.OffsetY>
+                                                                <InArgument x:TypeArguments="x:Int32" />
+                                                              </ui:CursorPosition.OffsetY>
+                                                            </ui:CursorPosition>
+                                                          </ui:Click.CursorPosition>
+                                                          <ui:Click.Target>
+                                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="059a1b78-8204-4f96-b5cf-784bdd650425" Selector="&lt;webctrl id='publish' tag='INPUT' /&gt;">
+                                                              <ui:Target.TimeoutMS>
+                                                                <InArgument x:TypeArguments="x:Int32" />
+                                                              </ui:Target.TimeoutMS>
+                                                              <ui:Target.WaitForReady>
+                                                                <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                              </ui:Target.WaitForReady>
+                                                            </ui:Target>
+                                                          </ui:Click.Target>
+                                                        </ui:Click>
+                                                        <ui:UiElementExists Exists="{x:Null}" DisplayName="Element Exists 'Updated'" sap:VirtualizedContainerService.HintSize="334,68" sap2010:WorkflowViewState.IdRef="UiElementExists_8">
+                                                          <ui:UiElementExists.Target>
+                                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="c0f6d2c8-2d3c-45b9-a9c9-5857b6ca2570" Selector="&lt;webctrl parentid='message' tag='P' /&gt;">
+                                                              <ui:Target.TimeoutMS>
+                                                                <InArgument x:TypeArguments="x:Int32" />
+                                                              </ui:Target.TimeoutMS>
+                                                              <ui:Target.WaitForReady>
+                                                                <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                              </ui:Target.WaitForReady>
+                                                            </ui:Target>
+                                                          </ui:UiElementExists.Target>
+                                                        </ui:UiElementExists>
+                                                      </Sequence>
+                                                    </TryCatch.Try>
+                                                    <TryCatch.Catches>
+                                                      <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,307" sap2010:WorkflowViewState.IdRef="Catch`1_7">
+                                                        <sap:WorkflowViewStateService.ViewState>
+                                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                          </scg:Dictionary>
+                                                        </sap:WorkflowViewStateService.ViewState>
+                                                        <ActivityAction x:TypeArguments="s:Exception">
+                                                          <ActivityAction.Argument>
+                                                            <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                                                          </ActivityAction.Argument>
+                                                          <Sequence DisplayName="Retry" sap:VirtualizedContainerService.HintSize="242,238" sap2010:WorkflowViewState.IdRef="Sequence_42">
+                                                            <sap:WorkflowViewStateService.ViewState>
+                                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                              </scg:Dictionary>
+                                                            </sap:WorkflowViewStateService.ViewState>
+                                                            <el:Log_Failed_Activity DisplayName="Log Failed Activity" ExceptionType="Application" ExceptionsList="[listExceptions]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Log_Failed_Activity_6" LogMessage="Failed to populate fields. Retrying..." />
+                                                            <ui:RefreshBrowser Browser="{x:Null}" DisplayName="Refresh Browser" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="RefreshBrowser_1" />
+                                                            <Rethrow sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Rethrow_1" />
+                                                          </Sequence>
+                                                        </ActivityAction>
+                                                      </Catch>
+                                                    </TryCatch.Catches>
+                                                  </TryCatch>
+                                                </ActivityAction>
+                                              </ui:RetryScope.ActivityBody>
+                                              <ui:RetryScope.Condition>
+                                                <ActivityFunc x:TypeArguments="x:Boolean" />
+                                              </ui:RetryScope.Condition>
+                                            </ui:RetryScope>
                                             <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Log Item Status" sap:VirtualizedContainerService.HintSize="568,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_58" UnSafe="False" WorkflowFileName="Workflows\EZFramework\Orchestrator\Log Item Status.xaml">
                                               <ui:InvokeWorkflowFile.Arguments>
                                                 <InArgument x:TypeArguments="x:String" x:Key="strSuccessMessage">["[" + community(1).ToString + "] COVID-19 WordPress page updated!"]</InArgument>

@@ -15,7 +15,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1035,3728</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1314,3728</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Get_New_Results_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="22">
@@ -140,7 +140,7 @@
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
                       <ui:NavigateTo Browser="{x:Null}" DisplayName="Navigate To: All Results" sap:VirtualizedContainerService.HintSize="438,59" sap2010:WorkflowViewState.IdRef="NavigateTo_2" Url="[strURLAccessions]" />
-                      <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="438,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_11" LogLevel="Info" LogMessage="Filtering Table for last 14 days..." />
+                      <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="438,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_11" LogLevel="Info" LogMessage="Filtering Table for last 60 days..." />
                       <ui:UiElementExists Exists="{x:Null}" DisplayName="Element Exists 'Filter Days'" sap:VirtualizedContainerService.HintSize="438,68" sap2010:WorkflowViewState.IdRef="UiElementExists_3">
                         <ui:UiElementExists.Target>
                           <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="783945f7-1c73-48fd-bf8d-a7afb3c878ee" Selector="&lt;webctrl parentid='ce1f3ceb__n_2_view_columns_view_columns_column' tag='INPUT' type='text' /&gt;" TimeoutMS="60000">
@@ -150,7 +150,7 @@
                           </ui:Target>
                         </ui:UiElementExists.Target>
                       </ui:UiElementExists>
-                      <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into 'Requisition Days'" EmptyField="True" sap:VirtualizedContainerService.HintSize="438,96" sap2010:WorkflowViewState.IdRef="TypeInto_2" Text="14 Days[k(enter)]">
+                      <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DelayBefore="5000" DisplayName="Type Into 'Requisition Days'" EmptyField="True" sap:VirtualizedContainerService.HintSize="438,96" sap2010:WorkflowViewState.IdRef="TypeInto_2" Text="60 days">
                         <ui:TypeInto.Target>
                           <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="04158264-16d3-49c1-ba7c-7fa175eeeb26" Selector="&lt;webctrl parentid='ce1f3ceb__n_2_view_columns_view_columns_column' tag='INPUT' type='text' /&gt;">
                             <ui:Target.TimeoutMS>
@@ -241,7 +241,7 @@
                         </ui:GetLastDownloadedFile.Body>
                       </ui:GetLastDownloadedFile>
                       <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="438,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_8" LogLevel="Info" LogMessage="Downloaded!" />
-                      <ui:RetryScope DisplayName="Retry Scope: Get Processed Results" sap:VirtualizedContainerService.HintSize="438,326" sap2010:WorkflowViewState.IdRef="RetryScope_7" NumberOfRetries="60" RetryInterval="00:00:01">
+                      <ui:RetryScope DisplayName="Retry Scope: All Results" sap:VirtualizedContainerService.HintSize="438,326" sap2010:WorkflowViewState.IdRef="RetryScope_7" NumberOfRetries="60" RetryInterval="00:00:01">
                         <ui:RetryScope.ActivityBody>
                           <ActivityAction>
                             <ui:ReadCsvFile Encoding="{x:Null}" DataTable="[dtResults]" Delimitator="Comma" DisplayName="Read CSV: All Results" FilePath="[fileAllResults.FullName]" sap:VirtualizedContainerService.HintSize="334,152" sap2010:WorkflowViewState.IdRef="ReadCsvFile_2" />

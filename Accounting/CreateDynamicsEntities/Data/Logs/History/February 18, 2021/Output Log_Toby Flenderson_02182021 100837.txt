@@ -1,6 +1,0 @@
-<li>[2/18/2021 10:02 AM] <strong><span style="color: #008000;">PROCESSED</span></strong>: Created Dynamics Entity for [Cardon VI, Inc]<br><br></li>
-<li>[2/18/2021 10:03 AM] <strong><span style="color: #008000;">PROCESSED</span></strong>: Created Dynamics Entity for [Paoli H & L Property LLC]<br><br></li>
-<li>[2/18/2021 10:05 AM] <strong><span style="color: #008000;">PROCESSED</span></strong>: Created Dynamics Entity for [CarDon RE Investment Company LLC]<br><br></li>
-<li>[2/18/2021 10:06 AM] <strong><span style="color: #008000;">PROCESSED</span></strong>: Created Dynamics Entity for [Altenheim H&L Property LLC ]<br><br></li>
-<li>[2/18/2021 10:07 AM] <strong><span style="color: #008000;">PROCESSED</span></strong>: Created Dynamics Entity for [Arbor Trace H&L Property LLC ]<br><br></li>
-<li>[2/18/2021 10:08 AM] <strong><span style="color: #ff0000;">NEEDS REVIEW</span></strong>: An unhandled exception occurred. UiPath.UiAutomation.Activities: Cannot find the UI element corresponding to this selector: <webctrl id='DMFAddEntity_*' tag='INPUT' aaname='Period allocation categories' /><br><br></li>

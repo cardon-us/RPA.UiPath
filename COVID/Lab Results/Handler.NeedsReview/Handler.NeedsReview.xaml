@@ -5,7 +5,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1314,2012</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>863,2057</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Main_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="33">
@@ -299,13 +299,14 @@
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <Transition.To>
-            <State x:Name="__ReferenceID1" sap2010:Annotation.AnnotationText="Workflows to process." DisplayName="Process" sap:VirtualizedContainerService.HintSize="852,6247" sap2010:WorkflowViewState.IdRef="State_2">
+            <State x:Name="__ReferenceID1" sap2010:Annotation.AnnotationText="Workflows to process." DisplayName="Process" sap:VirtualizedContainerService.HintSize="852,6278" sap2010:WorkflowViewState.IdRef="State_2">
               <State.Entry>
-                <TryCatch DisplayName="Try Catch: Process Workflows" sap:VirtualizedContainerService.HintSize="806,5829" sap2010:WorkflowViewState.IdRef="TryCatch_3">
+                <TryCatch DisplayName="Try Catch: Process Workflows" sap:VirtualizedContainerService.HintSize="806,5860" sap2010:WorkflowViewState.IdRef="TryCatch_3">
                   <TryCatch.Try>
-                    <Sequence DisplayName="Processing" sap:VirtualizedContainerService.HintSize="768,5109" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                    <Sequence DisplayName="Processing" sap:VirtualizedContainerService.HintSize="768,5140" sap2010:WorkflowViewState.IdRef="Sequence_17">
                       <Sequence.Variables>
                         <Variable x:TypeArguments="x:String" Name="strQueueNameHandler" />
+                        <Variable x:TypeArguments="x:String" Name="strContactType" />
                       </Sequence.Variables>
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -375,7 +376,6 @@
                               <Variable x:TypeArguments="x:String" Name="strFullPathPage" />
                               <Variable x:TypeArguments="x:String" Name="strContactDOB" />
                               <Variable x:TypeArguments="x:String" Name="strFailReason" />
-                              <Variable x:TypeArguments="x:String" Name="strContactType" />
                               <Variable x:TypeArguments="x:String" Name="strItemId" />
                               <Variable x:TypeArguments="x:String" Name="strFirstName" />
                               <Variable x:TypeArguments="x:String" Name="strLastName" />
@@ -498,6 +498,9 @@
                             </ui:MultipleAssign>
                             <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="539,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_24" LogLevel="Info" LogMessage="[&quot;Handling [&quot; + String.Join(&quot;] [&quot;, {strItemId, strFirstName, strLastName, &quot;DOB: &quot; + strContactDOB, &quot;Date Collected: &quot; + strDateCollected, &quot;Result: &quot; + strResult, &quot;Date Result: &quot; + strDateResult}) + &quot;]...&quot;]" />
                             <Sequence DisplayName="Formatting" sap:VirtualizedContainerService.HintSize="539,944" sap2010:WorkflowViewState.IdRef="Sequence_64">
+                              <Sequence.Variables>
+                                <Variable x:TypeArguments="x:String" Name="strContactTypeMessage" />
+                              </Sequence.Variables>
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -560,9 +563,9 @@
                                         <InArgument x:TypeArguments="x:String">[If (Not strResult.ToLower.Contains("negative"), "&lt;span style=""color: #ff0000;""&gt;&lt;strong&gt;" + strResult + "&lt;/strong&gt;&lt;/span&gt;", strResult)]</InArgument>
                                       </ui:AssignOperation.Value>
                                     </ui:AssignOperation>
-                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_178">
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_203">
                                       <ui:AssignOperation.To>
-                                        <OutArgument x:TypeArguments="x:String">[strContactType]</OutArgument>
+                                        <OutArgument x:TypeArguments="x:String">[strContactTypeMessage]</OutArgument>
                                       </ui:AssignOperation.To>
                                       <ui:AssignOperation.Value>
                                         <InArgument x:TypeArguments="x:String">["&lt;span style=""color: #" + strContactColor + ";""&gt;&lt;strong&gt;" + strContactType +"&lt;/strong&gt;&lt;/span&gt;"]</InArgument>
@@ -589,7 +592,7 @@
                                         <OutArgument x:TypeArguments="x:String">[strMessage]</OutArgument>
                                       </ui:AssignOperation.To>
                                       <ui:AssignOperation.Value>
-                                        <InArgument x:TypeArguments="x:String">["&lt;li&gt;[" + String.Join("] [", {"Presumed Type: " + strContactType, "ID: " + strItemId, "Date Received: " + strDateReceived, "Name: " + strFullName, "DOB: " + strContactDOB, "Lab: " + strLab, "Date Collected: " + strDateCollected, "Result: " + strResult, "Date Result: " + strDateResult, "Unable to process reason: " + strFailReason}).Replace("Misread", "&lt;strong&gt;Misread&lt;/strong&gt;") + "]&lt;br&gt;&lt;br&gt;&lt;/li&gt;"]</InArgument>
+                                        <InArgument x:TypeArguments="x:String">["&lt;li&gt;[" + String.Join("] [", {"Presumed Type: " + strContactTypeMessage, "ID: " + strItemId, "Date Received: " + strDateReceived, "Name: " + strFullName, "DOB: " + strContactDOB, "Lab: " + strLab, "Date Collected: " + strDateCollected, "Result: " + strResult, "Date Result: " + strDateResult, "Unable to process reason: " + strFailReason}).Replace("Misread", "&lt;strong&gt;Misread&lt;/strong&gt;") + "]&lt;br&gt;&lt;br&gt;&lt;/li&gt;"]</InArgument>
                                       </ui:AssignOperation.Value>
                                     </ui:AssignOperation>
                                   </scg:List>
@@ -608,13 +611,14 @@
                           </Sequence>
                         </If.Then>
                       </If>
-                      <If Condition="[itemTransaction Is Nothing And listQueueItems.Any()]" DisplayName="If: No More to Process with Items Processed" sap:VirtualizedContainerService.HintSize="726,2522" sap2010:WorkflowViewState.IdRef="If_13">
+                      <If Condition="[itemTransaction Is Nothing And listQueueItems.Any()]" DisplayName="If: No More to Process with Items Processed" sap:VirtualizedContainerService.HintSize="726,2553" sap2010:WorkflowViewState.IdRef="If_13">
                         <If.Then>
-                          <Sequence DisplayName="Prepare and Send Needs Review Email" sap:VirtualizedContainerService.HintSize="537,2374" sap2010:WorkflowViewState.IdRef="Sequence_41">
+                          <Sequence DisplayName="Prepare and Send Needs Review Email" sap:VirtualizedContainerService.HintSize="537,2405" sap2010:WorkflowViewState.IdRef="Sequence_41">
                             <Sequence.Variables>
                               <Variable x:TypeArguments="x:String" Name="strUsername" />
                               <Variable x:TypeArguments="ss:SecureString" Name="secstrPassword" />
                               <Variable x:TypeArguments="x:String" Name="strMessageBody" />
+                              <Variable x:TypeArguments="x:String" Name="strEmailTo" />
                             </Sequence.Variables>
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -623,7 +627,7 @@
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
                             <el:Append_to_Log DisplayName="Append to Log" sap:VirtualizedContainerService.HintSize="495,22" sap2010:WorkflowViewState.IdRef="Append_to_Log_21" LogLevel="Info" LogMessage="Sending Needs Review Email to Team..." />
-                            <ui:MultipleAssign DisplayName="Multiple Assign: Body" sap:VirtualizedContainerService.HintSize="495,98" sap2010:WorkflowViewState.IdRef="MultipleAssign_23">
+                            <ui:MultipleAssign DisplayName="Multiple Assign: Declarations" sap:VirtualizedContainerService.HintSize="495,129" sap2010:WorkflowViewState.IdRef="MultipleAssign_23">
                               <ui:MultipleAssign.AssignOperations>
                                 <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
                                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_132">
@@ -632,6 +636,14 @@
                                     </ui:AssignOperation.To>
                                     <ui:AssignOperation.Value>
                                       <InArgument x:TypeArguments="x:String">["&lt;p&gt;&lt;span style=""font-family: Arial,Helvetica,sans-serif; font-size: 12px;""&gt;Hello team,&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=""font-family: Arial,Helvetica,sans-serif; font-size: 12px;""&gt;Below and attached are the COVID-19 Test Results I could not process:&lt;/span&gt;&lt;/p&gt;&lt;ol&gt;&lt;span style=""font-family: Arial, Helvetica, sans-serif; font-size: 12px;""&gt;" + String.Join("", listLogEmail) + "&lt;/span&gt;&lt;/ol&gt;" + dicConfig("Signature").Item2]</InArgument>
+                                    </ui:AssignOperation.Value>
+                                  </ui:AssignOperation>
+                                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_202">
+                                    <ui:AssignOperation.To>
+                                      <OutArgument x:TypeArguments="x:String">[strEmailTo]</OutArgument>
+                                    </ui:AssignOperation.To>
+                                    <ui:AssignOperation.Value>
+                                      <InArgument x:TypeArguments="x:String">[dicConfig("Emails.Team.Unknown").Item2]</InArgument>
                                     </ui:AssignOperation.Value>
                                   </ui:AssignOperation>
                                 </scg:List>
@@ -668,7 +680,7 @@
                                 <ui:RetryScope DisplayName="Retry Scope: Send Needs Review" sap:VirtualizedContainerService.HintSize="376,319" sap2010:WorkflowViewState.IdRef="RetryScope_2" NumberOfRetries="5" RetryInterval="00:00:10">
                                   <ui:RetryScope.ActivityBody>
                                     <ActivityAction>
-                                      <ui:SendExchangeMail ApplicationId="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" DirectoryId="{x:Null}" Domain="{x:Null}" EmailAutodiscover="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" AttachmentsCollection="[listFiles]" AuthenticationMode="UserNameAndPassword" Body="[strMessageBody]" DisplayName="Send Exchange Mail Message: Needs Review" ExchangeVersion="Exchange2007_SP1" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="SendExchangeMail_2" IsBodyHtml="True" IsDraft="False" Password="[New Net.NetworkCredential(String.Empty, secstrPassword).Password]" SaveCopy="True" Server="https://outlook.office365.com/" Subject="[Bot] NEEDS REVIEW: COVID-19 Test Results" To="[dicConfig(&quot;Emails.Team.Unknown&quot;).Item2]" User="[strUsername]" />
+                                      <ui:SendExchangeMail ApplicationId="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" DirectoryId="{x:Null}" Domain="{x:Null}" EmailAutodiscover="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" AttachmentsCollection="[listFiles]" AuthenticationMode="UserNameAndPassword" Body="[strMessageBody]" DisplayName="Send Exchange Mail Message: Needs Review" ExchangeVersion="Exchange2007_SP1" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="SendExchangeMail_2" IsBodyHtml="True" IsDraft="False" Password="[New Net.NetworkCredential(String.Empty, secstrPassword).Password]" SaveCopy="True" Server="https://outlook.office365.com/" Subject="[Bot] NEEDS REVIEW: COVID-19 Test Results" To="[strEmailTo]" User="[strUsername]" />
                                     </ActivityAction>
                                   </ui:RetryScope.ActivityBody>
                                   <ui:RetryScope.Condition>
@@ -680,7 +692,7 @@
                                 <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="461,352" sap2010:WorkflowViewState.IdRef="Catch`1_6">
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
